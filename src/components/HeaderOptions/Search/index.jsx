@@ -1,10 +1,11 @@
 import React from "react";
+import './styles.scss'
 
 const Search = () => {
   return (
-    <div className="search-container">
-      <span>IC</span>
+    <div className="option search-container">
       <input type="text" />
+      <i className="fas fa-search fa-lg"></i>
     </div>
   );
 };

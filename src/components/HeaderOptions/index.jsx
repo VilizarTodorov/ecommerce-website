@@ -2,6 +2,7 @@ import React from 'react'
 import Search from './Search'
 import Profile from './Profile'
 import Cart from './Cart'
+import './styles.scss'
 
 const HeaderOptions = () => {
     return(
