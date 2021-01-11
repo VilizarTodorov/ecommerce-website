@@ -32,15 +32,14 @@
       display: flex;
       margin: 0 40px 0 40px;
       line-height: 50px;
+      border-bottom: 3px solid transparent;
 
       &-title {
         display: flex;
         align-items: center;
-        border-bottom: 3px solid transparent;
-
-        &:hover {
-          border-bottom: 3px solid black;
-        }
+      }
+      &:hover {
+        border-bottom: 3px solid black;
       }
 
       .arrow-down {
