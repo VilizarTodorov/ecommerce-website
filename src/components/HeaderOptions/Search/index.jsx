@@ -4,7 +4,7 @@ import './styles.scss'
 const Search = () => {
   return (
     <div className="option search-container">
-      <input type="text" />
+      <input className='search-input' type="text" />
       <i className="fas fa-search fa-lg"></i>
     </div>
   );

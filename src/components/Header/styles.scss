@@ -1,8 +1,12 @@
-.header{
+.header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  height: 65px;
+  border-bottom: 1px solid gray;
+
+  .logo {
     display: flex;
-    justify-content: space-between;
-    padding: 8px;
-    height: 65px;
-    align-items: flex-end;
-    border-bottom: 1px solid gray;
+    align-items: center;
+  }
 }

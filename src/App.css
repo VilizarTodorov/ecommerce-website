@@ -37,3 +37,11 @@
     transform: translateY(0px)
   }
 } */
+
+a{
+  text-decoration: none;
+}
+
+ul{
+  list-style: none;
+}
