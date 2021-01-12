@@ -72,6 +72,8 @@ const Navigation = () => {
           shoes={womenShoes}
           accessories={accessories}
         ></NavOption>
+
+        <NavOption optionTitle='kids' clothing={menClothing} shoes={menShoes} accessories={accessories}></NavOption>
       </ul>
     </nav>
   );

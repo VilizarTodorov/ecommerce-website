@@ -1,3 +1,14 @@
+.greeting-sign {
+  background-color: black;
+  color: white;
+  padding: 5px;
+  text-align: center;
+
+  a{
+    color: white;
+  }
+}
+
 .header {
   position: relative;
   display: flex;
@@ -11,7 +22,7 @@
     overflow: hidden;
     height: 50px;
 
-    img{
+    img {
       width: 196px;
     }
   }
