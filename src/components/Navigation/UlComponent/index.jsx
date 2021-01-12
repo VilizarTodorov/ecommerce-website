@@ -1,14 +1,38 @@
-import React from "react";
-import './styles.scss'
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import NavHeader from "../NavHeading";
+import "./styles.scss";
 
 const UlComponent = (props) => {
-  const items = props.items.map((item) => <li key={item} className='shop-item-category'>{item}</li>);
+  const [subSubNavToggle, setSubSubNavToggle] = useState(false);
+
+  const setSubSubNavToTrue = () => {
+    setSubSubNavToggle(true);
+  };
+
+  const setSubSubNavToFalse = () => {
+    setSubSubNavToggle(false);
+  };
+
+  const items = props.items.map((item) => (
+    <li key={item} className="shop-item-category">
+      <Link to={"/item"}>{item}</Link>
+    </li>
+  ));
 
   return (
-    <ul>
-      <h3 className='category-title'>{props.listTitle}</h3>
-      {items}
-    </ul>
+    <li className="ul-component">
+      <div onClick={setSubSubNavToTrue} className="container">
+        <h3 className="category-title">
+          <Link to={"/category-title"}>{props.listTitle}</Link>
+        </h3>
+        <i className="fas fa-chevron-right fa-lg arrow-down"></i>
+      </div>
+      <ul className={`sub-dropdown ${subSubNavToggle ? "active" : ""}`}>
+        <NavHeader title={props.listTitle} hideNav={setSubSubNavToFalse}></NavHeader>
+        {items}
+      </ul>
+    </li>
   );
 };
 

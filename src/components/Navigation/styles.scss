@@ -1,71 +1,7 @@
-// .navigation {
-
-//   .nav-option {
-//     display: flex;
-//
-//   @media screen and (min-width: 960px) {
-//     position: initial;
-//     height: auto;
-//     width: auto;
-//     opacity: 1;
-
-//     .nav-heading{
-//         display: none;
-//     }
-
-//     .options {
-//       display: flex;
-//     }
-
-//     .arrow-down{
-//         display: none;
-//     }
-//   }
-// }
-
 .navigation {
   .options {
     display: flex;
     height: 100%;
-
-    .nav-option {
-      display: flex;
-      margin: 0 40px 0 40px;
-      line-height: 50px;
-      border-bottom: 3px solid transparent;
-
-      &-title {
-        display: flex;
-        align-items: center;
-      }
-      &:hover {
-        border-bottom: 3px solid black;
-      }
-
-      .arrow-down {
-        display: none;
-      }
-
-      .dropdown-menu {
-        position: absolute;
-        display: none;
-        top: calc(100% + 1px);
-        background: white;
-        width: 100%;
-        justify-content: space-around;
-        box-shadow: 0px 20px 20px -20px black;
-      }
-      @media screen and (min-width: 960px) {
-        &:hover {
-          .dropdown-menu {
-            display: flex;
-          }
-        }
-        .dropdown-menu {
-          left: 0;
-        }
-      }
-    }
   }
 
   @media screen and (max-width: 959px) {
@@ -75,59 +11,17 @@
     left: 0;
     height: 100vh;
     width: 0;
-    opacity: 0;
+    // opacity: 0;
     overflow-x: hidden;
     transition: all 0.4s;
 
     &.active {
-      opacity: 1;
+      // opacity: 1;
       width: 100%;
-    }
-
-    .nav-heading {
-      height: 60px;
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-bottom: 1px solid lightgrey;
-
-      .exit {
-        position: absolute;
-        right: 10px;
-      }
     }
 
     .options {
       display: initial;
-
-      .nav-option {
-        justify-content: space-between;
-        margin: 10px 0 10px 0;
-        align-items: center;
-        padding: 5px;
-
-        .arrow-down {
-          display: initial;
-        }
-
-        .dropdown-menu {
-          position: absolute;
-          top: 0;
-          right: 0;
-          width: 0;
-          min-height: 100%;
-          opacity: 0;
-          overflow: hidden;
-          display: initial;
-          transition: all 0.4s;
-
-          &.active {
-            opacity: 1;
-            width: 100%;
-          }
-        }
-      }
     }
   }
 }

@@ -4,6 +4,7 @@ import { HOME } from "../../constants/routes";
 import HeaderOptions from "../HeaderOptions";
 import MenuBars from "../MenuBars";
 import Navigation from "../Navigation";
+import Logo from "../../assets/logo.jpg";
 import "./styles.scss";
 
 const Header = () => {
@@ -11,7 +12,9 @@ const Header = () => {
     <header className="header">
       <MenuBars></MenuBars>
       <div className="logo">
-        <Link to={HOME}>eCommerce</Link>
+        <Link to={HOME}>
+          <img src={Logo} alt="eCommerce logo" />
+        </Link>
       </div>
       <Navigation></Navigation>
       <HeaderOptions></HeaderOptions>

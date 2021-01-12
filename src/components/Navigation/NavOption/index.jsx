@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import NavHeader from "../NavHeading";
 import UlComponent from "../UlComponent";
 import "./styles.scss";
@@ -16,8 +17,12 @@ const NavOption = (props) => {
 
   return (
     <li className="nav-option">
-      <h4 className="nav-option-title">{props.optionTitle}</h4>
-      <i onClick={setToTrue} className="fas fa-chevron-right fa-lg arrow-down"></i>
+      <div className="container" onClick={setToTrue}>
+        <h3 className="nav-option-title">
+          <Link to={"/link"}>{props.optionTitle}</Link>
+        </h3>
+        <i className="fas fa-chevron-right fa-lg arrow-down"></i>
+      </div>
       <ul className={`dropdown-menu ${subNavToggle ? "active" : ""}`}>
         <NavHeader title={props.optionTitle} hideNav={setToFalse}></NavHeader>
         <UlComponent listTitle="shoes" items={props.shoes}></UlComponent>

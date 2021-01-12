@@ -1,20 +1,22 @@
 .nav-heading {
+  font-weight: 300;
   display: none;
 
-  .nav-heading-title{
-      text-transform: uppercase;
+  .nav-heading-title {
+    text-transform: uppercase;
   }
-//   @media screen and (max-width: 959px) {
-//     height: 60px;
-//     position: relative;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     border-bottom: 1px solid lightgrey;
 
-//     .exit {
-//       position: absolute;
-//       right: 10px;
-//     }
-//   }
+  @media screen and (max-width: 959px) {
+    height: 60px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid lightgrey;
+
+    .exit {
+      position: absolute;
+      right: 10px;
+    }
+  }
 }

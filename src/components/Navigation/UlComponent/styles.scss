@@ -1,12 +1,48 @@
-.shop-item-category:hover,
-.category-title:hover {
+.ul-component {
+  margin: 10px 0 10px 0;
+  padding: 5px;
+  border-bottom: 2px solid transparent;
+
+  .shop-item-category:hover,
+  .category-title:hover {
     text-decoration: underline;
-}
+  }
 
-.shop-item-category {
-  text-transform: capitalize;
-}
+  .shop-item-category {
+    text-transform: capitalize;
+  }
 
-.category-title {
-  text-transform: uppercase;
+  .category-title {
+    font-weight: 300;
+    text-transform: uppercase;
+  }
+
+  @media screen and (max-width: 959px) {
+    &:hover {
+      border-bottom: 2px solid black;
+    }
+
+    .sub-dropdown {
+      background-color: white;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      // opacity: 0;
+      min-height: 100%;
+      overflow: hidden;
+      transition: all 0.4s;
+
+      &.active {
+        width: 100%;
+        // opacity: 1;
+      }
+    }
+
+    .category-title {
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
 }

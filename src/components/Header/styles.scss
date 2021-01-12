@@ -8,5 +8,11 @@
   .logo {
     display: flex;
     align-items: center;
+    overflow: hidden;
+    height: 50px;
+
+    img{
+      width: 196px;
+    }
   }
 }
