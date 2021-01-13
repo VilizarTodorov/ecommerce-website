@@ -1,12 +1,13 @@
 .home {
   display: flex;
+  height: 100%;
 
   .shop-main-category {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 50%;
-    height: calc(100vh - 95px);
+    height: 100%;
     background-size: cover;
     background-repeat: no-repeat;
 

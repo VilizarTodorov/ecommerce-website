@@ -12,7 +12,7 @@ const Home = () => {
         <Link to={MEN}>
           <div className="shop shop-men">
             shop men
-            <i class="fas fa-arrow-right"></i>
+            <i className="fas fa-arrow-right"></i>
           </div>
         </Link>
       </aside>
@@ -20,7 +20,7 @@ const Home = () => {
         <Link to={WOMEN}>
           <div className="shop shop-women">
             shop women
-            <i class="fas fa-arrow-right"></i>
+            <i className="fas fa-arrow-right"></i>
           </div>
         </Link>
       </aside>
