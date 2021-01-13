@@ -1,0 +1,41 @@
+.home {
+  display: flex;
+
+  .shop-main-category {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: calc(100vh - 95px);
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    &.men {
+      background-position: top;
+    }
+    &.women {
+      background-position: bottom;
+    }
+
+    .shop {
+      text-transform: uppercase;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+
+      &.shop-men {
+        background-color: white;
+        color: black;
+      }
+
+      &.shop-women {
+        background-color: black;
+        color: white;
+      }
+
+      .fa-arrow-right{
+        margin-left: 10px;
+      }
+    }
+  }
+}
