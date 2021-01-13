@@ -1,5 +1,6 @@
 .home {
   display: flex;
+  justify-content: center;
   height: 100%;
 
   .shop-main-category {
@@ -7,6 +8,7 @@
     align-items: center;
     justify-content: center;
     width: 50%;
+    max-width: 560px;
     height: 100%;
     background-size: cover;
     background-repeat: no-repeat;

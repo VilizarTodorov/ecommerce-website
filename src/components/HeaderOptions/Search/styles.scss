@@ -9,5 +9,10 @@
         outline: none;
         background-color: lightgray;
         padding: 5px;
+        border: 1px solid transparent;
+
+        &:hover, &:focus{
+            border: 1px solid rgb(94, 94, 94);
+        }
     }
 }
