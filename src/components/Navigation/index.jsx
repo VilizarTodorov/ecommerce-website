@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setMainToFalse } from "../../Redux/NavSlice/nav-slice";
 import NavHeader from "./NavHeading";
 import NavOption from "./NavOption";
+import { MEN, WOMEN, KIDS } from "../../constants/routes";
+import * as categories from "../../constants/categories";
 import "./styles.scss";
 
 const menShoes = [
@@ -64,16 +66,29 @@ const Navigation = () => {
     <nav className={`navigation ${navState ? "active" : ""}`}>
       <NavHeader title="eCommerce" hideNav={hideNav}></NavHeader>
       <ul className="options">
-        <NavOption optionTitle="men" clothing={menClothing} shoes={menShoes} accessories={accessories}></NavOption>
+        <NavOption
+          routePart={MEN}
+          optionTitle={categories.MEN}
+          clothing={menClothing}
+          shoes={menShoes}
+          accessories={accessories}
+        ></NavOption>
 
         <NavOption
-          optionTitle="women"
+          routePart={WOMEN}
+          optionTitle={categories.WOMEN}
           clothing={womenClothing}
           shoes={womenShoes}
           accessories={accessories}
         ></NavOption>
 
-        <NavOption optionTitle='kids' clothing={menClothing} shoes={menShoes} accessories={accessories}></NavOption>
+        <NavOption
+          routePart={KIDS}
+          optionTitle={categories.KIDS}
+          clothing={menClothing}
+          shoes={menShoes}
+          accessories={accessories}
+        ></NavOption>
       </ul>
     </nav>
   );

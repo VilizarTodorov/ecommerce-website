@@ -19,7 +19,7 @@ const NavOption = (props) => {
     <li className="nav-option">
       <div className="container" onClick={setToTrue}>
         <h3 className="nav-option-title">
-          <Link to={"/link"}>{props.optionTitle}</Link>
+          <Link to={props.routePart}>{props.optionTitle}</Link>
         </h3>
         <i className="fas fa-chevron-right fa-lg arrow-down"></i>
       </div>
