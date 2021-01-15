@@ -5,6 +5,7 @@ import ComponentMainCategory from "../ComponentMainCategory";
 import ComponentSubCategory from "../ComponentSubCategory";
 import Home from "../Home";
 import SignIn from "../SignIn";
+import SingUp from "../SignUp";
 
 const Routes = () => {
   return (
@@ -12,7 +13,10 @@ const Routes = () => {
       <Route exact path={ROUTES.HOME}>
         <Home></Home>
       </Route>
-      <Route path={ROUTES.SIGN_IN}>
+      <Route exact path={ROUTES.SIGN_UP}>
+        <SingUp></SingUp>
+      </Route>
+      <Route exact path={ROUTES.SIGN_IN}>
         <SignIn></SignIn>
       </Route>
       <Route exact path={ROUTES.CATEGORY}>

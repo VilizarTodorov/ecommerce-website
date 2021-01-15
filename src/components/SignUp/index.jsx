@@ -3,12 +3,12 @@ import Form from "../Form";
 import FormInput from "../FormInput";
 import FormTitle from "../FormTitle";
 import FormButton from "../FromButton";
-import SignUpLink from "../SignUp/sign-up-link";
 import "./styles.scss";
 
-const SignIn = () => {
+const SingUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [rePassword, setRePassword] = useState("");
 
   const emailOnChange = (event) => {
     setEmail(event.target.value);
@@ -18,14 +18,15 @@ const SignIn = () => {
     setPassword(event.target.value);
   };
 
-  const onSubmit = (event) => {
-    event.preventDefault();
+  const rePasswordOnChange = (event) => {
+    setRePassword(event.target.value);
   };
 
   return (
-    <div className="sign-in">
-      <Form onSubmit={onSubmit}>
-        <FormTitle title="sign in"></FormTitle>
+    <div className="sign-up">
+      <Form>
+        <FormTitle title="sign up"></FormTitle>
+
         <FormInput
           type="email"
           id="email"
@@ -44,11 +45,19 @@ const SignIn = () => {
           label="password"
         ></FormInput>
 
-        <FormButton buttonContent="sign in"></FormButton>
+        <FormInput
+          type="password"
+          id="rePassword"
+          name="rePassword"
+          value={rePassword}
+          onChange={rePasswordOnChange}
+          label="repeat password"
+        ></FormInput>
+
+        <FormButton buttonContent="sign up"></FormButton>
       </Form>
-      <SignUpLink></SignUpLink>
     </div>
   );
 };
 
-export default SignIn;
+export default SingUp;
