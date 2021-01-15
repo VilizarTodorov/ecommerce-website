@@ -16,7 +16,7 @@ const UlComponent = (props) => {
 
   const items = props.items.map((item) => (
     <li key={item} className="shop-item-category">
-      <Link to={"/item"}>{item}</Link>
+      <Link to={`${props.mainRoutePart}${props.subRoutePart}/item`}>{item}</Link>
     </li>
   ));
 
@@ -24,7 +24,7 @@ const UlComponent = (props) => {
     <li className="ul-component">
       <div onClick={setSubSubNavToTrue} className="container">
         <h3 className="category-title">
-          <Link to={"/category-title"}>{props.listTitle}</Link>
+          <Link to={`${props.mainRoutePart}${props.subRoutePart}`}>{props.listTitle}</Link>
         </h3>
         <i className="fas fa-chevron-right fa-lg arrow-down"></i>
       </div>

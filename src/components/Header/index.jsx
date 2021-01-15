@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
-import { HOME } from "../../constants/routes";
+import { HOME, SIGN_IN } from "../../constants/routes";
 import HeaderOptions from "../HeaderOptions";
 import MenuBars from "../MenuBars";
 import Navigation from "../Navigation";
@@ -10,21 +10,19 @@ import "./styles.scss";
 const Header = () => {
   return (
     <Fragment>
-      <p className='greeting-sign'>
-        <Link to={'/sign-in'}>
-          Sign in
-        </Link>
+      <p className="greeting-sign">
+        <Link to={SIGN_IN}>Sign in</Link>
       </p>
-    <header className="header">
-      <MenuBars></MenuBars>
-      <div className="logo">
-        <Link to={HOME}>
-          <img src={Logo} alt="eCommerce logo" />
-        </Link>
-      </div>
-      <Navigation></Navigation>
-      <HeaderOptions></HeaderOptions>
-    </header>
+      <header className="header">
+        <MenuBars></MenuBars>
+        <div className="logo">
+          <Link to={HOME}>
+            <img src={Logo} alt="eCommerce logo" />
+          </Link>
+        </div>
+        <Navigation></Navigation>
+        <HeaderOptions></HeaderOptions>
+      </header>
     </Fragment>
   );
 };

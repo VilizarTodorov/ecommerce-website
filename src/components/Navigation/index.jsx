@@ -58,7 +58,6 @@ const Navigation = () => {
   const dispatch = useDispatch();
 
   const hideNav = () => {
-    console.log(navState);
     dispatch(setMainToFalse());
   };
 

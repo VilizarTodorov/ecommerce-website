@@ -1,10 +1,10 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import * as ROUTES from "../../constants/routes";
+import ComponentMainCategory from "../ComponentMainCategory";
+import ComponentSubCategory from "../ComponentSubCategory";
 import Home from "../Home";
-import Kids from "../Kids";
-import Men from "../Men";
-import Women from "../Women";
+import SignIn from "../SignIn";
 
 const Routes = () => {
   return (
@@ -12,22 +12,15 @@ const Routes = () => {
       <Route exact path={ROUTES.HOME}>
         <Home></Home>
       </Route>
-
-      <Route exact path={ROUTES.WOMEN}>
-        <Women></Women>
+      <Route path={ROUTES.SIGN_IN}>
+        <SignIn></SignIn>
       </Route>
-
-      <Route exact path={ROUTES.MEN}>
-        <Men></Men>
-      </Route>
-
-      <Route exact path={ROUTES.KIDS}>
-        <Kids></Kids>
-      </Route>
-
-      {/* <Route exact path={ROUTES.CATEGORY}>
+      <Route exact path={ROUTES.CATEGORY}>
         <ComponentMainCategory></ComponentMainCategory>
-      </Route> */}
+      </Route>
+      <Route exact path={ROUTES.SUB_CATEGORY}>
+        <ComponentSubCategory></ComponentSubCategory>
+      </Route>
     </Switch>
   );
 };

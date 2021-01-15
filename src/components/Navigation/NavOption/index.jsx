@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import NavHeader from "../NavHeading";
 import UlComponent from "../UlComponent";
+import { SHOES, CLOTHING, ACCESSORIES } from "../../../constants/routes";
+import * as categories from "../../../constants/categories";
 import "./styles.scss";
 
 const NavOption = (props) => {
@@ -25,9 +27,27 @@ const NavOption = (props) => {
       </div>
       <ul className={`dropdown-menu ${subNavToggle ? "active" : ""}`}>
         <NavHeader title={props.optionTitle} hideNav={setToFalse}></NavHeader>
-        <UlComponent listTitle="shoes" items={props.shoes}></UlComponent>
-        <UlComponent listTitle="clothing" items={props.clothing}></UlComponent>
-        <UlComponent listTitle="accessories" items={props.accessories}></UlComponent>
+
+        <UlComponent
+          mainRoutePart={props.routePart}
+          subRoutePart={SHOES}
+          listTitle={categories.SHOES}
+          items={props.shoes}
+        ></UlComponent>
+
+        <UlComponent
+          mainRoutePart={props.routePart}
+          subRoutePart={CLOTHING}
+          listTitle={categories.CLOTHES}
+          items={props.clothing}
+        ></UlComponent>
+        
+        <UlComponent
+          mainRoutePart={props.routePart}
+          subRoutePart={ACCESSORIES}
+          listTitle={categories.ACCESSORIES}
+          items={props.accessories}
+        ></UlComponent>
       </ul>
     </li>
   );

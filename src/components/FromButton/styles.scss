@@ -1,0 +1,35 @@
+.form-button {
+  position: relative;
+  color: white;
+  background-color: black;
+  padding: 15px;
+  text-transform: capitalize;
+  font-size: 17px;
+  transition: all 0.3s;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  
+  &::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    right: -5px;
+    bottom: -5px;
+    border: 1px solid black;
+    transition: all 0.3s;
+  }
+
+  &:hover {
+    color: #767677;
+  }
+
+  &:active {
+    transform: translate(5px, 5px);
+    &::before {
+      right: 0px;
+      bottom: 0px;
+    }
+  }
+}
