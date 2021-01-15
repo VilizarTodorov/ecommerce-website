@@ -1,10 +1,10 @@
 import React, { useState } from "react";
+import FormPageLayout from "../../layout/FormPageLayout";
 import Form from "../Form";
 import FormInput from "../FormInput";
 import FormTitle from "../FormTitle";
 import FormButton from "../FromButton";
 import SignUpLink from "../SignUp/sign-up-link";
-import "./styles.scss";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -23,7 +23,7 @@ const SignIn = () => {
   };
 
   return (
-    <div className="sign-in">
+    <FormPageLayout>
       <Form onSubmit={onSubmit}>
         <FormTitle title="sign in"></FormTitle>
         <FormInput
@@ -47,7 +47,7 @@ const SignIn = () => {
         <FormButton buttonContent="sign in"></FormButton>
       </Form>
       <SignUpLink></SignUpLink>
-    </div>
+    </FormPageLayout>
   );
 };
 

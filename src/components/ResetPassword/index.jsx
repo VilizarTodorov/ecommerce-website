@@ -3,7 +3,7 @@ import Form from "../Form";
 import FormTitle from "../FormTitle";
 import FormInput from "../FormInput";
 import FormButton from "../FormButton";
-import "./styles.scss";
+import FormPageLayout from "../../layout/FormPageLayout";
 
 const ResetPassword = () => {
   const [email, setEmail] = useState("");
@@ -13,7 +13,7 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className="reset-password">
+    <FormPageLayout>
       <Form>
         <FormTitle title="reset password"></FormTitle>
         <FormInput
@@ -26,7 +26,7 @@ const ResetPassword = () => {
         ></FormInput>
         <FormButton buttonContent="reset password"></FormButton>
       </Form>
-    </div>
+    </FormPageLayout>
   );
 };
 

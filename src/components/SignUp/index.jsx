@@ -1,9 +1,9 @@
 import React, { useState } from "react";
+import FormPageLayout from "../../layout/FormPageLayout";
 import Form from "../Form";
 import FormInput from "../FormInput";
 import FormTitle from "../FormTitle";
 import FormButton from "../FromButton";
-import "./styles.scss";
 
 const SingUp = () => {
   const [email, setEmail] = useState("");
@@ -23,10 +23,9 @@ const SingUp = () => {
   };
 
   return (
-    <div className="sign-up">
+    <FormPageLayout>
       <Form>
         <FormTitle title="sign up"></FormTitle>
-
         <FormInput
           type="email"
           id="email"
@@ -56,7 +55,7 @@ const SingUp = () => {
 
         <FormButton buttonContent="sign up"></FormButton>
       </Form>
-    </div>
+    </FormPageLayout>
   );
 };
 
