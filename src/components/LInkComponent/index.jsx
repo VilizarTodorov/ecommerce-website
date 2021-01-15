@@ -4,12 +4,10 @@ import "./styles.scss";
 
 const LinkComponent = ({ to, linkContent }) => {
   return (
-    <div className="link-component">
-      <Link to={to}>
-        {linkContent}
-        <i className="fas fa-arrow-right"></i>
-      </Link>
-    </div>
+    <Link className="link-component" to={to}>
+      {linkContent}
+      <i className="fas fa-arrow-right"></i>
+    </Link>
   );
 };
 
