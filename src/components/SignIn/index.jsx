@@ -5,10 +5,26 @@ import FormInput from "../FormInput";
 import FormTitle from "../FormTitle";
 import FormButton from "../FormButton";
 import SignUpLink from "../SignUp/sign-up-link";
+import { useDispatch, useSelector } from "react-redux";
+import { failure, signIn } from "../../Redux/userSlice/user-slice";
+import { useHistory, useLocation } from "react-router-dom";
+
+const isFetchingSelector = (state) => state.user.authActionStarted;
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const location = useLocation();
+  const history = useHistory();
+
+  const dispatch = useDispatch();
+  const isFetching = useSelector(isFetchingSelector);
+
+  const getFromLocation = () => {
+    const { from } = location.state || { from: "/" };
+    return from;
+  };
 
   const emailOnChange = (event) => {
     setEmail(event.target.value);
@@ -20,6 +36,10 @@ const SignIn = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
+    const from = getFromLocation();
+    dispatch(signIn(email, password))
+      .then(() => history.replace(from))
+      .catch((err) => dispatch(failure(err.message)));
   };
 
   return (
@@ -44,7 +64,7 @@ const SignIn = () => {
           label="password"
         ></FormInput>
 
-        <FormButton buttonContent="sign in"></FormButton>
+        <FormButton isFetching={isFetching} buttonContent="sign in"></FormButton>
       </Form>
       <SignUpLink></SignUpLink>
     </FormPageLayout>

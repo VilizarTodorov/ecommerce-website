@@ -44,7 +44,7 @@ const { authActionStart, authActionSuccess } = userSlice.actions;
 const signIn = (email, password) => {
   return (dispatch) => {
     dispatch(authActionStart());
-    return auth.signInWithEmailAndPassword(email, password).then(() => dispatch(authActionSuccess));
+    return auth.signInWithEmailAndPassword(email, password).then(() => dispatch(authActionSuccess()));
   };
 };
 

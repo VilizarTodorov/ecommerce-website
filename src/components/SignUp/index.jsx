@@ -6,6 +6,8 @@ import FormTitle from "../FormTitle";
 import FormButton from "../FormButton";
 import { failure, signUp } from "../../Redux/userSlice/user-slice";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { HOME } from "../../constants/routes";
 
 const isFetchingSelector = (state) => state.user.authActionStarted;
 
@@ -16,6 +18,7 @@ const SingUp = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
+  const history = useHistory();
   const dispatch = useDispatch();
   const authActionStarted = useSelector(isFetchingSelector);
 
@@ -42,8 +45,8 @@ const SingUp = () => {
   const onSubmit = (event) => {
     event.preventDefault();
     dispatch(signUp(email, password))
-      .then()
-      .catch((err) => dispatch(failure()));
+      .then(() => history.replace(HOME))
+      .catch((err) => dispatch(failure(err.message)));
   };
 
   return (
