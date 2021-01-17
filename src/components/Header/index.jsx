@@ -1,18 +1,17 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
-import { HOME, SIGN_IN } from "../../constants/routes";
+import { HOME } from "../../constants/routes";
 import HeaderOptions from "../HeaderOptions";
 import MenuBars from "../MenuBars";
 import Navigation from "../Navigation";
 import Logo from "../../assets/logo.jpg";
 import "./styles.scss";
+import HeaderGreeting from "../HeaderGreeting";
 
 const Header = () => {
   return (
     <Fragment>
-      <p className="greeting-sign">
-        <Link to={SIGN_IN}>Sign in</Link>
-      </p>
+      <HeaderGreeting></HeaderGreeting>
       <header className="header">
         <MenuBars></MenuBars>
         <div className="logo">

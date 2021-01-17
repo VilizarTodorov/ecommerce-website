@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { auth } from "../../Firebase/firebase";
+import { auth, COLLECTIONS, firestore } from "../../Firebase/firebase";
 
 const INITIAL_STATE = {
   authActionStarted: false,
-  authUser: null,
+  uid: null,
   user: null,
   error: null,
 };
@@ -21,20 +21,23 @@ const userSlice = createSlice({
     },
 
     setUser(state, action) {
-      state.authActionStarted = false;
-      state.authUser = action.payload.authUser;
-      state.user = action.payload.user;
-      state.error = null;
+      state.user = action.payload;
     },
+
+    setUid: (state, action) => {
+      state.uid = action.payload;
+    },
+
     failure(state, action) {
       state.authActionStarted = false;
       state.authUser = null;
       state.user = null;
       state.error = action.payload;
     },
+
     resetUser(state) {
-      state.authUser = null;
-      state.user = null;
+      state.authUser = {};
+      state.user = {};
     },
   },
 });
@@ -44,14 +47,20 @@ const { authActionStart, authActionSuccess } = userSlice.actions;
 const signIn = (email, password) => {
   return (dispatch) => {
     dispatch(authActionStart());
-    return auth.signInWithEmailAndPassword(email, password).then(() => dispatch(authActionSuccess()));
+    return auth.signInWithEmailAndPassword(email, password).then((authUser) => {
+      dispatch(authActionSuccess());
+      return authUser;
+    });
   };
 };
 
 const signUp = (email, password) => {
   return (dispatch) => {
     dispatch(authActionStart());
-    return auth.createUserWithEmailAndPassword(email, password).then(() => dispatch(authActionSuccess()));
+    return auth.createUserWithEmailAndPassword(email, password).then((authUser) => {
+      dispatch(authActionSuccess());
+      return authUser;
+    });
   };
 };
 
@@ -65,10 +74,25 @@ const signOut = () => {
 const resetPassword = (email) => {
   return (dispatch) => {
     dispatch(authActionStart());
-    return auth.sendPasswordResetEmail(email).then(() => dispatch(authActionSuccess()));
+    return auth.sendPasswordResetEmail(email).then((authUser) => {
+      dispatch(authActionSuccess());
+      return authUser;
+    });
   };
 };
 
-export { signIn, signUp, signOut, resetPassword };
-export const { failure, resetUser } = userSlice.actions;
+const setUserEntry = (uid) => {
+  return (dispatch) => {
+    dispatch(authActionStart());
+    return firestore
+      .collection(COLLECTIONS.USERS)
+      .doc(uid)
+      .get()
+      .then((user) => dispatch(setUser(user.data())))
+      .then(() => dispatch(authActionSuccess()));
+  };
+};
+
+export { signIn, signUp, signOut, resetPassword, setUserEntry };
+export const { setUser, setUid, failure, resetUser } = userSlice.actions;
 export default userSlice.reducer;

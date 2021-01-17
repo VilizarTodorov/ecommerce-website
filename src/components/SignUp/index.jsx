@@ -8,6 +8,7 @@ import { failure, signUp } from "../../Redux/userSlice/user-slice";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { HOME } from "../../constants/routes";
+import { COLLECTIONS, firestore } from "../../Firebase/firebase";
 
 const isFetchingSelector = (state) => state.user.authActionStarted;
 
@@ -44,8 +45,22 @@ const SingUp = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
+
     dispatch(signUp(email, password))
-      .then(() => history.replace(HOME))
+      .then(({ user }) => {
+        const DB_ENTRY = {
+          email: email,
+          uid: user.uid,
+          firstName: firstName,
+          lastName: lastName,
+        };
+
+        firestore
+          .collection(COLLECTIONS.USERS)
+          .doc(user.uid)
+          .set(DB_ENTRY)
+          .then(() => history.replace(HOME));
+      })
       .catch((err) => dispatch(failure(err.message)));
   };
 

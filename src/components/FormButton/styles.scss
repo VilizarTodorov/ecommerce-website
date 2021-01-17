@@ -24,6 +24,7 @@
     bottom: -5px;
     border: 1px solid black;
     transition: all 0.175s;
+    z-index: -1;
   }
 
   &:hover {
