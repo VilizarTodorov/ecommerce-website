@@ -1,9 +1,9 @@
 import React from "react";
 import "./styles.scss";
 
-const FormButton = ({ buttonContent }) => {
+const FormButton = ({ isFetching, buttonContent }) => {
   return (
-    <button className="form-button">
+    <button disabled={isFetching} className={`form-button ${isFetching ? "disabled" : ""}`}>
       {buttonContent}
       <i className="fas fa-arrow-right"></i>
     </button>

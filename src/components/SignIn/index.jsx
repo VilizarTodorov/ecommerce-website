@@ -3,7 +3,7 @@ import FormPageLayout from "../../layout/FormPageLayout";
 import Form from "../Form";
 import FormInput from "../FormInput";
 import FormTitle from "../FormTitle";
-import FormButton from "../FromButton";
+import FormButton from "../FormButton";
 import SignUpLink from "../SignUp/sign-up-link";
 
 const SignIn = () => {

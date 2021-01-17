@@ -2,8 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const INITIAL_STATE = {
   mainNav: false,
-  menNav: false,
-  womenNav: false,
 };
 
 const navSlice = createSlice({
@@ -16,27 +14,8 @@ const navSlice = createSlice({
     setMainToFalse(state) {
       state.mainNav = false;
     },
-    // setMenToTrue(state) {
-    //   state.menNav = true;
-    // },
-    // setMenToFalse(state) {
-    //   state.menNav = false;
-    // },
-    // setWomenToTrue(state) {
-    //   state.womenNav = true;
-    // },
-    // setWomenToFalse(state) {
-    //   state.womenNav = false;
-    // },
   },
 });
 
-export const {
-  setMainToFalse,
-  setMainToTrue,
-  // setMenToFalse,
-  // setMenToTrue,
-  // setWomenToFalse,
-  // setWomenToTrue,
-} = navSlice.actions;
+export const { setMainToFalse, setMainToTrue } = navSlice.actions;
 export default navSlice.reducer;

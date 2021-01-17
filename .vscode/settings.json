@@ -5,6 +5,7 @@
         "dlzx",
         "ecommerce",
         "firebaseapp",
-        "firestore"
+        "firestore",
+        "reduxjs"
     ]
 }
