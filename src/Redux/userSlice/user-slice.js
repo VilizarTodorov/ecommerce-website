@@ -62,6 +62,13 @@ const signOut = () => {
   };
 };
 
-export { signIn, signUp, signOut };
+const resetPassword = (email) => {
+  return (dispatch) => {
+    dispatch(authActionStart());
+    return auth.sendPasswordResetEmail(email).then(() => dispatch(authActionSuccess()));
+  };
+};
+
+export { signIn, signUp, signOut, resetPassword };
 export const { failure, resetUser } = userSlice.actions;
 export default userSlice.reducer;
