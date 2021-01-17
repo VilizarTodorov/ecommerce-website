@@ -8,6 +8,7 @@ import SignUpLink from "../SignUp/sign-up-link";
 import { useDispatch, useSelector } from "react-redux";
 import { failure, signIn } from "../../Redux/userSlice/user-slice";
 import { useHistory, useLocation } from "react-router-dom";
+import ResetPasswordLink from "../ResetPassword/reset-password-link";
 
 const isFetchingSelector = (state) => state.user.authActionStarted;
 
@@ -66,6 +67,7 @@ const SignIn = () => {
 
         <FormButton isFetching={isFetching} buttonContent="sign in"></FormButton>
       </Form>
+      <ResetPasswordLink></ResetPasswordLink>
       <SignUpLink></SignUpLink>
     </FormPageLayout>
   );
