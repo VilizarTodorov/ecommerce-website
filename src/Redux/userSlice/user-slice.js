@@ -36,8 +36,8 @@ const userSlice = createSlice({
     },
 
     resetUser(state) {
-      state.authUser = {};
-      state.user = {};
+      state.authUser = null;
+      state.user = null;
     },
   },
 });

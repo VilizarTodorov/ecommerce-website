@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { failure, signIn } from "../../Redux/userSlice/user-slice";
 import { useHistory, useLocation } from "react-router-dom";
 import ResetPasswordLink from "../ResetPassword/reset-password-link";
+import {WidthAuth} from "../../HOC";
 
 const isFetchingSelector = (state) => state.user.authActionStarted;
 
@@ -73,4 +74,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default WidthAuth(SignIn);

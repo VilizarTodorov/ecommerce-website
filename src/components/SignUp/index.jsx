@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { HOME } from "../../constants/routes";
 import { COLLECTIONS, firestore } from "../../Firebase/firebase";
+import { WidthAuth } from "../../HOC";
 
 const isFetchingSelector = (state) => state.user.authActionStarted;
 
@@ -119,4 +120,4 @@ const SingUp = () => {
   );
 };
 
-export default SingUp;
+export default WidthAuth(SingUp);

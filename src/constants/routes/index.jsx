@@ -10,4 +10,6 @@ export const CATEGORY = "/:category";
 export const SUB_CATEGORY = "/:category/:sub";
 export const SIGN_IN = "/sign-in";
 export const SIGN_UP = "/sign-up";
-export const RESET_PASSWORD='/reset-password'
+export const RESET_PASSWORD = "/reset-password";
+export const CHANGE_PASSWORD = "/change-password";
+export const ADMIN = "/admin";

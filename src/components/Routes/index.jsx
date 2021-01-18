@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import * as ROUTES from "../../constants/routes";
+import Admin from "../Admin";
 import ComponentMainCategory from "../ComponentMainCategory";
 import ComponentSubCategory from "../ComponentSubCategory";
 import Home from "../Home";
@@ -13,6 +14,9 @@ const Routes = () => {
     <Switch>
       <Route exact path={ROUTES.HOME}>
         <Home></Home>
+      </Route>
+      <Route exact path={ROUTES.ADMIN}>
+        <Admin></Admin>
       </Route>
       <Route exact path={ROUTES.RESET_PASSWORD}>
         <ResetPassword></ResetPassword>

@@ -15,7 +15,7 @@ function App() {
         dispatch(setUid(authUser.uid));
         dispatch(setUserEntry(authUser.uid));
       } else {
-        dispatch(resetUser);
+        dispatch(resetUser());
       }
     });
 
