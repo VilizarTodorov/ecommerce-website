@@ -2,13 +2,9 @@ import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { HOME, SIGN_IN } from "../constants/routes";
-import { auth } from "../Firebase/firebase";
 
 const withAuthorization = (condition) => (Component) => {
   class WithAuthorization extends React.Component {
-    constructor(props) {
-      super(props);
-    }
 
     componentDidMount() {
       if (!condition(this.props.user)) {
