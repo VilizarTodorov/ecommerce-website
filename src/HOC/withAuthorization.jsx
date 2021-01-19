@@ -12,8 +12,11 @@ const withAuthorization = (condition) => (Component) => {
 
     componentDidMount() {
       if (!condition(this.props.user)) {
-        debugger;
-        if (this.props.location.pathname === "/sign-in" || this.props.location.pathname === "/sign-up") {
+        if (
+          this.props.location.pathname === "/sign-in" ||
+          this.props.location.pathname === "/sign-up" ||
+          this.props.location.pathname === "/admin"
+        ) {
           this.props.history.push(HOME);
           return;
         }
@@ -22,9 +25,8 @@ const withAuthorization = (condition) => (Component) => {
     }
 
     componentDidUpdate(prevProps) {
-      if (this.props.user != prevProps.user) {
+      if (this.props.user !== prevProps.user) {
         if (!condition(this.props.user)) {
-          debugger;
           if (this.props.location.pathname === "/sign-in" || this.props.location.pathname === "/sign-up") {
             this.props.history.push(HOME);
             return;

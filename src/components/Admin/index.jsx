@@ -1,4 +1,5 @@
 import React from "react";
+import { WithAuthorization } from "../../HOC";
 
 const Admin = (props) => {
   return (
@@ -8,4 +9,14 @@ const Admin = (props) => {
   );
 };
 
-export default Admin;
+const condition = (user) => {
+  if (user) {
+    if (user.roles.admin) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
+export default WithAuthorization(condition)(Admin);
