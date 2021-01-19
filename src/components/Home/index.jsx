@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import shopMens from "../../assets/shopMens.jpg";
 import shopWomen from "../../assets/shopWomens.jpg";
 import { MEN, WOMEN } from "../../constants/routes";
+import { WithAuthorization } from "../../HOC";
 import "./styles.scss";
 
 const Home = () => {
@@ -28,4 +29,6 @@ const Home = () => {
   );
 };
 
-export default Home;
+const condition = (user) => user != null;
+
+export default WithAuthorization(condition)(Home);

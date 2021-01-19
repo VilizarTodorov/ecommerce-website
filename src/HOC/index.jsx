@@ -1,3 +1,3 @@
-import WidthAuth from "./withAuthorization";
+import WithAuthorization from "./withAuthorization";
 
-export { WidthAuth };
+export { WithAuthorization };
