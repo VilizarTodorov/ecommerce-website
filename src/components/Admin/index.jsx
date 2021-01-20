@@ -4,10 +4,9 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { HOME } from "../../constants/routes";
 import SignOut from "../SignOut";
-import "./styles.scss";
 import Modal from "../Modal";
-import Form from "../Form";
-import FormTitle from "../FormTitle";
+import AddProduct from '../AddProduct'
+import "./styles.scss";
 
 const selectFirstName = (state) => state.user.user.firstName;
 const selectLastName = (state) => state.user.user.lastName;
@@ -26,7 +25,7 @@ const Admin = (props) => {
     setIsModalOpen(true);
   };
 
-  const closeModal = () => {
+  const closeModal = (event) => {
     setIsModalOpen(false);
   };
 
@@ -51,9 +50,7 @@ const Admin = (props) => {
       <section className="items">
         <button onClick={openModal}>add product</button>
         <Modal hideModal={closeModal} isOpen={isModalOpen}>
-          <Form>
-            <FormTitle title="add product"></FormTitle>
-          </Form>
+          <AddProduct></AddProduct>
         </Modal>
       </section>
     </div>

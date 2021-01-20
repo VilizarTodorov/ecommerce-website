@@ -8,7 +8,10 @@ const Modal = ({ children, hideModal, styles, isOpen, className }) => {
       onClick={hideModal}
       style={styles}
     >
-      <div className="content">{children}</div>
+      <div onClick={(event) => event.stopPropagation()} className="content">
+        <i onClick={hideModal} className="fas fa-times fa-lg exit"></i>
+        {children}
+      </div>
     </div>
   );
 };

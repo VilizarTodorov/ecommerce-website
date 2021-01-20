@@ -9,18 +9,19 @@
 
   .content {
     position: absolute;
-    top: 40px;
-    left: 40px;
-    right: 40px;
-    bottom: 40px;
+    width: 500px;
+    height: 700px;
     border: 1px solid #ccc;
     background: #fff;
     overflow: auto;
     outline: none;
     padding: 20px;
+    text-align: end;
   }
 
-  &.active{
-      display: initial;
+  &.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
