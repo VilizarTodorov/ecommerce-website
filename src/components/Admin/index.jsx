@@ -7,6 +7,7 @@ import SignOut from "../SignOut";
 import Modal from "../Modal";
 import AddProduct from '../AddProduct'
 import "./styles.scss";
+import GeneralButton from "../GeneralButton";
 
 const selectFirstName = (state) => state.user.user.firstName;
 const selectLastName = (state) => state.user.user.lastName;
@@ -48,7 +49,7 @@ const Admin = (props) => {
         </nav>
       </aside>
       <section className="items">
-        <button onClick={openModal}>add product</button>
+        <GeneralButton onClick={openModal}>add new product</GeneralButton>
         <Modal hideModal={closeModal} isOpen={isModalOpen}>
           <AddProduct></AddProduct>
         </Modal>

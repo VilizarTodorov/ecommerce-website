@@ -1,5 +1,5 @@
 import React from "react";
-import LinkComponent from "../LInkComponent";
+import LinkComponent from "../LinkComponent";
 import { SIGN_UP } from "../../constants/routes";
 
 const SignUpLink = () => {

@@ -12,33 +12,30 @@
     height: 100%;
     background-size: cover;
     background-repeat: no-repeat;
+    
+    .link-component{
+      width: auto;
+    }
 
     &.men {
       background-position: top;
+
+      .link-component{
+        background-color: white;
+        color: black;
+
+        &::before{
+          border: 1px solid white;
+        }
+
+        &:hover{
+          color: #767677;
+        }
+      }
     }
     &.women {
       background-position: bottom;
     }
 
-    .shop {
-      text-transform: uppercase;
-      padding: 10px;
-      display: flex;
-      align-items: center;
-
-      &.shop-men {
-        background-color: white;
-        color: black;
-      }
-
-      &.shop-women {
-        background-color: black;
-        color: white;
-      }
-
-      .fa-arrow-right{
-        margin-left: 10px;
-      }
-    }
   }
 }

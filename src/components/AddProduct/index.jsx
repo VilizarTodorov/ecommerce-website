@@ -6,6 +6,7 @@ import FormButton from "../FormButton";
 import Select from "./Select";
 import Option from "./Option";
 import ProductTypes from "./ProductTypes";
+import { firestore } from "../../Firebase/firebase";
 
 const AddProduct = () => {
   const [name, setName] = useState("");
@@ -18,7 +19,19 @@ const AddProduct = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    console.log(name, price, mainCategory, subCategory, productType);
+    firestore
+      .collection(mainCategory)
+      .doc(name)
+      .set({
+        name: name,
+        price: price,
+        mainImg: mainImg,
+        mainCategory: mainCategory,
+        subCategory: subCategory,
+        productType: productType,
+      })
+      .then((x) => console.log(x))
+      .catch((err) => console.log(err));
   };
 
   return (
