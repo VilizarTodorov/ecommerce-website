@@ -17,11 +17,20 @@ const AddProduct = () => {
   const [subCategory, setSubCategory] = useState("");
   const [productType, setProductType] = useState("");
 
+  const clearForm = () => {
+    setName("");
+    setPrice(0);
+    setMainImg("");
+    setSubCategory("");
+    setMainCategory("");
+    setProductType("");
+  };
+
   const onSubmit = (event) => {
     event.preventDefault();
     firestore
       .collection(mainCategory)
-      .doc(name)
+      .doc()
       .set({
         name: name,
         price: price,
@@ -31,12 +40,13 @@ const AddProduct = () => {
         productType: productType,
       })
       .then((x) => console.log(x))
+      .then(() => clearForm())
       .catch((err) => console.log(err));
   };
 
   return (
     <Form onSubmit={onSubmit}>
-      <FormTitle title="add new product"></FormTitle>
+      <FormTitle>add new product</FormTitle>
 
       <Select value={mainCategory} onChange={(event) => setMainCategory(event.target.value)}>
         <Option value="men" content="men"></Option>
@@ -85,7 +95,7 @@ const AddProduct = () => {
         label="price"
       ></FormInput>
 
-      <FormButton buttonContent="add product"></FormButton>
+      <FormButton>add product</FormButton>
     </Form>
   );
 };

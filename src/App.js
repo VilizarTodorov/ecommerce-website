@@ -25,7 +25,7 @@ function App() {
     return () => {
       listener();
     };
-  });
+  }, [dispatch]);
 
   return (
     <Fragment>

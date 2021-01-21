@@ -32,7 +32,7 @@ const ResetPassword = () => {
   return (
     <FormPageLayout>
       <Form onSubmit={onSubmit}>
-        <FormTitle title="reset password"></FormTitle>
+        <FormTitle>reset password</FormTitle>
         <FormInput
           type="email"
           id="email"
@@ -41,7 +41,7 @@ const ResetPassword = () => {
           onChange={emailOnChange}
           label="email"
         ></FormInput>
-        <FormButton isFetching={isFetching} buttonContent="reset password"></FormButton>
+        <FormButton isFetching={isFetching}>reset password</FormButton>
       </Form>
     </FormPageLayout>
   );

@@ -47,7 +47,7 @@ const SignIn = () => {
   return (
     <FormPageLayout>
       <Form onSubmit={onSubmit}>
-        <FormTitle title="sign in"></FormTitle>
+        <FormTitle>sign in</FormTitle>
         <FormInput
           type="email"
           id="email"
@@ -66,7 +66,7 @@ const SignIn = () => {
           label="password"
         ></FormInput>
 
-        <FormButton isFetching={isFetching} buttonContent="sign in"></FormButton>
+        <FormButton isFetching={isFetching}>sign in</FormButton>
       </Form>
       <ResetPasswordLink></ResetPasswordLink>
       <SignUpLink></SignUpLink>

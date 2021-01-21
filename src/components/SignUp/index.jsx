@@ -69,7 +69,7 @@ const SingUp = () => {
   return (
     <FormPageLayout>
       <Form onSubmit={onSubmit}>
-        <FormTitle title="sign up"></FormTitle>
+        <FormTitle>sign up</FormTitle>
         <FormInput
           type="text"
           id="firsName"
@@ -115,12 +115,12 @@ const SingUp = () => {
           label="repeat password"
         ></FormInput>
 
-        <FormButton isFetching={authActionStarted} buttonContent="sign up"></FormButton>
+        <FormButton isFetching={authActionStarted}>sign up</FormButton>
       </Form>
     </FormPageLayout>
   );
 };
 
-const condition = (user) => user == null
+const condition = (user) => user == null;
 
 export default withAuthorization(condition)(SingUp);

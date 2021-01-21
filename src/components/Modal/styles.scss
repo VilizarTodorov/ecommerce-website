@@ -6,11 +6,12 @@
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.4);
+  z-index: 20;
 
   .content {
     position: absolute;
     width: 500px;
-    height: 700px;
+    height: auto;
     border: 1px solid #ccc;
     background: #fff;
     overflow: auto;
