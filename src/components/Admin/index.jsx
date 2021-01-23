@@ -20,7 +20,7 @@ const userNamesSelector = createSelector([selectFirstName, selectLastName], (fir
   };
 });
 
-const Admin = (props) => {
+const Admin = () => {
   const [items, setItems] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [collection, setCollection] = useState("men");

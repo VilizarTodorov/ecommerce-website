@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { firestore } from "../../Firebase/firebase";
 import Form from "../Form";
 import FormInput from "../FormInput";
 import FormButton from "../FormButton";
@@ -9,11 +8,17 @@ import Modal from "../Modal";
 import ProductTypes from "../AddProduct/ProductTypes";
 import Select from "../AddProduct/Select";
 import Option from "../AddProduct/Option";
+import { useDispatch, useSelector } from "react-redux";
 import "./styles.scss";
+import { fetchFailure, updateProduct, deleteProduct } from "../../Redux/ProductSlice/product-slice";
+
+const isFetchingSelector = (state) => state.product.isFetching;
 
 const AdminProduct = (props) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const isFetching = useSelector(isFetchingSelector);
+  const dispatch = useDispatch();
 
+  const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState(props.name);
   const [price, setPrice] = useState(props.price);
   const [mainImg, setMainImg] = useState(props.mainImg);
@@ -30,13 +35,8 @@ const AdminProduct = (props) => {
     setIsOpen(false);
   };
 
-  const deleteProduct = () => {
-    firestore
-      .collection(props.mainCategory)
-      .doc(props.name)
-      .delete()
-      .then(() => console.log("deleted"))
-      .catch((err) => console.log(err));
+  const deleteProd = () => {
+    dispatch(deleteProduct(mainCategory, props.id)).catch((err) => dispatch(fetchFailure(err.message)));
   };
 
   const onSubmit = (event) => {
@@ -51,12 +51,9 @@ const AdminProduct = (props) => {
       productType,
     };
 
-    firestore
-      .collection(mainCategory)
-      .doc(props.id)
-      .set(updateData)
+    dispatch(updateProduct(updateData, props.id))
       .then(() => closeModal())
-      .catch((err) => console.log(err));
+      .catch((err) => dispatch(fetchFailure(err.message)));
   };
 
   return (
@@ -68,32 +65,22 @@ const AdminProduct = (props) => {
         <p className="info">${props.price}</p>
       </div>
       <div className="controls">
-        <GeneralButton onClick={deleteProduct}>delete</GeneralButton>
+        <GeneralButton onClick={deleteProd}>delete</GeneralButton>
         <GeneralButton onClick={openModal}>edit</GeneralButton>
       </div>
       <Modal hideModal={closeModal} isOpen={isOpen}>
         <Form onSubmit={onSubmit}>
           <FormTitle>edit product</FormTitle>
 
-          {/* <Select value={mainCategory} onChange={(event) => setMainCategory(event.target.value)}>
-            <Option value="men" content="men"></Option>
-            <Option value="women" content="women"></Option>
-            <Option value="kids" content="kids"></Option>
-          </Select> */}
+          <Select value={subCategory} onChange={(event) => setSubCategory(event.target.value)}>
+            <Option value="shoes" content="shoes"></Option>
+            <Option value="clothing" content="clothing"></Option>
+            <Option value="accessories" content="accessories"></Option>
+          </Select>
 
-          {mainCategory && (
-            <Select value={subCategory} onChange={(event) => setSubCategory(event.target.value)}>
-              <Option value="shoes" content="shoes"></Option>
-              <Option value="clothing" content="clothing"></Option>
-              <Option value="accessories" content="accessories"></Option>
-            </Select>
-          )}
-
-          {subCategory && (
-            <Select value={productType} onChange={(event) => setProductType(event.target.value)}>
-              <ProductTypes mainCategory={mainCategory} subCategory={subCategory}></ProductTypes>
-            </Select>
-          )}
+          <Select value={productType} onChange={(event) => setProductType(event.target.value)}>
+            <ProductTypes mainCategory={mainCategory} subCategory={subCategory}></ProductTypes>
+          </Select>
 
           <FormInput
             type="text"
@@ -122,7 +109,7 @@ const AdminProduct = (props) => {
             label="price"
           ></FormInput>
 
-          <FormButton>edit product</FormButton>
+          <FormButton isFetching={isFetching}>edit product</FormButton>
         </Form>
       </Modal>
     </div>

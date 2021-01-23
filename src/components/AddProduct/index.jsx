@@ -6,9 +6,15 @@ import FormButton from "../FormButton";
 import Select from "./Select";
 import Option from "./Option";
 import ProductTypes from "./ProductTypes";
-import { firestore } from "../../Firebase/firebase";
+import { useDispatch, useSelector } from "react-redux";
+import { addProduct, fetchFailure } from "../../Redux/ProductSlice/product-slice";
+
+const isFetchingSelector = (state) => state.product.isFetching;
 
 const AddProduct = () => {
+  const isFetching = useSelector(isFetchingSelector);
+  const dispatch = useDispatch();
+
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [mainImg, setMainImg] = useState("");
@@ -28,20 +34,18 @@ const AddProduct = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    firestore
-      .collection(mainCategory)
-      .doc()
-      .set({
-        name: name,
-        price: price,
-        mainImg: mainImg,
-        mainCategory: mainCategory,
-        subCategory: subCategory,
-        productType: productType,
-      })
-      .then((x) => console.log(x))
+    const product = {
+      name,
+      price,
+      mainImg,
+      mainCategory,
+      subCategory,
+      productType,
+    };
+
+    dispatch(addProduct(product))
       .then(() => clearForm())
-      .catch((err) => console.log(err));
+      .catch((err) => dispatch(fetchFailure(err.message)));
   };
 
   return (
@@ -95,7 +99,7 @@ const AddProduct = () => {
         label="price"
       ></FormInput>
 
-      <FormButton>add product</FormButton>
+      <FormButton isFetching={isFetching}>add product</FormButton>
     </Form>
   );
 };

@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { firestore } from "../../Firebase/firebase";
 
 const INITIAL_STATE = {
   isFetching: false,
@@ -15,21 +16,77 @@ const productSlice = createSlice({
       state.isFetching = true;
     },
 
+    addProductSuccess(state) {
+      state.isFetching = false;
+    },
+
+    updateProductSuccess(state) {
+      state.isFetching = false;
+    },
+
+    deleteProductSuccess(state) {
+      state.isFetching = false;
+    },
+
     fetchProductListSuccess(state, action) {
       state.productList = action.payload;
+      state.isFetching = false;
     },
 
     fetchProductSuccess(state, action) {
       state.product = action.payload;
+      state.isFetching = false;
     },
 
     fetchFailure(state, action) {
+      state.isFetching = false;
       state.error = action.payload;
     },
   },
 });
 
+const addProduct = (product) => {
+  return (dispatch) => {
+    dispatch(startFetch());
+    return firestore
+      .collection(product.mainCategory)
+      .doc()
+      .set(product)
+      .then(() => dispatch(addProductSuccess()));
+  };
+};
 
+const updateProduct = (product, productID) => {
+  return (dispatch) => {
+    dispatch(startFetch());
+    return firestore
+      .collection(product.mainCategory)
+      .doc(productID)
+      .update(product)
+      .then(() => dispatch(updateProductSuccess()));
+  };
+};
 
-export const { startFetch, fetchProductListSuccess, fetchProductSuccess, fetchFailure } = productSlice.actions;
+const deleteProduct = (collection, productID) => {
+  return (dispatch) => {
+    dispatch(startFetch());
+    return firestore
+      .collection(collection)
+      .doc(productID)
+      .delete()
+      .then(() => dispatch(deleteProductSuccess()));
+  };
+};
+
+export { addProduct, updateProduct, deleteProduct };
+
+export const {
+  startFetch,
+  addProductSuccess,
+  updateProductSuccess,
+  deleteProductSuccess,
+  fetchProductListSuccess,
+  fetchProductSuccess,
+  fetchFailure,
+} = productSlice.actions;
 export default productSlice.reducer;
