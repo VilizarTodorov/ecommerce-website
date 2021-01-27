@@ -1,16 +1,11 @@
 import React from "react";
 import SignOut from "../SignOut";
-import { CHANGE_PASSWORD, HOME, PERSONAL_INFO, WISH_LIST } from "../../constants/routes";
-import { Link, Route, Switch, useRouteMatch } from "react-router-dom";
+import { CHANGE_PASSWORD, HOME, PERSONAL_INFO, PROFILE, WISH_LIST } from "../../constants/routes";
+import { Link, useRouteMatch } from "react-router-dom";
 import "./styles.scss";
 import Content from "./Content";
 
-const WishList = React.lazy(() => import("./WishList"));
-
 const Profile = (props) => {
-  let { path, url } = useRouteMatch();
-  console.log(path, url);
-
   return (
     <div className="profile">
       <aside className="aside">
@@ -24,13 +19,13 @@ const Profile = (props) => {
               <Link to={HOME}>home</Link>
             </li>
             <li className="aside-nav-option">
-              <Link to={`${url}${PERSONAL_INFO}`}>personal info</Link>
+              <Link to={`${PROFILE}${PERSONAL_INFO}`}>personal info</Link>
             </li>
             <li className="aside-nav-option">
-              <Link to={`${url}${CHANGE_PASSWORD}`}>change password</Link>
+              <Link to={`${PROFILE}${CHANGE_PASSWORD}`}>change password</Link>
             </li>
             <li className="aside-nav-option">
-              <Link to={`${url}${WISH_LIST}`}>wish list</Link>
+              <Link to={`${PROFILE}${WISH_LIST}`}>wish list</Link>
             </li>
             <li className="aside-nav-option">
               <SignOut></SignOut>

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Grid from "../Grid";
 import ProductEntry from "../ProductEntry";
-import { getAllMainCategoryItems, getAllSubCategoryItems } from "../../Redux/ProductSlice/product-slice";
+import { fetchFailure, getAllMainCategoryItems, getAllSubCategoryItems } from "../../Redux/ProductSlice/product-slice";
 
 const productListSelector = (state) => state.product.productList;
 
@@ -14,9 +14,9 @@ const ComponentSubCategory = () => {
 
   useEffect(() => {
     if (sub === "all") {
-      dispatch(getAllMainCategoryItems(category));
+      dispatch(getAllMainCategoryItems(category)).catch((err) => dispatch(fetchFailure(err.message)));
     } else {
-      dispatch(getAllSubCategoryItems(category, sub));
+      dispatch(getAllSubCategoryItems(category, sub)).catch((err) => dispatch(fetchFailure(err.message)));
     }
   }, [category, sub, dispatch]);
 

@@ -78,6 +78,15 @@ const deleteProduct = (collection, productID) => {
   };
 };
 
+const setAll = (snapshot) => {
+  return (dispatch) => {
+    dispatch(startFetch());
+    const products = [];
+    snapshot.forEach((doc) => products.push({ id: doc.id, ...doc.data() }));
+    dispatch(fetchProductListSuccess(products));
+  };
+};
+
 const getAllMainCategoryItems = (mainCategory) => {
   return (dispatch) => {
     dispatch(startFetch());
@@ -135,6 +144,7 @@ export {
   getAllMainCategoryItems,
   getAllSubCategoryItems,
   getAllProductsWithSpecificType,
+  setAll,
 };
 
 export const {

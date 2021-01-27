@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getAllProductsWithSpecificType } from "../../Redux/ProductSlice/product-slice";
+import { fetchFailure, getAllProductsWithSpecificType } from "../../Redux/ProductSlice/product-slice";
 import Grid from "../Grid";
 import ProductEntry from "../ProductEntry";
 
@@ -15,7 +15,9 @@ const ComponentProductType = (props) => {
 
   useEffect(() => {
     const productType = type.replace(/-/g, " ");
-    dispatch(getAllProductsWithSpecificType(category, sub, productType)).catch((err) => console.log(err));
+    dispatch(getAllProductsWithSpecificType(category, sub, productType)).catch((err) =>
+      dispatch(fetchFailure(err.message))
+    );
   }, [category, sub, type, dispatch]);
 
   return (

@@ -1,14 +1,17 @@
 import React from "react";
-import { auth } from "../../Firebase/firebase";
+import { useDispatch } from "react-redux";
+import { signOut, failure } from "../../Redux/userSlice/user-slice";
 import "./styles.scss";
 
 const SignOut = () => {
-  const signOut = () => {
-    auth.signOut();
+  const dispatch = useDispatch();
+
+  const onClick = () => {
+    dispatch(signOut()).catch((err) => dispatch(failure(err.message)));
   };
 
   return (
-    <button className="sign-out-button" onClick={signOut}>
+    <button className="sign-out-button" onClick={onClick}>
       sign out
     </button>
   );
