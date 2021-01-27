@@ -93,6 +93,13 @@ const setUserEntry = (uid) => {
   };
 };
 
-export { signIn, signUp, signOut, resetPassword, setUserEntry };
+const changePassword = (password) => {
+  return (dispatch) => {
+    dispatch(authActionStart());
+    return auth.currentUser.updatePassword(password).then(() => dispatch(authActionSuccess()));
+  };
+};
+
+export { signIn, signUp, signOut, resetPassword, setUserEntry, changePassword };
 export const { setUser, setUid, failure, resetUser } = userSlice.actions;
 export default userSlice.reducer;

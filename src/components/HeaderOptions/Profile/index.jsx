@@ -1,11 +1,13 @@
 import React from "react";
-import './styles.scss'
+import { Link } from "react-router-dom";
+import { PROFILE } from "../../../constants/routes";
+import "./styles.scss";
 
 const Profile = () => {
   return (
-    <div className="option profile">
+    <Link to={PROFILE} className="option-profile">
       <i className="far fa-user-circle fa-lg"></i>
-    </div>
+    </Link>
   );
 };
 

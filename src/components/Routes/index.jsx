@@ -1,15 +1,9 @@
 import React, { Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
 import * as ROUTES from "../../constants/routes";
-import ComponentProductType from "../ComponentProductType";
-// import Admin from "../Admin";
-// import ComponentMainCategory from "../ComponentMainCategory";
-// import ComponentSubCategory from "../ComponentSubCategory";
-// import Home from "../Home";
-// import ResetPassword from "../ResetPassword";
-// import SignIn from "../SignIn";
-// import SingUp from "../SignUp";
 
+const ComponentProductType = React.lazy(() => import("../ComponentProductType"));
+const Profile = React.lazy(() => import("../Profile"));
 const Admin = React.lazy(() => import("../Admin"));
 const ComponentMainCategory = React.lazy(() => import("../ComponentMainCategory"));
 const ComponentSubCategory = React.lazy(() => import("../ComponentSubCategory"));
@@ -24,6 +18,9 @@ const Routes = () => {
       <Switch>
         <Route exact path={ROUTES.HOME}>
           <Home></Home>
+        </Route>
+        <Route path={ROUTES.PROFILE}>
+          <Profile></Profile>
         </Route>
         <Route exact path={ROUTES.ADMIN}>
           <Admin></Admin>

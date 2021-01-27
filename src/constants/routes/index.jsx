@@ -15,3 +15,6 @@ export const SIGN_UP = "/sign-up";
 export const RESET_PASSWORD = "/reset-password";
 export const CHANGE_PASSWORD = "/change-password";
 export const ADMIN = "/admin";
+export const PROFILE = "/profile";
+export const WISH_LIST = "/wish-list";
+export const PERSONAL_INFO = "/personal-info";

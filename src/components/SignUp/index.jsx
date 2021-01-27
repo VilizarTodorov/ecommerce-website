@@ -55,6 +55,7 @@ const SingUp = () => {
           uid: user.uid,
           firstName: firstName,
           lastName: lastName,
+          roles: ["user"],
         };
 
         firestore
