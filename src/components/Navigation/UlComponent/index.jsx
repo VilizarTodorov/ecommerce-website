@@ -14,11 +14,14 @@ const UlComponent = (props) => {
     setSubSubNavToggle(false);
   };
 
-  const items = props.items.map((item) => (
-    <li key={item} className="shop-item-category">
-      <Link to={`${props.mainRoutePart}${props.subRoutePart}/item`}>{item}</Link>
-    </li>
-  ));
+  const items = props.items.map((item) => {
+    const productTypeRoutePart = item.replace(/\s+/g, "-");
+    return (
+      <li key={item} className="shop-item-category">
+        <Link to={`${props.mainRoutePart}${props.subRoutePart}/${productTypeRoutePart}`}>{item}</Link>
+      </li>
+    );
+  });
 
   return (
     <li className="ul-component">

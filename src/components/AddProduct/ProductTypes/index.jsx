@@ -49,7 +49,11 @@ const products = {
 
 const ProductTypes = ({ mainCategory, subCategory }) => {
   const items = products[mainCategory][subCategory];
-  const options = items.map((x) => <Option key={x} value={x} content={x}></Option>);
+  const options = items.map((x) => (
+    <Option key={x} value={x}>
+      {x}
+    </Option>
+  ));
   return options;
 };
 

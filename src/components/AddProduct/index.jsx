@@ -53,16 +53,16 @@ const AddProduct = () => {
       <FormTitle>add new product</FormTitle>
 
       <Select value={mainCategory} onChange={(event) => setMainCategory(event.target.value)}>
-        <Option value="men" content="men"></Option>
-        <Option value="women" content="women"></Option>
-        <Option value="kids" content="kids"></Option>
+        <Option value="men">men</Option>
+        <Option value="women">women</Option>
+        <Option value="kids">kids</Option>
       </Select>
 
       {mainCategory && (
         <Select value={subCategory} onChange={(event) => setSubCategory(event.target.value)}>
-          <Option value="shoes" content="shoes"></Option>
-          <Option value="clothing" content="clothing"></Option>
-          <Option value="accessories" content="accessories"></Option>
+          <Option value="shoes">shoes</Option>
+          <Option value="clothing">clothing</Option>
+          <Option value="accessories">accessories</Option>
         </Select>
       )}
 

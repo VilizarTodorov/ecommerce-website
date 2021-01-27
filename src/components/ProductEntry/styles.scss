@@ -1,0 +1,41 @@
+.product-entry {
+  background-color: white;
+  padding: 2px;
+  transition: all 0.2s ease-in-out;
+  &-main-img {
+    img {
+      width: 100%;
+    }
+  }
+
+  &-other-colors {
+    display: none;
+    height: 50px;
+    background-color: lightgray;
+  }
+
+  &-info {
+    padding: 7px;
+    margin-bottom: 50px;
+  }
+
+  .product-info {
+    margin: 5px 0;
+  }
+
+  &:hover {
+    position: relative;
+    // padding: 0;
+    z-index: 2;
+    // transform: scale(1.05);
+    border: 1px solid black;
+
+    .product-entry-info{
+        margin-bottom: 0;
+    }
+
+    .product-entry-other-colors {
+      display: block;
+    }
+  }
+}

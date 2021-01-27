@@ -23,7 +23,7 @@ const AdminProduct = (props) => {
   const [price, setPrice] = useState(props.price);
   const [mainImg, setMainImg] = useState(props.mainImg);
 
-  const [mainCategory, setMainCategory] = useState(props.mainCategory);
+  // const [mainCategory, setMainCategory] = useState(props.mainCategory);
   const [subCategory, setSubCategory] = useState(props.subCategory);
   const [productType, setProductType] = useState(props.productType);
 
@@ -36,7 +36,7 @@ const AdminProduct = (props) => {
   };
 
   const deleteProd = () => {
-    dispatch(deleteProduct(mainCategory, props.id)).catch((err) => dispatch(fetchFailure(err.message)));
+    dispatch(deleteProduct(props.mainCategory, props.id)).catch((err) => dispatch(fetchFailure(err.message)));
   };
 
   const onSubmit = (event) => {
@@ -46,7 +46,7 @@ const AdminProduct = (props) => {
       name,
       price,
       mainImg,
-      mainCategory,
+      mainCategory: props.mainCategory,
       subCategory,
       productType,
     };
@@ -73,13 +73,13 @@ const AdminProduct = (props) => {
           <FormTitle>edit product</FormTitle>
 
           <Select value={subCategory} onChange={(event) => setSubCategory(event.target.value)}>
-            <Option value="shoes" content="shoes"></Option>
-            <Option value="clothing" content="clothing"></Option>
-            <Option value="accessories" content="accessories"></Option>
+            <Option value="shoes">shoes</Option>
+            <Option value="clothing">clothing</Option>
+            <Option value="accessories">accessories</Option>
           </Select>
 
           <Select value={productType} onChange={(event) => setProductType(event.target.value)}>
-            <ProductTypes mainCategory={mainCategory} subCategory={subCategory}></ProductTypes>
+            <ProductTypes mainCategory={props.mainCategory} subCategory={subCategory}></ProductTypes>
           </Select>
 
           <FormInput

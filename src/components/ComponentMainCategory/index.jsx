@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import menImg from "../../assets/men.jpg";
 import womenImg from "../../assets/women.jpg";
 import kidsImg from "../../assets/kids.jpg";
-import { MEN, WOMEN, KIDS, SHOES, CLOTHING, ACCESSORIES } from "../../constants/routes";
+import { MEN, WOMEN, KIDS, SHOES, CLOTHING, ACCESSORIES, ALL } from "../../constants/routes";
 import * as categ from "../../constants/categories";
 import "./styles.scss";
 import { Link, useParams } from "react-router-dom";
@@ -38,7 +38,7 @@ const ComponentMainCategory = () => {
         <h3 className="main-category-title">{category}</h3>
         <div className="container">
           <section className="sub-categories">
-            <Link to={`/`}>
+            <Link to={`${mainRoutePart}${ALL}`}>
               <p className="sub-categories-title">all items</p>
             </Link>
             <Link to={`${mainRoutePart}${SHOES}`}>

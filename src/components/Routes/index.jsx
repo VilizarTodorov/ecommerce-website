@@ -1,6 +1,7 @@
 import React, { Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
 import * as ROUTES from "../../constants/routes";
+import ComponentProductType from "../ComponentProductType";
 // import Admin from "../Admin";
 // import ComponentMainCategory from "../ComponentMainCategory";
 // import ComponentSubCategory from "../ComponentSubCategory";
@@ -41,6 +42,9 @@ const Routes = () => {
         </Route>
         <Route exact path={ROUTES.SUB_CATEGORY}>
           <ComponentSubCategory></ComponentSubCategory>
+        </Route>
+        <Route exact path={ROUTES.PRODUCT_TYPE}>
+          <ComponentProductType></ComponentProductType>
         </Route>
       </Switch>
     </Suspense>

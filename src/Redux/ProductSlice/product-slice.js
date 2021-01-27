@@ -78,7 +78,64 @@ const deleteProduct = (collection, productID) => {
   };
 };
 
-export { addProduct, updateProduct, deleteProduct };
+const getAllMainCategoryItems = (mainCategory) => {
+  return (dispatch) => {
+    dispatch(startFetch());
+    return firestore
+      .collection(mainCategory)
+      .get()
+      .then((snapshot) => {
+        const products = [];
+        snapshot.forEach((x) => products.push({ id: x.id, ...x.data() }));
+        return products;
+      })
+      .then((products) => {
+        dispatch(fetchProductListSuccess(products));
+      });
+  };
+};
+
+const getAllSubCategoryItems = (mainCategory, subCategory) => {
+  return (dispatch) => {
+    dispatch(startFetch());
+    return firestore
+      .collection(mainCategory)
+      .where("subCategory", "==", subCategory)
+      .get()
+      .then((snapshot) => {
+        const products = [];
+        snapshot.forEach((x) => products.push({ id: x.id, ...x.data() }));
+        return products;
+      })
+      .then((products) => dispatch(fetchProductListSuccess(products)));
+  };
+};
+
+const getAllProductsWithSpecificType = (mainCategory, subCategory, productType) => {
+  return (dispatch) => {
+    dispatch(startFetch());
+    return firestore
+      .collection(mainCategory)
+      .where("subCategory", "==", subCategory)
+      .where("productType", "==", productType)
+      .get()
+      .then((snapshot) => {
+        const products = [];
+        snapshot.forEach((x) => products.push({ id: x.id, ...x.data() }));
+        return products;
+      })
+      .then((products) => dispatch(fetchProductListSuccess(products)));
+  };
+};
+
+export {
+  addProduct,
+  updateProduct,
+  deleteProduct,
+  getAllMainCategoryItems,
+  getAllSubCategoryItems,
+  getAllProductsWithSpecificType,
+};
 
 export const {
   startFetch,

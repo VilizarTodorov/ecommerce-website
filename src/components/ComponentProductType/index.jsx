@@ -1,24 +1,22 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { getAllProductsWithSpecificType } from "../../Redux/ProductSlice/product-slice";
 import Grid from "../Grid";
 import ProductEntry from "../ProductEntry";
-import { getAllMainCategoryItems, getAllSubCategoryItems } from "../../Redux/ProductSlice/product-slice";
 
 const productListSelector = (state) => state.product.productList;
 
-const ComponentSubCategory = () => {
-  const { category, sub } = useParams();
+const ComponentProductType = (props) => {
+  const { category, sub, type } = useParams();
+
   const dispatch = useDispatch();
   const productList = useSelector(productListSelector);
 
   useEffect(() => {
-    if (sub === "all") {
-      dispatch(getAllMainCategoryItems(category));
-    } else {
-      dispatch(getAllSubCategoryItems(category, sub));
-    }
-  }, [category, sub, dispatch]);
+    const productType = type.replace(/-/g, " ");
+    dispatch(getAllProductsWithSpecificType(category, sub, productType)).catch((err) => console.log(err));
+  }, [category, sub, type, dispatch]);
 
   return (
     <Grid>
@@ -36,4 +34,4 @@ const ComponentSubCategory = () => {
   );
 };
 
-export default ComponentSubCategory;
+export default ComponentProductType;

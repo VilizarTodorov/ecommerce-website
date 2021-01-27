@@ -5,9 +5,11 @@ export const WOMEN = "/women";
 export const SHOES = "/shoes";
 export const CLOTHING = "/clothing";
 export const ACCESSORIES = "/accessories";
+export const ALL = "/all";
 
 export const CATEGORY = "/:category";
 export const SUB_CATEGORY = "/:category/:sub";
+export const PRODUCT_TYPE = "/:category/:sub/:type";
 export const SIGN_IN = "/sign-in";
 export const SIGN_UP = "/sign-up";
 export const RESET_PASSWORD = "/reset-password";
