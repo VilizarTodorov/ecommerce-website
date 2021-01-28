@@ -1,22 +1,37 @@
 import React from "react";
 import SignOut from "../SignOut";
-import { CHANGE_PASSWORD, HOME, PERSONAL_INFO, PROFILE, WISH_LIST } from "../../constants/routes";
+import { CHANGE_PASSWORD, PERSONAL_INFO, PROFILE, WISH_LIST } from "../../constants/routes";
 import { Link } from "react-router-dom";
-import "./styles.scss";
 import Content from "./Content";
+import { createSelector } from "@reduxjs/toolkit";
+import "./styles.scss";
+import { useSelector } from "react-redux";
+
+const selectFirstName = (state) => state.user.user.firstName;
+const selectLastName = (state) => state.user.user.lastName;
+const userNamesSelector = createSelector([selectFirstName, selectLastName], (firstName, lastName) => {
+  return {
+    firstName,
+    lastName,
+  };
+});
 
 const Profile = (props) => {
+  const { firstName, lastName } = useSelector(userNamesSelector);
+
   return (
     <div className="profile">
       <aside className="aside">
         <header className="aside-header">
           <i className="far fa-user-circle fa-4x"></i>
-          <h2>firstName lastName</h2>
+          <h2>
+            {firstName} {lastName}
+          </h2>
         </header>
         <nav className="aside-nav">
           <ul>
             <li className="aside-nav-option">
-              <Link to={HOME}>home</Link>
+              <Link to={PROFILE}>my account</Link>
             </li>
             <li className="aside-nav-option">
               <Link to={`${PROFILE}${PERSONAL_INFO}`}>personal info</Link>

@@ -9,8 +9,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { HOME } from "../../constants/routes";
 import { COLLECTIONS, firestore } from "../../Firebase/firebase";
-import { WithAuthorization } from "../../HOC";
 import withAuthorization from "../../HOC/withAuthorization";
+import FormRadioButton from "../FormRadioButton";
+import RadioButtonContainer from "../RadioButtonContainer";
+// import { WithAuthorization } from "../../HOC";
 
 const isFetchingSelector = (state) => state.user.authActionStarted;
 
@@ -20,6 +22,7 @@ const SingUp = () => {
   const [rePassword, setRePassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [gender, setGender] = useState("gender");
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -56,6 +59,8 @@ const SingUp = () => {
           firstName: firstName,
           lastName: lastName,
           roles: ["user"],
+          wishList: [],
+          gender,
         };
 
         firestore
@@ -88,6 +93,30 @@ const SingUp = () => {
           onChange={lastNameOnChange}
           label="last name"
         ></FormInput>
+
+        <RadioButtonContainer>
+          <FormRadioButton
+            id="male"
+            name="gender"
+            value="male"
+            onChange={(event) => setGender(event.target.value)}
+            label="male"
+          ></FormRadioButton>
+          <FormRadioButton
+            id="female"
+            name="gender"
+            value="female"
+            onChange={(event) => setGender(event.target.value)}
+            label="female"
+          ></FormRadioButton>
+          <FormRadioButton
+            id="other"
+            name="gender"
+            value="other"
+            onChange={(event) => setGender(event.target.value)}
+            label="other"
+          ></FormRadioButton>
+        </RadioButtonContainer>
 
         <FormInput
           type="email"

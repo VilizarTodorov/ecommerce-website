@@ -1,0 +1,10 @@
+.personal-info {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  h3 {
+    text-transform: uppercase;
+    margin: 10px 0;
+  }
+}

@@ -9,8 +9,8 @@ import AddProduct from "../AddProduct";
 import GeneralButton from "../GeneralButton";
 import { firestore } from "../../Firebase/firebase";
 import AdminProduct from "../AdminProduct";
-import "./styles.scss";
 import { fetchFailure, setAll } from "../../Redux/ProductSlice/product-slice";
+import "./styles.scss";
 
 const selectFirstName = (state) => state.user.user.firstName;
 const selectLastName = (state) => state.user.user.lastName;
@@ -41,7 +41,7 @@ const Admin = () => {
     return () => {
       listener();
     };
-  }, [collection,dispatch]);
+  }, [collection, dispatch]);
 
   const openModal = () => {
     setIsModalOpen(true);
