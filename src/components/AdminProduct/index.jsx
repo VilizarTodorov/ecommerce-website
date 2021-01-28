@@ -38,7 +38,7 @@ const AdminProduct = (props) => {
     dispatch(deleteProduct(props.mainCategory, props.id)).catch((err) => dispatch(fetchFailure(err.message)));
   };
 
-  const updateProduct = (event) => {
+  const onSubmit = (event) => {
     event.preventDefault();
 
     const updateData = {
@@ -68,7 +68,7 @@ const AdminProduct = (props) => {
         <GeneralButton onClick={openModal}>edit</GeneralButton>
       </div>
       <Modal hideModal={closeModal} isOpen={isOpen}>
-        <Form onSubmit={updateProduct}>
+        <Form onSubmit={onSubmit}>
           <FormTitle>edit product</FormTitle>
 
           <Select value={subCategory} onChange={(event) => setSubCategory(event.target.value)}>

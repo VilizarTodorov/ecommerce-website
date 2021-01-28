@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Router, Switch, useLocation } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { CHANGE_PASSWORD, PERSONAL_INFO, PROFILE, WISH_LIST } from "../../../constants/routes";
 import ChangePassword from "../ChangePassword";
 import PersonalInfo from "../PersonalInfo";

@@ -1,7 +1,7 @@
 import React from "react";
 import SignOut from "../SignOut";
 import { CHANGE_PASSWORD, HOME, PERSONAL_INFO, PROFILE, WISH_LIST } from "../../constants/routes";
-import { Link, useRouteMatch } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./styles.scss";
 import Content from "./Content";
 

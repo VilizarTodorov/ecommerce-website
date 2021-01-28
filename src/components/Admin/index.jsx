@@ -41,7 +41,7 @@ const Admin = () => {
     return () => {
       listener();
     };
-  }, [collection]);
+  }, [collection,dispatch]);
 
   const openModal = () => {
     setIsModalOpen(true);
