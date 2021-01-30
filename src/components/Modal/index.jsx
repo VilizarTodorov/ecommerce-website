@@ -4,7 +4,7 @@ import "./styles.scss";
 const Modal = ({ children, hideModal, styles, isOpen, className }) => {
   return (
     <div
-      className={`overlay ${isOpen ? "active" : ""} ${className ? className : ""}`}
+      className={`overlay ${isOpen ? "active" : ""} ${className ? className : ""} modal`}
       onClick={hideModal}
       style={styles}
     >

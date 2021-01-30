@@ -33,8 +33,8 @@ const LoginDetails = ({ user }) => {
             label="email"
           ></FormInput>
           <FormButton>save changes</FormButton>
-          <GeneralButton onClick={() => setIsOpen(false)}>cancel</GeneralButton>
         </Form>
+        <GeneralButton onClick={() => setIsOpen(false)}>cancel</GeneralButton>
       </Modal>
     </Section>
   );

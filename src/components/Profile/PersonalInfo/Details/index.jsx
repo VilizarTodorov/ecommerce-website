@@ -9,7 +9,6 @@ import FormInput from "../../../FormInput";
 import FormButton from "../../../FormButton";
 import FormRadioButton from "../../../FormRadioButton";
 import RadioButtonContainer from "../../../RadioButtonContainer";
-import "./styles.scss";
 
 const Details = ({ user }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -78,8 +77,8 @@ const Details = ({ user }) => {
           </RadioButtonContainer>
 
           <FormButton>update details</FormButton>
-          <GeneralButton onClick={() => setIsOpen(false)}>cancel</GeneralButton>
         </Form>
+        <GeneralButton onClick={() => setIsOpen(false)}>cancel</GeneralButton>
       </Modal>
     </Section>
   );

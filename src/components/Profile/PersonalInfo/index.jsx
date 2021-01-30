@@ -1,13 +1,11 @@
-import React, { useState } from "react";
-import GeneralButton from "../../GeneralButton";
+import React from "react";
 import SectionTitle from "../../SectionTitle";
-import Modal from "../../Modal";
 import "./styles.scss";
 import Details from "./Details";
 import LoginDetails from "./LoginDetails";
+import DeleteAccount from "./DeleteAccount";
 
 const PersonalInfo = ({ user }) => {
-  const [manageAccModalIsOpen, setManageAccModalIsOpen] = useState(false);
 
   return (
     <div className="personal-info">
@@ -16,11 +14,7 @@ const PersonalInfo = ({ user }) => {
 
       <Details user={user}></Details>
       <LoginDetails user={user}></LoginDetails>
-      <section className="manage-account">
-        <h3>manage account</h3>
-        <GeneralButton onClick={() => setManageAccModalIsOpen(true)}>delete account</GeneralButton>
-        <Modal isOpen={manageAccModalIsOpen} hideModal={() => setManageAccModalIsOpen(false)}></Modal>
-      </section>
+      <DeleteAccount user={user}></DeleteAccount>
     </div>
   );
 };
