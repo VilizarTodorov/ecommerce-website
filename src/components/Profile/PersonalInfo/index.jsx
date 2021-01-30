@@ -1,35 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import GeneralButton from "../../GeneralButton";
-import SectionTitle from './SectionTitle'
+import SectionTitle from "../../SectionTitle";
+import Modal from "../../Modal";
 import "./styles.scss";
+import Details from "./Details";
+import LoginDetails from "./LoginDetails";
 
 const PersonalInfo = ({ user }) => {
+  const [manageAccModalIsOpen, setManageAccModalIsOpen] = useState(false);
+
   return (
     <div className="personal-info">
-      <section className="my-details">
       <SectionTitle>my details</SectionTitle>
-        <p className="capitalize">Feel free to edit any of your details below so your account is up to date.</p>
-      </section>
-      <section className="details">
-       <SectionTitle>details</SectionTitle>
-        <p>
-          {user.firstName} {user.lastName}
-        </p>
-        <p>{user.gender}</p>
-        <GeneralButton>edit</GeneralButton>
-      </section>
-      <section className="login-details">
-       <SectionTitle>login details</SectionTitle>
-        <h3>email</h3>
-        <p>{user.email}</p>
-        <GeneralButton>edit</GeneralButton>
-        <h3>password</h3>
-        <p>************</p>
-        <GeneralButton>edit</GeneralButton>
-      </section>
+      <p className="capitalize">Feel free to edit any of your details below so your account is up to date.</p>
+
+      <Details user={user}></Details>
+      <LoginDetails user={user}></LoginDetails>
       <section className="manage-account">
         <h3>manage account</h3>
-        <GeneralButton>delete account</GeneralButton>
+        <GeneralButton onClick={() => setManageAccModalIsOpen(true)}>delete account</GeneralButton>
+        <Modal isOpen={manageAccModalIsOpen} hideModal={() => setManageAccModalIsOpen(false)}></Modal>
       </section>
     </div>
   );

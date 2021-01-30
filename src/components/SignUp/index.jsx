@@ -101,6 +101,7 @@ const SingUp = () => {
             value="male"
             onChange={(event) => setGender(event.target.value)}
             label="male"
+            currentValue={gender}
           ></FormRadioButton>
           <FormRadioButton
             id="female"
@@ -108,6 +109,7 @@ const SingUp = () => {
             value="female"
             onChange={(event) => setGender(event.target.value)}
             label="female"
+            currentValue={gender}
           ></FormRadioButton>
           <FormRadioButton
             id="other"
@@ -115,6 +117,7 @@ const SingUp = () => {
             value="other"
             onChange={(event) => setGender(event.target.value)}
             label="other"
+            currentValue={gender}
           ></FormRadioButton>
         </RadioButtonContainer>
 
