@@ -9,8 +9,12 @@ import FormInput from "../../../FormInput";
 import FormButton from "../../../FormButton";
 import FormRadioButton from "../../../FormRadioButton";
 import RadioButtonContainer from "../../../RadioButtonContainer";
+import { useDispatch } from "react-redux";
+import { failure, updateUserGenderAndName } from "../../../../Redux/userSlice/user-slice";
 
 const Details = ({ user }) => {
+  const dispatch = useDispatch();
+
   const [isOpen, setIsOpen] = useState(false);
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
@@ -18,6 +22,9 @@ const Details = ({ user }) => {
 
   const onSubmit = (event) => {
     event.preventDefault();
+    dispatch(updateUserGenderAndName(user.uid, firstName, lastName, gender))
+      .then(() => setIsOpen(false))
+      .catch((err) => dispatch(failure(err.message)));
   };
 
   return (

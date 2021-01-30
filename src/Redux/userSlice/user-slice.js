@@ -81,6 +81,13 @@ const resetPassword = (email) => {
   };
 };
 
+const changePassword = (password) => {
+  return (dispatch) => {
+    dispatch(authActionStart());
+    return auth.currentUser.updatePassword(password).then(() => dispatch(authActionSuccess()));
+  };
+};
+
 const setUserEntry = (uid) => {
   return (dispatch) => {
     dispatch(authActionStart());
@@ -93,13 +100,17 @@ const setUserEntry = (uid) => {
   };
 };
 
-const changePassword = (password) => {
+const updateUserGenderAndName = (uid, firstName, lastName, gender) => {
   return (dispatch) => {
     dispatch(authActionStart());
-    return auth.currentUser.updatePassword(password).then(() => dispatch(authActionSuccess()));
+    return firestore
+      .collection(COLLECTIONS.USERS)
+      .doc(uid)
+      .update({ firstName, lastName, gender })
+      .then(() => dispatch(authActionSuccess()));
   };
 };
 
-export { signIn, signUp, signOut, resetPassword, setUserEntry, changePassword };
+export { signIn, signUp, signOut, resetPassword, changePassword, setUserEntry, updateUserGenderAndName };
 export const { setUser, setUid, failure, resetUser } = userSlice.actions;
 export default userSlice.reducer;
