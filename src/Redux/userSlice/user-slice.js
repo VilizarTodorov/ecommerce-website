@@ -111,6 +111,35 @@ const updateUserGenderAndName = (uid, firstName, lastName, gender) => {
   };
 };
 
-export { signIn, signUp, signOut, resetPassword, changePassword, setUserEntry, updateUserGenderAndName };
+const updateLoginDetails = (email, uid) => {
+  return (dispatch) => {
+    dispatch(authActionStart());
+    const changeEmail = auth.currentUser.updateEmail(email);
+    const updateDbEntry = firestore.collection(COLLECTIONS.USERS).doc(uid).update({ email });
+    return Promise.all([changeEmail, updateDbEntry]).then(() => dispatch(authActionSuccess()));
+  };
+};
+
+const deleteAccount = (uid) => {
+  return (dispatch) => {
+    dispatch(authActionStart());
+    const deleteDbEntry = firestore.collection(COLLECTIONS.USERS).doc(uid).delete();
+    const deleteUser = auth.currentUser.delete();
+
+    return Promise.all([deleteDbEntry, deleteUser]).then(() => dispatch(authActionSuccess()));
+  };
+};
+
+export {
+  signIn,
+  signUp,
+  signOut,
+  resetPassword,
+  changePassword,
+  setUserEntry,
+  updateUserGenderAndName,
+  updateLoginDetails,
+  deleteAccount,
+};
 export const { setUser, setUid, failure, resetUser } = userSlice.actions;
 export default userSlice.reducer;

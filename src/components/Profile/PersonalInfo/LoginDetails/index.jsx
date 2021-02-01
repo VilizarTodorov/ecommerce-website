@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { failure, updateLoginDetails } from "../../../../Redux/userSlice/user-slice";
 import Form from "../../../Form";
 import FormButton from "../../../FormButton";
 import FormInput from "../../../FormInput";
@@ -11,8 +13,14 @@ import SectionTitle from "../../../SectionTitle";
 const LoginDetails = ({ user }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [email, setEmail] = useState(user.email);
+
+  const dispatch = useDispatch();
+
   const onSubmit = (event) => {
     event.preventDefault();
+    dispatch(updateLoginDetails(email, user.uid))
+      .then(() => setIsOpen(false))
+      .catch((err) => dispatch(failure(err.message)));
   };
 
   return (

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { deleteAccount, failure } from "../../../../Redux/userSlice/user-slice";
 import GeneralButton from "../../../GeneralButton";
 import Modal from "../../../Modal";
 import Section from "../../../Section";
@@ -6,6 +8,13 @@ import SectionTitle from "../../../SectionTitle";
 
 const DeleteAccount = ({ user }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
+
+  const onClick = () => {
+    dispatch(deleteAccount(user.uid))
+      .then(() => console.log("deleted"))
+      .catch((err) => dispatch(failure(err.message)));
+  };
 
   return (
     <Section className="manage-account">
@@ -19,7 +28,7 @@ const DeleteAccount = ({ user }) => {
             have access to the information in your account, like your order history, wish list, or athletic progress.
           </p>
         </div>
-        <GeneralButton>delete account</GeneralButton>
+        <GeneralButton onClick={onClick}>delete account</GeneralButton>
         <GeneralButton onClick={() => setIsOpen(false)}>cancel</GeneralButton>
       </Modal>
     </Section>
