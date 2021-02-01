@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { isProductInWishList } from "../../helpers/functions";
-import { addToWishList } from "../../Redux/userSlice/user-slice";
+import { addToWishList, failure, removeFromWishList } from "../../Redux/userSlice/user-slice";
 import "./styles.scss";
 
 const wishlistSelector = (state) => state.user.wishList;
@@ -28,7 +28,9 @@ const ProductEntry = (props) => {
         sub: props.sub,
         productType: props.productType,
       };
-      dispatch(addToWishList(uid, product, wishList));
+      dispatch(addToWishList(uid, product, wishList)).catch((err) => dispatch(failure(err.message)));
+    } else {
+      dispatch(removeFromWishList(uid, props.id, wishList)).catch((err) => dispatch(failure(err.message)));
     }
   };
 

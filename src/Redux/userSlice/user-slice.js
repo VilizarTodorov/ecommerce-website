@@ -155,12 +155,25 @@ const addToWishList = (uid, product, wishlist) => {
 
   return (dispatch) => {
     dispatch(wishListActionStart());
-    firestore
+    return firestore
       .collection(COLLECTIONS.WISHLISTS)
       .doc(uid)
       .update({ wishlist: list })
-      .then(() => dispatch(wishListActionSuccess()))
-      .catch((err) => dispatch(failure(err.message)));
+      .then(() => dispatch(wishListActionSuccess()));
+  };
+};
+
+const removeFromWishList = (uid, productID, wishlist) => {
+  let list = [...wishlist];
+  list = list.filter((x) => x.id !== productID);
+
+  return (dispatch) => {
+    dispatch(wishListActionStart());
+    return firestore
+      .collection(COLLECTIONS.WISHLISTS)
+      .doc(uid)
+      .update({ wishlist: list })
+      .then(() => dispatch(wishListActionSuccess));
   };
 };
 
@@ -175,6 +188,7 @@ export {
   updateLoginDetails,
   deleteAccount,
   addToWishList,
+  removeFromWishList
 };
 export const {
   authActionStart,
@@ -186,7 +200,5 @@ export const {
   resetUser,
   wishListActionStart,
   wishListActionSuccess,
-  addProductToWishList,
-  removeProductFromWishList,
 } = userSlice.actions;
 export default userSlice.reducer;
