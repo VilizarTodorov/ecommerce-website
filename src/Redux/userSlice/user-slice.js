@@ -3,8 +3,10 @@ import { auth, COLLECTIONS, firestore } from "../../Firebase/firebase";
 
 const INITIAL_STATE = {
   authActionStarted: false,
+  wishListActionStarted: false,
   uid: null,
   user: null,
+  wishList: [],
   error: null,
 };
 
@@ -12,6 +14,14 @@ const userSlice = createSlice({
   name: "user",
   initialState: { ...INITIAL_STATE },
   reducers: {
+    wishListActionStart(state) {
+      state.wishListActionStarted = true;
+    },
+
+    wishListActionSuccess(state) {
+      state.wishListActionStarted = false;
+    },
+
     authActionStart(state) {
       state.authActionStarted = true;
     },
@@ -20,12 +30,16 @@ const userSlice = createSlice({
       state.authActionStarted = false;
     },
 
+    setUid(state, action) {
+      state.uid = action.payload;
+    },
+
     setUser(state, action) {
       state.user = action.payload;
     },
 
-    setUid: (state, action) => {
-      state.uid = action.payload;
+    setWishList(state, action) {
+      state.wishList = action.payload;
     },
 
     failure(state, action) {
@@ -41,8 +55,6 @@ const userSlice = createSlice({
     },
   },
 });
-
-const { authActionStart, authActionSuccess } = userSlice.actions;
 
 const signIn = (email, password) => {
   return (dispatch) => {
@@ -88,15 +100,22 @@ const changePassword = (password) => {
   };
 };
 
-const setUserEntry = (uid) => {
+const setUserAndWishList = (uid) => {
   return (dispatch) => {
     dispatch(authActionStart());
-    return firestore
+    const getUser = firestore
       .collection(COLLECTIONS.USERS)
       .doc(uid)
       .get()
-      .then((user) => dispatch(setUser(user.data())))
-      .then(() => dispatch(authActionSuccess()));
+      .then((user) => dispatch(setUser(user.data())));
+
+    const getWishList = firestore
+      .collection(COLLECTIONS.WISHLISTS)
+      .doc(uid)
+      .get()
+      .then((wishList) => dispatch(setWishList(wishList.data().wishlist)));
+
+    return Promise.all([getUser, getWishList]).then(() => dispatch(authActionSuccess()));
   };
 };
 
@@ -130,16 +149,44 @@ const deleteAccount = (uid) => {
   };
 };
 
+const addToWishList = (uid, product, wishlist) => {
+  const list = [...wishlist];
+  list.push(product);
+
+  return (dispatch) => {
+    dispatch(wishListActionStart());
+    firestore
+      .collection(COLLECTIONS.WISHLISTS)
+      .doc(uid)
+      .update({ wishlist: list })
+      .then(() => dispatch(wishListActionSuccess()))
+      .catch((err) => dispatch(failure(err.message)));
+  };
+};
+
 export {
   signIn,
   signUp,
   signOut,
   resetPassword,
   changePassword,
-  setUserEntry,
+  setUserAndWishList,
   updateUserGenderAndName,
   updateLoginDetails,
   deleteAccount,
+  addToWishList,
 };
-export const { setUser, setUid, failure, resetUser } = userSlice.actions;
+export const {
+  authActionStart,
+  authActionSuccess,
+  setUid,
+  setUser,
+  setWishList,
+  failure,
+  resetUser,
+  wishListActionStart,
+  wishListActionSuccess,
+  addProductToWishList,
+  removeProductFromWishList,
+} = userSlice.actions;
 export default userSlice.reducer;

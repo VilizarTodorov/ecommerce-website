@@ -1,9 +1,47 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { isProductInWishList } from "../../helpers/functions";
+import { addToWishList } from "../../Redux/userSlice/user-slice";
 import "./styles.scss";
 
+const wishlistSelector = (state) => state.user.wishList;
+const uidSelector = (state) => state.user.uid;
+
 const ProductEntry = (props) => {
+  const [isInWishlist, setIsInWishlist] = useState(false);
+
+  const wishList = useSelector(wishlistSelector);
+  const uid = useSelector(uidSelector);
+
+  const dispatch = useDispatch();
+
+  const toggleInWishList = () => {
+    const isAdded = isProductInWishList(wishList, props.id);
+
+    if (!isAdded) {
+      const product = {
+        id: props.id,
+        mainImg: props.mainImg,
+        price: props.price,
+        name: props.name,
+        category: props.category,
+        sub: props.sub,
+        productType: props.productType,
+      };
+      dispatch(addToWishList(uid, product, wishList));
+    }
+  };
+
+  useEffect(() => {
+    const isAdded = isProductInWishList(wishList, props.id);
+    setIsInWishlist(isAdded);
+  }, [wishList, props.id]);
+
   return (
     <div className="product-entry">
+      <span onClick={toggleInWishList} className="wish-list-icon">
+        {isInWishlist ? <i className="fas fa-heart fa-lg"></i> : <i className="far fa-heart fa-lg"></i>}
+      </span>
       <div className="product-entry-main-img">
         <img src={props.mainImg} alt="img" />
       </div>

@@ -5,7 +5,7 @@ import "./styles.scss";
 
 const Profile = () => {
   return (
-    <Link to={PROFILE} className="option-profile">
+    <Link to={PROFILE} className="option option-profile">
       <i className="far fa-user-circle fa-lg"></i>
     </Link>
   );

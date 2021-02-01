@@ -5,7 +5,7 @@ import Header from "./components/Header";
 import Routes from "./components/Routes";
 import { auth } from "./Firebase/firebase";
 import { setToReady } from "./Redux/AppSlice/app-slice";
-import { resetUser, setUid, setUserEntry } from "./Redux/userSlice/user-slice";
+import { resetUser, setUserAndWishList, setUid } from "./Redux/userSlice/user-slice";
 
 function App() {
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ function App() {
     const listener = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         dispatch(setUid(authUser.uid));
-        dispatch(setUserEntry(authUser.uid)).then(() => dispatch(setToReady()));
+        dispatch(setUserAndWishList(authUser.uid)).then(() => dispatch(setToReady()));
       } else {
         dispatch(resetUser());
         dispatch(setToReady());

@@ -1,8 +1,13 @@
-.options-container{
-    display: flex;
-    align-items: center;
+.options-container {
+  display: flex;
+  align-items: center;
 
-    .option{
-        margin: 0 10px 0 10px;
-    }
+  .option {
+    position: relative;
+    margin: 0 10px 0 10px;
+  }
+  
+  a.option {
+    color: black;
+  }
 }

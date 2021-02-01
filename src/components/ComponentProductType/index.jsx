@@ -25,9 +25,12 @@ const ComponentProductType = (props) => {
       {productList.map((x) => (
         <ProductEntry
           key={x.id}
+          id={x.id}
           mainImg={x.mainImg}
           price={x.price}
           name={x.name}
+          category={category}
+          sub={sub}
           productType={x.productType}
           otherColors={true}
         ></ProductEntry>

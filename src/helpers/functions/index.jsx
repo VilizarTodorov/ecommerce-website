@@ -3,4 +3,8 @@ const validateEmail = (email) => {
   return re.test(String(email).toLowerCase());
 };
 
-export { validateEmail };
+const isProductInWishList = (wishlist, id) => {
+  return wishlist.some((x) => x.id === id);
+};
+
+export { validateEmail, isProductInWishList };

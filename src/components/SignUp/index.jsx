@@ -12,7 +12,6 @@ import { COLLECTIONS, firestore } from "../../Firebase/firebase";
 import withAuthorization from "../../HOC/withAuthorization";
 import FormRadioButton from "../FormRadioButton";
 import RadioButtonContainer from "../RadioButtonContainer";
-// import { WithAuthorization } from "../../HOC";
 
 const isFetchingSelector = (state) => state.user.authActionStarted;
 
@@ -59,15 +58,15 @@ const SingUp = () => {
           firstName: firstName,
           lastName: lastName,
           roles: ["user"],
-          wishList: [],
           gender,
         };
 
-        firestore
-          .collection(COLLECTIONS.USERS)
-          .doc(user.uid)
-          .set(DB_ENTRY)
-          .then(() => history.replace(HOME));
+        const createDbUserEntry = firestore.collection(COLLECTIONS.USERS).doc(user.uid).set(DB_ENTRY);
+        const createDbWishListEntry = firestore.collection(COLLECTIONS.WISHLISTS).doc(user.uid).set({ wishlist: [] });
+
+        Promise.all([createDbUserEntry, createDbWishListEntry])
+          .then(() => history.push(HOME))
+          .catch((err) => dispatch(failure(err.message)));
       })
       .catch((err) => dispatch(failure(err.message)));
   };

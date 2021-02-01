@@ -1,7 +1,15 @@
 .product-entry {
+  position: relative;
   background-color: white;
   padding: 2px;
   transition: all 0.2s ease-in-out;
+
+  .wish-list-icon{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
   &-main-img {
     img {
       width: 100%;
@@ -24,10 +32,7 @@
   }
 
   &:hover {
-    position: relative;
-    // padding: 0;
-    z-index: 2;
-    // transform: scale(1.05);
+    padding: 0;
     border: 1px solid black;
 
     .product-entry-info{
