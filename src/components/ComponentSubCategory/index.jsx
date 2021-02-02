@@ -27,6 +27,7 @@ const ComponentSubCategory = () => {
           key={x.id}
           id={x.id}
           mainImg={x.mainImg}
+          secondaryImg={x.secondaryImg}
           price={x.price}
           name={x.name}
           category={category}

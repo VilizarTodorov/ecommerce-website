@@ -11,7 +11,7 @@
   .content {
     position: absolute;
     width: 500px;
-    height: auto;
+    max-height: 90%;
     border: 1px solid #ccc;
     background: #fff;
     overflow: auto;

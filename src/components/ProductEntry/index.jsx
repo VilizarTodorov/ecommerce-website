@@ -9,6 +9,7 @@ const uidSelector = (state) => state.user.uid;
 
 const ProductEntry = (props) => {
   const [isInWishlist, setIsInWishlist] = useState(false);
+  const [imgSrc, setImgSrc] = useState(props.mainImg);
 
   const wishList = useSelector(wishlistSelector);
   const uid = useSelector(uidSelector);
@@ -45,7 +46,12 @@ const ProductEntry = (props) => {
         {isInWishlist ? <i className="fas fa-heart fa-lg"></i> : <i className="far fa-heart fa-lg"></i>}
       </span>
       <div className="product-entry-main-img">
-        <img src={props.mainImg} alt="img" />
+        <img
+          onMouseOut={() => setImgSrc(props.mainImg)}
+          onMouseOver={() => setImgSrc(props.secondaryImg)}
+          src={imgSrc}
+          alt="img"
+        />
       </div>
       {props.otherColors && <div className="product-entry-other-colors">other colors</div>}
       <div className="product-entry-info">
