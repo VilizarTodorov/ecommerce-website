@@ -10,6 +10,7 @@ import GeneralButton from "../GeneralButton";
 import { firestore } from "../../Firebase/firebase";
 import AdminProduct from "../AdminProduct";
 import { fetchFailure, setAll } from "../../Redux/ProductSlice/product-slice";
+import Grid from "../Grid";
 import "./styles.scss";
 
 const selectFirstName = (state) => state.user.user.firstName;
@@ -84,20 +85,26 @@ const Admin = () => {
         <Modal hideModal={closeModal} isOpen={isModalOpen}>
           <AddProduct></AddProduct>
         </Modal>
-        <ul className="items-list">
-          {productList.map(({ id, mainCategory, price, mainImg, name, productType, subCategory }) => (
-            <AdminProduct
-              key={id}
-              id={id}
-              mainCategory={mainCategory}
-              subCategory={subCategory}
-              mainImg={mainImg}
-              productType={productType}
-              name={name}
-              price={price}
-            ></AdminProduct>
-          ))}
-        </ul>
+        {/* <ul className="items-list"> */}
+        <Grid>
+          {productList.map(
+            ({ id, mainCategory, mainImg, name, otherColors, price, productType, secondaryImg, subCategory }) => (
+              <AdminProduct
+                key={id}
+                id={id}
+                mainCategory={mainCategory}
+                mainImg={mainImg}
+                name={name}
+                otherColors={otherColors}
+                price={price}
+                productType={productType}
+                secondaryImg={secondaryImg}
+                subCategory={subCategory}
+              ></AdminProduct>
+            )
+          )}
+        </Grid>
+        {/* </ul> */}
       </section>
     </div>
   );

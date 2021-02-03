@@ -7,7 +7,7 @@ import ProductEntry from "../ProductEntry";
 
 const productListSelector = (state) => state.product.productList;
 
-const ComponentProductType = (props) => {
+const ComponentProductType = () => {
   const { category, sub, type } = useParams();
 
   const dispatch = useDispatch();
@@ -26,14 +26,14 @@ const ComponentProductType = (props) => {
         <ProductEntry
           key={x.id}
           id={x.id}
+          mainCategory={x.mainCategory}
           mainImg={x.mainImg}
-          secondaryImg={x.secondaryImg}
-          price={x.price}
           name={x.name}
-          category={category}
-          sub={sub}
-          productType={x.productType}
           otherColors={x.otherColors}
+          price={x.price}
+          productType={x.productType}
+          secondaryImg={x.secondaryImg}
+          subCategory={x.subCategory}
         ></ProductEntry>
       ))}
     </Grid>

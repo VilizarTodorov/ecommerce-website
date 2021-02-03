@@ -14,14 +14,14 @@ const WishList = () => {
         <ProductEntry
           key={x.id}
           id={x.id}
+          mainCategory={x.mainCategory}
           mainImg={x.mainImg}
-          secondaryImg={x.secondaryImg}
-          price={x.price}
           name={x.name}
-          category={x.category}
-          sub={x.sub}
-          productType={x.productType}
           otherColors={x.otherColors}
+          productType={x.productType}
+          price={x.price}
+          secondaryImg={x.secondaryImg}
+          subCategory={x.subCategory}
         ></ProductEntry>
       ))}
     </Grid>

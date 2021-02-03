@@ -26,14 +26,14 @@ const ComponentSubCategory = () => {
         <ProductEntry
           key={x.id}
           id={x.id}
+          mainCategory={x.mainCategory}
           mainImg={x.mainImg}
-          secondaryImg={x.secondaryImg}
-          price={x.price}
           name={x.name}
-          category={category}
-          sub={sub}
-          productType={x.productType}
           otherColors={x.otherColors}
+          price={x.price}
+          productType={x.productType}
+          secondaryImg={x.secondaryImg}
+          subCategory={x.subCategory}
         ></ProductEntry>
       ))}
     </Grid>

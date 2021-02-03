@@ -9,8 +9,9 @@ import ProductTypes from "../AddProduct/ProductTypes";
 import Select from "../AddProduct/Select";
 import Option from "../AddProduct/Option";
 import { useDispatch, useSelector } from "react-redux";
-import "./styles.scss";
 import { fetchFailure, updateProduct, deleteProduct } from "../../Redux/ProductSlice/product-slice";
+import ProductEntry from "../ProductEntry";
+import "./styles.scss";
 
 const isFetchingSelector = (state) => state.product.isFetching;
 
@@ -42,12 +43,14 @@ const AdminProduct = (props) => {
     event.preventDefault();
 
     const updateData = {
-      name,
-      price,
-      mainImg,
       mainCategory: props.mainCategory,
-      subCategory,
+      mainImg,
+      name,
+      otherColors: props.otherColors,
+      price,
       productType,
+      secondaryImg: props.secondaryImg,
+      subCategory,
     };
 
     dispatch(updateProduct(updateData, props.id))
@@ -57,16 +60,22 @@ const AdminProduct = (props) => {
 
   return (
     <div className="admin-product">
-      <div style={{ backgroundImage: `url(${props.mainImg})` }} className="main-img"></div>
-      <div className="product-info">
-        <p className="info">{props.productType}</p>
-        <p className="info">{props.name}</p>
-        <p className="info">${props.price}</p>
-      </div>
-      <div className="controls">
-        <GeneralButton onClick={deleteProd}>delete</GeneralButton>
-        <GeneralButton onClick={openModal}>edit</GeneralButton>
-      </div>
+      <ProductEntry
+        id={props.id}
+        mainCategory={props.mainCategory}
+        mainImg={props.mainImg}
+        name={props.name}
+        otherColors={props.otherColors}
+        productType={props.productType}
+        price={props.price}
+        secondaryImg={props.secondaryImg}
+        subCategory={props.subCategory}
+      >
+        <div className="controls">
+          <GeneralButton onClick={deleteProd}>delete</GeneralButton>
+          <GeneralButton onClick={openModal}>edit</GeneralButton>
+        </div>
+      </ProductEntry>
       <Modal hideModal={closeModal} isOpen={isOpen}>
         <Form onSubmit={onSubmit}>
           <FormTitle>edit product</FormTitle>
