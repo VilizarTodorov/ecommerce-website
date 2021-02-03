@@ -21,6 +21,7 @@ button {
 
 .main {
   height: calc(100vh - 95px);
+  padding: 25px;
 }
 
 .App {

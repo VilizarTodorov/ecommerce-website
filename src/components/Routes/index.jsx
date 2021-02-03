@@ -11,6 +11,7 @@ const Home = React.lazy(() => import("../Home"));
 const ResetPassword = React.lazy(() => "../ResetPassword");
 const SignIn = React.lazy(() => import("../SignIn"));
 const SignUp = React.lazy(() => import("../SignUp"));
+const SpecificProduct = React.lazy(() => import("../SpecificProduct"));
 
 const Routes = () => {
   return (
@@ -42,6 +43,9 @@ const Routes = () => {
         </Route>
         <Route exact path={ROUTES.PRODUCT_TYPE}>
           <ComponentProductType></ComponentProductType>
+        </Route>
+        <Route exact path={ROUTES.SPECIFIC_PRODUCT}>
+          <SpecificProduct></SpecificProduct>
         </Route>
       </Switch>
     </Suspense>

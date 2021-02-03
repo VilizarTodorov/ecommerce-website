@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Grid from "../Grid";
 import ProductEntry from "../ProductEntry";
 import { fetchFailure, getAllMainCategoryItems, getAllSubCategoryItems } from "../../Redux/ProductSlice/product-slice";
+import GeneralHeading from "../GeneralHeading";
+import Filter from "../Filter";
 
 const productListSelector = (state) => state.product.productList;
 
@@ -21,22 +23,26 @@ const ComponentSubCategory = () => {
   }, [category, sub, dispatch]);
 
   return (
-    <Grid>
-      {productList.map((x) => (
-        <ProductEntry
-          key={x.id}
-          id={x.id}
-          mainCategory={x.mainCategory}
-          mainImg={x.mainImg}
-          name={x.name}
-          otherColors={x.otherColors}
-          price={x.price}
-          productType={x.productType}
-          secondaryImg={x.secondaryImg}
-          subCategory={x.subCategory}
-        ></ProductEntry>
-      ))}
-    </Grid>
+    <Fragment>
+      <GeneralHeading>MENS CLOTHING, SHOES AND ACCESSORIES</GeneralHeading>
+      <Filter></Filter>
+      <Grid>
+        {productList.map((x) => (
+          <ProductEntry
+            key={x.id}
+            id={x.id}
+            mainCategory={x.mainCategory}
+            mainImg={x.mainImg}
+            name={x.name}
+            otherColors={x.otherColors}
+            price={x.price}
+            productType={x.productType}
+            secondaryImg={x.secondaryImg}
+            subCategory={x.subCategory}
+          ></ProductEntry>
+        ))}
+      </Grid>
+    </Fragment>
   );
 };
 

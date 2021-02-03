@@ -1,0 +1,27 @@
+.filter-sort-box {
+  position: sticky;
+  top: 0;
+  display: flex;
+  margin: 15px 0;
+  z-index: 1;
+  background-color: white;
+
+  &-option {
+    flex-grow: 1;
+    border: 1px solid black;
+    padding: 10px;
+
+    .option {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+  }
+
+  .sort {
+    border-left: none;
+  }
+}

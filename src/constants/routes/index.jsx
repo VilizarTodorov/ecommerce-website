@@ -10,6 +10,7 @@ export const ALL = "/all";
 export const CATEGORY = "/:category";
 export const SUB_CATEGORY = "/:category/:sub";
 export const PRODUCT_TYPE = "/:category/:sub/:type";
+export const SPECIFIC_PRODUCT = "/:category/:sub/:type/:id";
 export const SIGN_IN = "/sign-in";
 export const SIGN_UP = "/sign-up";
 export const RESET_PASSWORD = "/reset-password";
