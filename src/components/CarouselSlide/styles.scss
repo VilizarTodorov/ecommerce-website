@@ -1,0 +1,13 @@
+.slide {
+  height: 60px;
+  border-bottom: 2px solid transparent;
+
+  img {
+    display: block;
+    height: 100%;
+  }
+
+  &:hover {
+    border-bottom: 2px solid black;
+  }
+}

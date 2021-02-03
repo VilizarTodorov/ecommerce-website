@@ -1,0 +1,22 @@
+.carousel-button {
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 0;
+  outline: 0;
+  padding: 3px;
+  position: absolute;
+  top: 25%;
+  &.left {
+    left: 0;
+  }
+
+  &.right {
+    right: 0;
+  }
+
+  &:hover {
+    background-color: black;
+    .arrow {
+      color: white;
+    }
+  }
+}

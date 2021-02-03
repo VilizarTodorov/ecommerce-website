@@ -33,7 +33,7 @@ const ComponentSubCategory = () => {
           category={category}
           sub={sub}
           productType={x.productType}
-          otherColors={true}
+          otherColors={x.otherColors}
         ></ProductEntry>
       ))}
     </Grid>

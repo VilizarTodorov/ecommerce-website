@@ -1,0 +1,10 @@
+.carousel {
+  display: none;
+  position: relative;
+  background-color: #eceff1;
+  overflow: hidden;
+
+  .slider {
+    display: flex;
+  }
+}

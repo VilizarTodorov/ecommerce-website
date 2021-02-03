@@ -1,7 +1,7 @@
 .admin-product {
-    border: 1px solid black;
-    background-color: lightgray;
-    margin-top: 5px;
+  border: 1px solid black;
+  background-color: lightgray;
+  margin-top: 5px;
 
   .main-img {
     height: 200px;
@@ -29,5 +29,9 @@
     display: flex;
     justify-content: space-between;
     padding: 5px;
+  }
+
+  .form-button {
+    z-index: 2;
   }
 }

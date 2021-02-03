@@ -15,12 +15,13 @@ const WishList = () => {
           key={x.id}
           id={x.id}
           mainImg={x.mainImg}
+          secondaryImg={x.secondaryImg}
           price={x.price}
           name={x.name}
           category={x.category}
           sub={x.sub}
           productType={x.productType}
-          otherColors={true}
+          otherColors={x.otherColors}
         ></ProductEntry>
       ))}
     </Grid>
