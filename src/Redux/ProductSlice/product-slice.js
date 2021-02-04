@@ -137,6 +137,20 @@ const getAllProductsWithSpecificType = (mainCategory, subCategory, productType) 
   };
 };
 
+const getSpecificProduct = (category, id) => {
+  return (dispatch) => {
+    dispatch(startFetch());
+    return firestore
+      .collection(category)
+      .doc(id)
+      .get()
+      .then((doc) => {
+        dispatch(fetchProductSuccess({ id: doc.id, ...doc.data() }));
+        return doc;
+      });
+  };
+};
+
 export {
   addProduct,
   updateProduct,
@@ -145,6 +159,7 @@ export {
   getAllSubCategoryItems,
   getAllProductsWithSpecificType,
   setAll,
+  getSpecificProduct,
 };
 
 export const {

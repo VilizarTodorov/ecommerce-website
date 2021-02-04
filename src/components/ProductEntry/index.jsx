@@ -35,9 +35,7 @@ const ProductEntry = ({
   const onMouseOverHandler = (value) => {
     if (value) {
       setImgSrc(value);
-      return;
     }
-    return;
   };
 
   const onMouseOutHandler = () => {
@@ -72,42 +70,37 @@ const ProductEntry = ({
 
   return (
     <div className="product-entry">
-      <Link to={`/${mainCategory}/${subCategory}/${productTypeUrlPart}/${id}`}>
-        <span
-          className="wish-list-icon"
-          onMouseOut={() => onMouseOutHandler}
-          onMouseOver={() => onMouseOverHandler(secondaryImg)}
-          onClick={toggleInWishList}
-        >
-          {isInWishlist ? <i className="fas fa-heart fa-lg"></i> : <i className="far fa-heart fa-lg"></i>}
-        </span>
-        <div className="product-entry-main-img">
+      <span
+        className="wish-list-icon"
+        onMouseOut={() => onMouseOutHandler}
+        onMouseOver={() => onMouseOverHandler(secondaryImg)}
+        onClick={toggleInWishList}
+      >
+        {isInWishlist ? <i className="fas fa-heart fa-lg"></i> : <i className="far fa-heart fa-lg"></i>}
+      </span>
+      <div className="product-entry-main-img">
+        <Link to={`/${mainCategory}/${subCategory}/${productTypeUrlPart}/${id}`}>
           <img
             onMouseOut={() => onMouseOutHandler()}
             onMouseOver={() => onMouseOverHandler(secondaryImg)}
             src={imgSrc}
             alt="img"
           />
-        </div>
-        {otherColors && (
-          <Carousel>
-            {otherColors.map((x, index) => (
-              <Slide
-                key={index}
-                value={x.value}
-                onMouseOut={onMouseOutHandler}
-                onMouseOver={onMouseOverHandler}
-              ></Slide>
-            ))}
-          </Carousel>
-        )}
-        <div className={`product-entry-info ${otherColors.length > 0 ? "has-other-colors" : ""}`}>
-          <p className="product-info product-type">{productType}</p>
-          <p className="product-info product-name">{name}</p>
-          <p className="product-info product-price">${price}</p>
-        </div>
-        {children && children}
-      </Link>
+        </Link>
+      </div>
+      {otherColors && (
+        <Carousel>
+          {otherColors.map((x, index) => (
+            <Slide key={index} value={x.value} onMouseOut={onMouseOutHandler} onMouseOver={onMouseOverHandler}></Slide>
+          ))}
+        </Carousel>
+      )}
+      <div className={`product-entry-info ${otherColors.length > 0 ? "has-other-colors" : ""}`}>
+        <p className="product-info product-type">{productType}</p>
+        <p className="product-info product-name">{name}</p>
+        <p className="product-info product-price">${price}</p>
+      </div>
+      {children && children}
     </div>
   );
 };
