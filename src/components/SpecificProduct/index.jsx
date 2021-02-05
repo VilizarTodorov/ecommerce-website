@@ -27,7 +27,7 @@ const SpecificProduct = () => {
   const cart = useSelector(cartSelector);
 
   const addProductToCart = () => {
-    dispatch(addToCart(id, cart, uid, product));
+    dispatch(addToCart(cart, product));
   };
 
   const [isInWishlist, setIsInWishlist] = useState(false);

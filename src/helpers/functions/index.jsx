@@ -7,4 +7,8 @@ const isProductInWishList = (wishlist, id) => {
   return wishlist.some((x) => x.id === id);
 };
 
-export { validateEmail, isProductInWishList };
+const isProductInCart = (cart, id) => {
+  return cart.findIndex((x) => x.id === id);
+};
+
+export { validateEmail, isProductInWishList, isProductInCart };

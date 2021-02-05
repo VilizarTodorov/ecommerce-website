@@ -3,10 +3,8 @@ import { auth, COLLECTIONS, firestore } from "../../Firebase/firebase";
 
 const INITIAL_STATE = {
   authActionStarted: false,
-  wishListActionStarted: false,
   uid: null,
   user: null,
-  wishList: [],
   error: null,
 };
 
@@ -14,14 +12,6 @@ const userSlice = createSlice({
   name: "user",
   initialState: { ...INITIAL_STATE },
   reducers: {
-    wishListActionStart(state) {
-      state.wishListActionStarted = true;
-    },
-
-    wishListActionSuccess(state) {
-      state.wishListActionStarted = false;
-    },
-
     authActionStart(state) {
       state.authActionStarted = true;
     },
@@ -36,10 +26,6 @@ const userSlice = createSlice({
 
     setUser(state, action) {
       state.user = action.payload;
-    },
-
-    setWishList(state, action) {
-      state.wishList = action.payload;
     },
 
     failure(state, action) {
@@ -109,13 +95,7 @@ const setUserAndWishList = (uid) => {
       .get()
       .then((user) => dispatch(setUser(user.data())));
 
-    const getWishList = firestore
-      .collection(COLLECTIONS.WISHLISTS)
-      .doc(uid)
-      .get()
-      .then((wishList) => dispatch(setWishList(wishList.data().wishlist)));
-
-    return Promise.all([getUser, getWishList]).then(() => dispatch(authActionSuccess()));
+    return Promise.all([getUser]).then(() => dispatch(authActionSuccess()));
   };
 };
 
@@ -149,34 +129,6 @@ const deleteAccount = (uid) => {
   };
 };
 
-const addToWishList = (uid, product, wishlist) => {
-  const list = [...wishlist];
-  list.push(product);
-
-  return (dispatch) => {
-    dispatch(wishListActionStart());
-    return firestore
-      .collection(COLLECTIONS.WISHLISTS)
-      .doc(uid)
-      .update({ wishlist: list })
-      .then(() => dispatch(wishListActionSuccess()));
-  };
-};
-
-const removeFromWishList = (uid, productID, wishlist) => {
-  let list = [...wishlist];
-  list = list.filter((x) => x.id !== productID);
-
-  return (dispatch) => {
-    dispatch(wishListActionStart());
-    return firestore
-      .collection(COLLECTIONS.WISHLISTS)
-      .doc(uid)
-      .update({ wishlist: list })
-      .then(() => dispatch(wishListActionSuccess));
-  };
-};
-
 export {
   signIn,
   signUp,
@@ -187,18 +139,6 @@ export {
   updateUserGenderAndName,
   updateLoginDetails,
   deleteAccount,
-  addToWishList,
-  removeFromWishList
 };
-export const {
-  authActionStart,
-  authActionSuccess,
-  setUid,
-  setUser,
-  setWishList,
-  failure,
-  resetUser,
-  wishListActionStart,
-  wishListActionSuccess,
-} = userSlice.actions;
+export const { authActionStart, authActionSuccess, setUid, setUser, failure, resetUser } = userSlice.actions;
 export default userSlice.reducer;

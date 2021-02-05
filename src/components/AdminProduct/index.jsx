@@ -12,7 +12,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchFailure, updateProduct, deleteProduct } from "../../Redux/ProductSlice/product-slice";
 import ProductEntry from "../ProductEntry";
 import "./styles.scss";
-import { Fragment } from "react";
 
 const isFetchingSelector = (state) => state.product.isFetching;
 
