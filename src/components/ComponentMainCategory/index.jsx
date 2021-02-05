@@ -4,8 +4,8 @@ import womenImg from "../../assets/women.jpg";
 import kidsImg from "../../assets/kids.jpg";
 import { MEN, WOMEN, KIDS, SHOES, CLOTHING, ACCESSORIES, ALL } from "../../constants/routes";
 import * as categ from "../../constants/categories";
-import "./styles.scss";
 import { Link, useParams } from "react-router-dom";
+import "./styles.scss";
 
 const images = {
   men: menImg,

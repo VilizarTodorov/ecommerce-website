@@ -1,13 +1,13 @@
 .main-category {
   height: 100%;
-
+  
   .category-img {
     height: 80%;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: top;
   }
-
+  
   &-title {
     display: flex;
     height: 10%;
@@ -16,14 +16,14 @@
     text-transform: uppercase;
     font-weight: bold;
   }
-
-  .container{
+  
+  .container {
     height: 10%;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-
+  
   .sub-categories {
     padding: 10px;
     height: 60%;
@@ -33,9 +33,24 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-
-    &-title{
+    
+    &-title {
       text-transform: uppercase;
     }
   }
+  
+  @media screen and (max-width: 615px) {
+    .container{
+      height: auto;
+    }
+
+    .sub-categories {
+      flex-direction: column;
+      height: auto;
+      &-title {
+        margin: 10px 0;
+      }
+    }
+  }
+
 }

@@ -3,18 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { isProductInWishList } from "../../helpers/functions";
 import { fetchFailure, getSpecificProduct } from "../../Redux/ProductSlice/product-slice";
-import { addToWishList, failure, removeFromWishList } from "../../Redux/userSlice/user-slice";
 import { addToCart } from "../../Redux/CartSlice/cart-slice";
 import Carousel from "../Carousel";
 import Slide from "../CarouselSlide";
 import GeneralButton from "../GeneralButton";
 import SpecificProductSize from "../SpecificProductSize";
 import "./styles.scss";
+import { toggleProductInWishList } from "../../Redux/WishlistSlice/wishlist-slice";
 
 const sizes = [5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11];
 
 const productSelector = (state) => state.product.product;
-const wishlistSelector = (state) => state.user.wishList;
+const wishlistSelector = (state) => state.wishlist.wishlist;
 const uidSelector = (state) => state.user.uid;
 const cartSelector = (state) => state.cart.cart;
 
@@ -22,7 +22,7 @@ const SpecificProduct = () => {
   const { category, id } = useParams();
   const dispatch = useDispatch();
   const product = useSelector(productSelector);
-  const wishList = useSelector(wishlistSelector);
+  const wishlist = useSelector(wishlistSelector);
   const uid = useSelector(uidSelector);
   const cart = useSelector(cartSelector);
 
@@ -35,16 +35,18 @@ const SpecificProduct = () => {
   const [size, setSize] = useState(0);
 
   useEffect(() => {
+    const isAdded = isProductInWishList(wishlist, id);
+    setIsInWishlist(isAdded);
+  }, [wishlist, id]);
+
+  useEffect(() => {
     dispatch(getSpecificProduct(category, id))
       .then((doc) => {
         setImgSrc(doc.data().mainImg);
         return doc;
       })
-      .then((doc) => {
-        setIsInWishlist(isProductInWishList(wishList, doc.id));
-      })
       .catch((err) => fetchFailure(err.message));
-  }, [category, id, dispatch, wishList]);
+  }, [category, id, dispatch]);
 
   const onMouseOverHandler = (value) => {
     if (value) {
@@ -57,24 +59,19 @@ const SpecificProduct = () => {
   };
 
   const toggleInWishList = () => {
-    const isAdded = isProductInWishList(wishList, product.id);
+    const productToAdd = {
+      id: product.id,
+      mainCategory: product.mainCategory,
+      mainImg: product.mainImg,
+      name: product.name,
+      otherColors: product.otherColors,
+      productType: product.productType,
+      price: product.price,
+      secondaryImg: product.secondaryImg,
+      subCategory: product.subCategory,
+    };
 
-    if (!isAdded) {
-      const productToAdd = {
-        id: product.id,
-        mainCategory: product.mainCategory,
-        mainImg: product.mainImg,
-        name: product.name,
-        otherColors: product.otherColors,
-        productType: product.productType,
-        price: product.price,
-        secondaryImg: product.secondaryImg,
-        subCategory: product.subCategory,
-      };
-      dispatch(addToWishList(uid, productToAdd, wishList)).catch((err) => dispatch(failure(err.message)));
-    } else {
-      dispatch(removeFromWishList(uid, id, wishList)).catch((err) => dispatch(failure(err.message)));
-    }
+    dispatch(toggleProductInWishList(productToAdd, wishlist));
   };
 
   if (!product) {

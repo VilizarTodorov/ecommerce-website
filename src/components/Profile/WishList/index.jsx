@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import Grid from "../../Grid";
 import ProductEntry from "../../ProductEntry";
 
-const wishlistSelector = (state) => state.user.wishList;
+const wishlistSelector = (state) => state.wishlist.wishlist;
 
 const WishList = () => {
   const wishlist = useSelector(wishlistSelector);

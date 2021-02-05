@@ -24,6 +24,7 @@ const Cart = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (!uid) return;
     const listener = firestore
       .collection(COLLECTIONS.CARTS)
       .doc(uid)

@@ -8,11 +8,11 @@ const Admin = React.lazy(() => import("../Admin"));
 const ComponentMainCategory = React.lazy(() => import("../ComponentMainCategory"));
 const ComponentSubCategory = React.lazy(() => import("../ComponentSubCategory"));
 const Home = React.lazy(() => import("../Home"));
-const ResetPassword = React.lazy(() => "../ResetPassword");
 const SignIn = React.lazy(() => import("../SignIn"));
 const SignUp = React.lazy(() => import("../SignUp"));
 const SpecificProduct = React.lazy(() => import("../SpecificProduct"));
 const Cart = React.lazy(() => import("../Cart"));
+const ResetPassword = React.lazy(() => import("../ResetPassword"));
 
 const Routes = () => {
   return (

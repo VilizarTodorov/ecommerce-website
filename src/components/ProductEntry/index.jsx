@@ -2,13 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { isProductInWishList } from "../../helpers/functions";
-import { addToWishList, failure, removeFromWishList } from "../../Redux/userSlice/user-slice";
+import { toggleProductInWishList } from "../../Redux/WishlistSlice/wishlist-slice";
 import Carousel from "../Carousel";
 import Slide from "../CarouselSlide";
 import "./styles.scss";
 
-const wishlistSelector = (state) => state.user.wishList;
-const uidSelector = (state) => state.user.uid;
+const wishlistSelector = (state) => state.wishlist.wishlist;
 
 const ProductEntry = ({
   id,
@@ -27,8 +26,7 @@ const ProductEntry = ({
 
   const productTypeUrlPart = productType.replace(/\s+/g, "-");
 
-  const wishList = useSelector(wishlistSelector);
-  const uid = useSelector(uidSelector);
+  const wishlist = useSelector(wishlistSelector);
 
   const dispatch = useDispatch();
 
@@ -43,30 +41,25 @@ const ProductEntry = ({
   };
 
   const toggleInWishList = () => {
-    const isAdded = isProductInWishList(wishList, id);
+    const product = {
+      id,
+      mainCategory,
+      mainImg,
+      name,
+      otherColors,
+      productType,
+      price,
+      secondaryImg,
+      subCategory,
+    };
 
-    if (!isAdded) {
-      const product = {
-        id,
-        mainCategory,
-        mainImg,
-        name,
-        otherColors,
-        productType,
-        price,
-        secondaryImg,
-        subCategory,
-      };
-      dispatch(addToWishList(uid, product, wishList)).catch((err) => dispatch(failure(err.message)));
-    } else {
-      dispatch(removeFromWishList(uid, id, wishList)).catch((err) => dispatch(failure(err.message)));
-    }
+    dispatch(toggleProductInWishList(product, wishlist));
   };
 
   useEffect(() => {
-    const isAdded = isProductInWishList(wishList, id);
+    const isAdded = isProductInWishList(wishlist, id);
     setIsInWishlist(isAdded);
-  }, [wishList, id]);
+  }, [wishlist, id]);
 
   return (
     <div className="product-entry">
