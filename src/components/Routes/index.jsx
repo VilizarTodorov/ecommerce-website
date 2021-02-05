@@ -12,6 +12,7 @@ const ResetPassword = React.lazy(() => "../ResetPassword");
 const SignIn = React.lazy(() => import("../SignIn"));
 const SignUp = React.lazy(() => import("../SignUp"));
 const SpecificProduct = React.lazy(() => import("../SpecificProduct"));
+const Cart = React.lazy(() => import("../Cart"));
 
 const Routes = () => {
   return (
@@ -19,6 +20,9 @@ const Routes = () => {
       <Switch>
         <Route exact path={ROUTES.HOME}>
           <Home></Home>
+        </Route>
+        <Route exact path={ROUTES.CART}>
+          <Cart></Cart>
         </Route>
         <Route path={ROUTES.PROFILE}>
           <Profile></Profile>

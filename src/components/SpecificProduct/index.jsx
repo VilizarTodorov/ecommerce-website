@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { isProductInWishList } from "../../helpers/functions";
 import { fetchFailure, getSpecificProduct } from "../../Redux/ProductSlice/product-slice";
 import { addToWishList, failure, removeFromWishList } from "../../Redux/userSlice/user-slice";
+import { addToCart } from "../../Redux/CartSlice/cart-slice";
 import Carousel from "../Carousel";
 import Slide from "../CarouselSlide";
 import GeneralButton from "../GeneralButton";
@@ -15,6 +16,7 @@ const sizes = [5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11];
 const productSelector = (state) => state.product.product;
 const wishlistSelector = (state) => state.user.wishList;
 const uidSelector = (state) => state.user.uid;
+const cartSelector = (state) => state.cart.cart;
 
 const SpecificProduct = () => {
   const { category, id } = useParams();
@@ -22,6 +24,11 @@ const SpecificProduct = () => {
   const product = useSelector(productSelector);
   const wishList = useSelector(wishlistSelector);
   const uid = useSelector(uidSelector);
+  const cart = useSelector(cartSelector);
+
+  const addProductToCart = () => {
+    dispatch(addToCart(id, cart, uid, product));
+  };
 
   const [isInWishlist, setIsInWishlist] = useState(false);
   const [imgSrc, setImgSrc] = useState("");
@@ -101,7 +108,7 @@ const SpecificProduct = () => {
             ))}
           </div>
           <div className="add-to-cart-button">
-            <GeneralButton>add to cart</GeneralButton>
+            <GeneralButton onClick={addProductToCart}>add to cart</GeneralButton>
             <span className="wish-list-icon" onClick={toggleInWishList}>
               {isInWishlist ? <i className="fas fa-heart fa-lg"></i> : <i className="far fa-heart fa-lg"></i>}
             </span>
@@ -142,7 +149,7 @@ const SpecificProduct = () => {
           ))}
         </div>
         <div className="add-to-cart-button">
-          <GeneralButton>add to cart</GeneralButton>
+          <GeneralButton onClick={addProductToCart}>add to cart</GeneralButton>
           <span className="wish-list-icon" onClick={toggleInWishList}>
             {isInWishlist ? <i className="fas fa-heart fa-lg"></i> : <i className="far fa-heart fa-lg"></i>}
           </span>

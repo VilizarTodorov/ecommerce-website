@@ -19,3 +19,4 @@ export const ADMIN = "/admin";
 export const PROFILE = "/profile";
 export const WISH_LIST = "/wish-list";
 export const PERSONAL_INFO = "/personal-info";
+export const CART = "/cart";
