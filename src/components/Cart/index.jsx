@@ -1,5 +1,6 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { removeFromCart } from "../../Redux/CartSlice/cart-slice";
 import GeneralButton from "../GeneralButton";
 import "./styles.scss";
 
@@ -7,6 +8,11 @@ const cartSelector = (state) => state.cart.cart;
 
 const Cart = (props) => {
   const cart = useSelector(cartSelector);
+  const dispatch = useDispatch();
+
+  const removeProduct = (productID) => {
+    dispatch(removeFromCart(productID));
+  };
 
   return (
     <div className="cart">
@@ -29,7 +35,9 @@ const Cart = (props) => {
                   <p>{x.price}</p>
                   <div>{x.quantity}</div>
                 </div>
-                <div className="controls">X</div>
+                <div onClick={() => removeProduct(x.id)} className="controls">
+                  X
+                </div>
               </div>
             </div>
           );

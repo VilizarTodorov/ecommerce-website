@@ -38,6 +38,19 @@ const addToCart = (cart, product) => {
   };
 };
 
-export { addToCart };
+const removeFromCart = (productID) => {
+  return (dispatch) => {
+    dispatch(remove(productID));
+  };
+};
+
+const setProductQuantity = (productID, quantity, cart) => {
+  return (dispatch) => {
+    const index = isProductInCart(cart, productID);
+    dispatch(setQuantity({ index, quantity }));
+  };
+};
+
+export { addToCart, removeFromCart, setProductQuantity };
 
 export default cartSlice.reducer;

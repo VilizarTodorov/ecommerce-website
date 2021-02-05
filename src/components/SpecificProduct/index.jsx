@@ -15,7 +15,7 @@ const sizes = [5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11];
 
 const productSelector = (state) => state.product.product;
 const wishlistSelector = (state) => state.wishlist.wishlist;
-const uidSelector = (state) => state.user.uid;
+// const uidSelector = (state) => state.user.uid;
 const cartSelector = (state) => state.cart.cart;
 
 const SpecificProduct = () => {
@@ -23,7 +23,7 @@ const SpecificProduct = () => {
   const dispatch = useDispatch();
   const product = useSelector(productSelector);
   const wishlist = useSelector(wishlistSelector);
-  const uid = useSelector(uidSelector);
+  // const uid = useSelector(uidSelector);
   const cart = useSelector(cartSelector);
 
   const addProductToCart = () => {
