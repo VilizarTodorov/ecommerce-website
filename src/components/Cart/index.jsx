@@ -1,46 +1,19 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { removeFromCart } from "../../Redux/CartSlice/cart-slice";
+import { useSelector } from "react-redux";
 import GeneralButton from "../GeneralButton";
+import CartItem from "./CartItem";
 import "./styles.scss";
 
 const cartSelector = (state) => state.cart.cart;
 
 const Cart = (props) => {
   const cart = useSelector(cartSelector);
-  const dispatch = useDispatch();
-
-  const removeProduct = (productID) => {
-    dispatch(removeFromCart(productID));
-  };
 
   return (
     <div className="cart">
       <div className="cars-items">
         {cart.map((x) => {
-          return (
-            <div key={x.id} className="item">
-              <div className="item-img">
-                <div className="aspect-ratio-box">
-                  <div className="media">
-                    <img src={x.mainImg} alt="img" />
-                  </div>
-                </div>
-              </div>
-              <div className="container">
-                <div className="item-info">
-                  <h2>{x.name}</h2>
-                  <p>some description</p>
-                  <p>SIZE:7.5(US Women)</p>
-                  <p>{x.price}</p>
-                  <div>{x.quantity}</div>
-                </div>
-                <div onClick={() => removeProduct(x.id)} className="controls">
-                  X
-                </div>
-              </div>
-            </div>
-          );
+          return <CartItem key={x.id} x={x}></CartItem>;
         })}
       </div>
       <div className="check-out">

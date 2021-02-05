@@ -10,7 +10,7 @@ const cartSelector = (state) => state.cart.cart;
 const cartCountSelector = createSelector([cartSelector], (cart) => {
   let count = 0;
   cart.forEach((x) => {
-    count += x.quantity;
+    count += +x.quantity;
   });
   return count;
 });
