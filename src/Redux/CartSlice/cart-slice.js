@@ -26,11 +26,11 @@ const cartSlice = createSlice({
 
 const { add, remove, increment, setQuantity } = cartSlice.actions;
 
-const addToCart = (cart, product) => {
+const addToCart = (cart, product, size) => {
   return (dispatch) => {
     const index = isProductInCart(cart, product.id);
     if (index === -1) {
-      const productToAdd = { ...product, quantity: 1 };
+      const productToAdd = { ...product, quantity: 1, size };
       dispatch(add(productToAdd));
     } else {
       dispatch(increment(index));

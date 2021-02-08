@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Option from "../../AddProduct/Option";
 import Select from "../../AddProduct/Select";
@@ -30,7 +30,9 @@ const CartItem = ({ x }) => {
         <div className="item-info">
           <h2>{x.name}</h2>
           <p>some description</p>
-          <p>SIZE:7.5(US Women)</p>
+          <p>
+            {x.size}(US {x.mainCategory})
+          </p>
           <p>{x.price}</p>
           <Select value={x.quantity} onChange={(event) => setQuantityOfProduct(event)}>
             <Option value={x.quantity}>{x.quantity}</Option>
