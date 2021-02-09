@@ -21,19 +21,19 @@ const Cart = (props) => {
         <GeneralButton>checkout</GeneralButton>
         <div className="order-summery">
           <h1>order summery</h1>
-          <div>
+          <div className="container">
             <p>{totalCostAndItems.totalItems} items</p>
             <p>${totalCostAndItems.totalPrice}</p>
           </div>
-          <div>
+          <div className="container">
             <p>delivery</p>
             <p>free</p>
           </div>
-          <div>
+          <div className="container">
             <p>sales tax</p>
             <p>-</p>
           </div>
-          <div>
+          <div className="container">
             <p>total</p>
             <p>${totalCostAndItems.totalPrice}</p>
           </div>

@@ -4,6 +4,7 @@ import Option from "../../AddProduct/Option";
 import Select from "../../AddProduct/Select";
 import { removeFromCart, setProductQuantity } from "../../../Redux/CartSlice/cart-slice";
 import { cartSelector } from "../../../helpers/selectors";
+import "./styles.scss";
 
 const CartItem = ({ x }) => {
   const cart = useSelector(cartSelector);
@@ -18,7 +19,7 @@ const CartItem = ({ x }) => {
   };
 
   return (
-    <div key={x.id} className="item">
+    <div className="item">
       <div className="item-img">
         <div className="aspect-ratio-box">
           <div className="media">

@@ -1,54 +1,29 @@
 .cart {
-  margin: auto;
-  background-color: #eceff1;
-  display: flex;
-  flex-direction: column;
-
-  .cart-items {
-    flex-basis: 70%;
+  padding: 5px;
+  .check-out {
+    padding-top: 15px;
     display: flex;
-    flex-direction: column;
-  }
-
-  .item {
-    display: flex;
-  }
-
-  .item-img {
-    width: 240px;
-  }
-
-  .aspect-ratio-box {
-    position: relative;
-
-    &::before {
-      display: block;
-      content: "";
-      padding-top: 100%;
+    flex-direction: column-reverse;
+    .general-button {
+      margin: 0;
+      width: 100%;
     }
-
-    .media {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      overflow: hidden;
-
-      img {
-        width: 100%;
+    .order-summery {
+      display: flex;
+      flex-direction: column;
+      .container {
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 0;
       }
     }
   }
-
-  .container {
+  @media screen and (min-width: 715px) {
     display: flex;
-    justify-content: space-between;
-    flex-grow: 1;
-    padding: 20px;
-  }
 
-  @media screen and (min-width: 600px) {
-    flex-direction: row;
+    .check-out {
+      margin-left: 15px;
+      flex-direction: column;
+    }
   }
 }
