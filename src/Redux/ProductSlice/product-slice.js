@@ -1,6 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { firestore } from "../../Firebase/firebase";
 
+let lastDoc = null;
+export { lastDoc };
+
 const INITIAL_STATE = {
   isFetching: false,
   productList: [],
@@ -29,7 +32,7 @@ const productSlice = createSlice({
     },
 
     fetchProductListSuccess(state, action) {
-      state.productList = action.payload;
+      state.productList = state.productList.concat(action.payload);
       state.isFetching = false;
     },
 
@@ -87,15 +90,19 @@ const setAll = (snapshot) => {
   };
 };
 
-const getAllMainCategoryItems = (mainCategory) => {
+const getAllMainCategoryItems = (mainCategory, startAfter) => {
   return (dispatch) => {
     dispatch(startFetch());
     return firestore
       .collection(mainCategory)
+      .orderBy("name", "asc")
+      .startAfter(startAfter)
+      .limit(2)
       .get()
       .then((snapshot) => {
         const products = [];
         snapshot.forEach((x) => products.push({ id: x.id, ...x.data() }));
+        snapshot.docs[snapshot.docs.length - 1].ref.get().then((doc) => (lastDoc = doc));
         return products;
       })
       .then((products) => {

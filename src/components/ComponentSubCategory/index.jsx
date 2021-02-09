@@ -3,9 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Grid from "../Grid";
 import ProductEntry from "../ProductEntry";
-import { fetchFailure, getAllMainCategoryItems, getAllSubCategoryItems } from "../../Redux/ProductSlice/product-slice";
+import {
+  fetchFailure,
+  getAllMainCategoryItems,
+  getAllSubCategoryItems,
+  lastDoc,
+} from "../../Redux/ProductSlice/product-slice";
 import GeneralHeading from "../GeneralHeading";
 import Filter from "../Filter";
+import LoadMore from "../LoadMore";
 
 const productListSelector = (state) => state.product.productList;
 
@@ -13,10 +19,10 @@ const ComponentSubCategory = () => {
   const { category, sub } = useParams();
   const dispatch = useDispatch();
   const productList = useSelector(productListSelector);
-
+  console.log(lastDoc);
   useEffect(() => {
     if (sub === "all") {
-      dispatch(getAllMainCategoryItems(category)).catch((err) => dispatch(fetchFailure(err.message)));
+      dispatch(getAllMainCategoryItems(category, lastDoc)).catch((err) => dispatch(fetchFailure(err.message)));
     } else {
       dispatch(getAllSubCategoryItems(category, sub)).catch((err) => dispatch(fetchFailure(err.message)));
     }
@@ -42,6 +48,11 @@ const ComponentSubCategory = () => {
           ></ProductEntry>
         ))}
       </Grid>
+      <LoadMore
+        loadMore={() => {
+          dispatch(getAllMainCategoryItems(category, lastDoc)).catch((err) => dispatch(fetchFailure(err.message)));
+        }}
+      ></LoadMore>
     </Fragment>
   );
 };

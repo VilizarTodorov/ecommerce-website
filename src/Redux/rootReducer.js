@@ -5,8 +5,10 @@ import appIsReadyReducer from "./AppSlice/app-slice";
 import productReducer from "./ProductSlice/product-slice";
 import cartReducer from "./CartSlice/cart-slice";
 import wishlistReducer from "./WishlistSlice/wishlist-slice";
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   toggleNav: navToggleReducer,
   user: userReducer,
   app: appIsReadyReducer,
@@ -15,4 +17,11 @@ const rootReducer = combineReducers({
   wishlist: wishlistReducer,
 });
 
-export default rootReducer;
+const configStorage = {
+  key: "root",
+  storage,
+  whitelist: ["cart", "wishlist"],
+  version: 1,
+};
+
+export default persistReducer(configStorage, rootReducer);
