@@ -6,10 +6,11 @@ import { fetchFailure, getSpecificProduct } from "../../Redux/ProductSlice/produ
 import { addToCart } from "../../Redux/CartSlice/cart-slice";
 import Carousel from "../Carousel";
 import Slide from "../CarouselSlide";
-import GeneralButton from "../GeneralButton";
-import SpecificProductSize from "../SpecificProductSize";
-import "./styles.scss";
 import { toggleProductInWishList } from "../../Redux/WishlistSlice/wishlist-slice";
+import Sizes from "./Sizes";
+import Info from "./Info";
+import Controls from "./Controls";
+import "./styles.scss";
 
 const sizes = [5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11];
 
@@ -79,36 +80,20 @@ const SpecificProduct = () => {
   return (
     <div className="specific-product-container">
       <div className="specific-product">
-        <div className="info">
-          <h5>{product.mainCategory}</h5>
-          <h5>{product.productType}</h5>
-          <h1>{product.name}</h1>
-          <div className="info-secondary">
-            <h4>color description</h4>
-            <p>{product.price}</p>
-          </div>
-          <div className="sizes-grid">
-            {sizes.map((x) => (
-              <SpecificProductSize
-                key={`${x}${x}`}
-                id={`${x}${x}`}
-                name="size-size"
-                value={x}
-                onChange={(event) => {
-                  setSize(event.target.value);
-                }}
-                label={x}
-                currentValue={size}
-              ></SpecificProductSize>
-            ))}
-          </div>
-          <div className="add-to-cart-button">
-            <GeneralButton onClick={addProductToCart}>add to cart</GeneralButton>
-            <span className="wish-list-icon" onClick={toggleInWishList}>
-              {isInWishlist ? <i className="fas fa-heart fa-lg"></i> : <i className="far fa-heart fa-lg"></i>}
-            </span>
-          </div>
-        </div>
+        <Info
+          mainCategory={product.mainCategory}
+          productType={product.productType}
+          name={product.name}
+          price={product.price}
+        >
+          <Sizes sizes={sizes} onChange={setSize} size={size}></Sizes>
+
+          <Controls
+            addProductToCart={addProductToCart}
+            toggleInWishList={toggleInWishList}
+            isInWishlist={isInWishlist}
+          ></Controls>
+        </Info>
         <div className="pictures">
           <div className="aspect-ratio-box">
             <div className="media">
@@ -128,27 +113,14 @@ const SpecificProduct = () => {
             </Carousel>
           </div>
         </div>
-        <div className="sizes-grid">
-          {sizes.map((x) => (
-            <SpecificProductSize
-              key={x}
-              id={x}
-              name="size"
-              value={x}
-              onChange={(event) => {
-                setSize(event.target.value);
-              }}
-              label={x}
-              currentValue={size}
-            ></SpecificProductSize>
-          ))}
-        </div>
-        <div className="add-to-cart-button">
-          <GeneralButton onClick={addProductToCart}>add to cart</GeneralButton>
-          <span className="wish-list-icon" onClick={toggleInWishList}>
-            {isInWishlist ? <i className="fas fa-heart fa-lg"></i> : <i className="far fa-heart fa-lg"></i>}
-          </span>
-        </div>
+
+        <Sizes sizes={sizes} onChange={setSize} size={size}></Sizes>
+
+        <Controls
+          addProductToCart={addProductToCart}
+          toggleInWishList={toggleInWishList}
+          isInWishlist={isInWishlist}
+        ></Controls>
       </div>
     </div>
   );

@@ -1,0 +1,42 @@
+.info {
+  padding: 10px;
+
+  .category-product {
+    font-size: 20px;
+    text-transform: capitalize;
+  }
+
+  .product-name {
+    font-weight: 500;
+    font-size: 42px;
+    margin: 10px 0;
+    text-transform: uppercase;
+  }
+
+  .product-price {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .specific-product-controls {
+    display: none;
+  }
+
+  .sizes {
+    display: none;
+  }
+
+  @media screen and (min-width: 715px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    .specific-product-controls {
+      display: flex !important;
+    }
+
+    .sizes {
+      display: block !important;
+    }
+  }
+}

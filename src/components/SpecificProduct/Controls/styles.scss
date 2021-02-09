@@ -1,0 +1,18 @@
+.specific-product-controls {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+
+  .general-button {
+    width: 70%;
+    margin: 0;
+  }
+  .wish-list-icon {
+    width: 50px;
+    height: 50px;
+    border: 2px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

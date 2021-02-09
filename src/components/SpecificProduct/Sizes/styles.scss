@@ -1,0 +1,8 @@
+.sizes {
+  .sizes-grid {
+    display: grid;
+    background-color: #eceff1;
+    grid-template-columns: repeat(3, 33%);
+    justify-content: center;
+  }
+}

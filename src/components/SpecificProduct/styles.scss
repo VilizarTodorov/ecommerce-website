@@ -4,23 +4,9 @@
 }
 
 .specific-product {
+  padding: 10px;
   min-height: 100%;
   background-color: #eceff1;
-
-  .info {
-    &-secondary {
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .add-to-cart-button {
-      display: none;
-    }
-
-    .sizes-grid {
-      display: none;
-    }
-  }
 
   .carousel {
     display: flex;
@@ -52,53 +38,12 @@
     }
   }
 
-  .sizes-grid {
-    display: grid;
-    background-color: #eceff1;
-    grid-template-columns: repeat(3, 33%);
-    justify-content: center;
-  }
-
-  .add-to-cart-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .general-button {
-    width: 70%;
-    margin: 20px auto;
-  }
-  .wish-list-icon {
-    width: 50px;
-    height: 50px;
-    border: 2px solid black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  @media screen and (min-width: 639px) {
+  @media screen and (min-width: 715px) {
     display: grid;
     grid-template-columns: 1fr 2fr;
     max-width: 1000px;
     margin: auto;
     padding: 20px;
-
-    .info {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-
-      .add-to-cart-button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .sizes-grid {
-        display: grid;
-      }
-    }
 
     .aspect-ratio-box {
       max-width: 460px;
@@ -109,11 +54,11 @@
       height: 70px;
     }
 
-    .add-to-cart-button {
+    .specific-product-controls {
       display: none;
     }
 
-    .sizes-grid {
+    .sizes {
       display: none;
     }
   }
