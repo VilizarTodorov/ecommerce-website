@@ -11,12 +11,11 @@ import Option from "../AddProduct/Option";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchFailure, updateProduct, deleteProduct } from "../../Redux/ProductSlice/product-slice";
 import ProductEntry from "../ProductEntry";
+import { isProductFetchingSelector } from "../../helpers/selectors";
 import "./styles.scss";
 
-const isFetchingSelector = (state) => state.product.isFetching;
-
 const AdminProduct = (props) => {
-  const isFetching = useSelector(isFetchingSelector);
+  const isFetching = useSelector(isProductFetchingSelector);
   const dispatch = useDispatch();
 
   const [isOpen, setIsOpen] = useState(false);

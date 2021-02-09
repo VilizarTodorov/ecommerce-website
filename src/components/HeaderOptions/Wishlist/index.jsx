@@ -2,12 +2,11 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { PROFILE, WISH_LIST } from "../../../constants/routes";
+import { wishlistItemsCountSelector } from "../../../helpers/selectors";
 import "./styles.scss";
 
-const wishListCountSelector = (state) => state.wishlist.wishlist.length;
-
 const WishList = () => {
-  const wishListCount = useSelector(wishListCountSelector);
+  const wishListCount = useSelector(wishlistItemsCountSelector);
 
   return (
     <Link className="option option-wish-list" to={`${PROFILE}${WISH_LIST}`}>

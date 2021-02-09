@@ -4,12 +4,13 @@ import "./App.css";
 import Header from "./components/Header";
 import Routes from "./components/Routes";
 import { auth } from "./Firebase/firebase";
+import { isAppReadySelector } from "./helpers/selectors";
 import { setToReady } from "./Redux/AppSlice/app-slice";
 import { resetUser, setUserAndWishList, setUid } from "./Redux/userSlice/user-slice";
 
 function App() {
   const dispatch = useDispatch();
-  const isAppReady = useSelector((state) => state.app.isAppReady);
+  const isAppReady = useSelector(isAppReadySelector);
 
   useEffect(() => {
     const listener = auth.onAuthStateChanged((authUser) => {

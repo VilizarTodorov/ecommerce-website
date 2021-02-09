@@ -3,21 +3,12 @@ import SignOut from "../SignOut";
 import { CHANGE_PASSWORD, PERSONAL_INFO, PROFILE, WISH_LIST } from "../../constants/routes";
 import { Link } from "react-router-dom";
 import Content from "./Content";
-import { createSelector } from "@reduxjs/toolkit";
 import "./styles.scss";
 import { useSelector } from "react-redux";
-
-const selectFirstName = (state) => state.user.user.firstName;
-const selectLastName = (state) => state.user.user.lastName;
-const userNamesSelector = createSelector([selectFirstName, selectLastName], (firstName, lastName) => {
-  return {
-    firstName,
-    lastName,
-  };
-});
+import { namesSelector } from "../../helpers/selectors";
 
 const Profile = (props) => {
-  const { firstName, lastName } = useSelector(userNamesSelector);
+  const { firstName, lastName } = useSelector(namesSelector);
 
   return (
     <div className="profile">

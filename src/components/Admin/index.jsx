@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { createSelector } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { HOME } from "../../constants/routes";
@@ -12,24 +11,14 @@ import AdminProduct from "../AdminProduct";
 import { fetchFailure, setAll } from "../../Redux/ProductSlice/product-slice";
 import Grid from "../Grid";
 import "./styles.scss";
-
-const selectFirstName = (state) => state.user.user.firstName;
-const selectLastName = (state) => state.user.user.lastName;
-const userNamesSelector = createSelector([selectFirstName, selectLastName], (firstName, lastName) => {
-  return {
-    firstName,
-    lastName,
-  };
-});
-
-const productListSelector = (state) => state.product.productList;
+import { namesSelector, productListSelector } from "../../helpers/selectors";
 
 const Admin = () => {
   const dispatch = useDispatch();
   const productList = useSelector(productListSelector);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [collection, setCollection] = useState("men");
-  const userCredentials = useSelector(userNamesSelector);
+  const userCredentials = useSelector(namesSelector);
 
   useEffect(() => {
     const listener = firestore.collection(collection).onSnapshot(

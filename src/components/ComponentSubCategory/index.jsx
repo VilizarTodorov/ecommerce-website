@@ -12,8 +12,7 @@ import {
 import GeneralHeading from "../GeneralHeading";
 import Filter from "../Filter";
 import LoadMore from "../LoadMore";
-
-const productListSelector = (state) => state.product.productList;
+import { productListSelector } from "../../helpers/selectors";
 
 const ComponentSubCategory = () => {
   const { category, sub } = useParams();

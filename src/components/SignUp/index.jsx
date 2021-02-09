@@ -12,8 +12,7 @@ import { COLLECTIONS, firestore } from "../../Firebase/firebase";
 import withAuthorization from "../../HOC/withAuthorization";
 import FormRadioButton from "../FormRadioButton";
 import RadioButtonContainer from "../RadioButtonContainer";
-
-const isFetchingSelector = (state) => state.user.authActionStarted;
+import { isUserFetching } from "../../helpers/selectors";
 
 const SingUp = () => {
   const [email, setEmail] = useState("");
@@ -25,7 +24,7 @@ const SingUp = () => {
 
   const history = useHistory();
   const dispatch = useDispatch();
-  const authActionStarted = useSelector(isFetchingSelector);
+  const authActionStarted = useSelector(isUserFetching);
 
   const firstNameOnChange = (event) => {
     setFirstName(event.target.value);

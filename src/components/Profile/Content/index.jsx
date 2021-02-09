@@ -2,13 +2,14 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import { CHANGE_PASSWORD, PERSONAL_INFO, PROFILE, WISH_LIST } from "../../../constants/routes";
+import { userSelector } from "../../../helpers/selectors";
 import ChangePassword from "../ChangePassword";
 import MyAccount from "../MyAccount";
 import PersonalInfo from "../PersonalInfo";
 import WishList from "../WishList";
 
 const Content = (props) => {
-  const user = useSelector((state) => state.user.user);
+  const user = useSelector(userSelector);
 
   return (
     <section className="nested-routes">
@@ -20,7 +21,7 @@ const Content = (props) => {
           <PersonalInfo user={user}></PersonalInfo>
         </Route>
         <Route exact path={`${PROFILE}${WISH_LIST}`}>
-          <WishList wishList={user.wishList}></WishList>
+          <WishList></WishList>
         </Route>
         <Route exact path={`${PROFILE}${CHANGE_PASSWORD}`}>
           <ChangePassword></ChangePassword>

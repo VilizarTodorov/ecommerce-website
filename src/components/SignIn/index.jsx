@@ -10,8 +10,8 @@ import { failure, signIn } from "../../Redux/userSlice/user-slice";
 import { useHistory, useLocation } from "react-router-dom";
 import ResetPasswordLink from "../ResetPassword/reset-password-link";
 import { WithAuthorization } from "../../HOC";
+import { isUserFetching } from "../../helpers/selectors";
 
-const isFetchingSelector = (state) => state.user.authActionStarted;
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -21,7 +21,7 @@ const SignIn = () => {
   const history = useHistory();
 
   const dispatch = useDispatch();
-  const isFetching = useSelector(isFetchingSelector);
+  const isFetching = useSelector(isUserFetching);
 
   const getFromLocation = () => {
     const { from } = location.state || { from: "/" };

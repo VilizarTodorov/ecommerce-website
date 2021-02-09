@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Option from "../../AddProduct/Option";
 import Select from "../../AddProduct/Select";
 import { removeFromCart, setProductQuantity } from "../../../Redux/CartSlice/cart-slice";
-const cartSelector = (state) => state.cart.cart;
+import { cartSelector } from "../../../helpers/selectors";
 
 const CartItem = ({ x }) => {
   const cart = useSelector(cartSelector);

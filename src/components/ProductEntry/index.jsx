@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { isProductInWishList } from "../../helpers/functions";
+import { wishlistSelector } from "../../helpers/selectors";
 import { toggleProductInWishList } from "../../Redux/WishlistSlice/wishlist-slice";
 import Carousel from "../Carousel";
 import Slide from "../CarouselSlide";
 import "./styles.scss";
-
-const wishlistSelector = (state) => state.wishlist.wishlist;
 
 const ProductEntry = ({
   id,

@@ -1,22 +1,12 @@
-import { createSelector } from "@reduxjs/toolkit";
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { CART } from "../../../constants/routes";
+import { cartTotalItemsCountSelector } from "../../../helpers/selectors";
 import "./styles.scss";
 
-const cartSelector = (state) => state.cart.cart;
-
-const cartCountSelector = createSelector([cartSelector], (cart) => {
-  let count = 0;
-  cart.forEach((x) => {
-    count += +x.quantity;
-  });
-  return count;
-});
-
 const Cart = () => {
-  const cartCount = useSelector(cartCountSelector);
+  const cartCount = useSelector(cartTotalItemsCountSelector);
 
   return (
     <Link className="option" to={CART}>

@@ -1,9 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { wishlistSelector } from "../../../helpers/selectors";
 import Grid from "../../Grid";
 import ProductEntry from "../../ProductEntry";
-
-const wishlistSelector = (state) => state.wishlist.wishlist;
 
 const WishList = () => {
   const wishlist = useSelector(wishlistSelector);

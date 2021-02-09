@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { productListSelector } from "../../helpers/selectors";
 import { fetchFailure, getAllProductsWithSpecificType } from "../../Redux/ProductSlice/product-slice";
 import Grid from "../Grid";
 import ProductEntry from "../ProductEntry";
-
-const productListSelector = (state) => state.product.productList;
 
 const ComponentProductType = () => {
   const { category, sub, type } = useParams();

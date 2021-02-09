@@ -1,32 +1,14 @@
-import { createSelector } from "@reduxjs/toolkit";
 import React from "react";
 import { useSelector } from "react-redux";
+import { cartSelector, totalItemsAndPriceSelector } from "../../helpers/selectors";
 import GeneralButton from "../GeneralButton";
 import CartItem from "./CartItem";
 import "./styles.scss";
 
-const selector = (state) => state.cart.cart;
-const theSelector = createSelector([selector], (cart) => {
-  let totalItems = 0;
-  let totalPrice = 0;
-
-  cart.forEach((x) => {
-    totalItems += x.quantity;
-    totalPrice += x.quantity * x.price;
-  });
-
-  return {
-    totalItems,
-    totalPrice,
-  };
-});
-
-const cartSelector = (state) => state.cart.cart;
-
 const Cart = (props) => {
   const cart = useSelector(cartSelector);
 
-  const totalCostAndItems = useSelector(theSelector);
+  const totalCostAndItems = useSelector(totalItemsAndPriceSelector);
 
   return (
     <div className="cart">

@@ -1,4 +1,3 @@
-import { createSelector } from "@reduxjs/toolkit";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setMainToFalse } from "../../Redux/NavSlice/nav-slice";
@@ -7,6 +6,7 @@ import NavOption from "./NavOption";
 import { MEN, WOMEN, KIDS } from "../../constants/routes";
 import * as categories from "../../constants/categories";
 import "./styles.scss";
+import { mainNavSelector } from "../../helpers/selectors";
 
 const menShoes = [
   "sneakers",
@@ -48,13 +48,8 @@ const accessories = [
   "water bottles",
 ];
 
-const navSelector = createSelector(
-  (state) => state.toggleNav.mainNav,
-  (toggleNav) => toggleNav
-);
-
 const Navigation = () => {
-  const navState = useSelector(navSelector);
+  const navState = useSelector(mainNavSelector);
   const dispatch = useDispatch();
 
   const hideNav = () => {

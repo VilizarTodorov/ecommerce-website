@@ -10,11 +10,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { addProduct, fetchFailure } from "../../Redux/ProductSlice/product-slice";
 import GeneralButton from "../GeneralButton";
 import "./styles.scss";
-
-const isFetchingSelector = (state) => state.product.isFetching;
+import { isProductFetchingSelector } from "../../helpers/selectors";
 
 const AddProduct = () => {
-  const isFetching = useSelector(isFetchingSelector);
+  const isFetching = useSelector(isProductFetchingSelector);
   const dispatch = useDispatch();
 
   const [name, setName] = useState("");

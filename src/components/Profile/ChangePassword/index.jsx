@@ -8,13 +8,12 @@ import FormPageLayout from "../../../layout/FormPageLayout";
 import { changePassword, failure } from "../../../Redux/userSlice/user-slice";
 import { useHistory } from "react-router-dom";
 import { PROFILE } from "../../../constants/routes";
-
-const isFetchingSelector = (state) => state.user.isFetching;
+import { isUserFetching } from "../../../helpers/selectors";
 
 const ChangePassword = (props) => {
-  const [password, setPassword] = useState('');
-  const [rePassword, setRePassword] = useState('');
-  const isFetching = useSelector(isFetchingSelector);
+  const [password, setPassword] = useState("");
+  const [rePassword, setRePassword] = useState("");
+  const isFetching = useSelector(isUserFetching);
   const history = useHistory();
   const dispatch = useDispatch();
 

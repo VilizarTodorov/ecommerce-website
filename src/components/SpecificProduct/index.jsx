@@ -4,24 +4,20 @@ import { useParams } from "react-router-dom";
 import { isProductInWishList } from "../../helpers/functions";
 import { fetchFailure, getSpecificProduct } from "../../Redux/ProductSlice/product-slice";
 import { addToCart } from "../../Redux/CartSlice/cart-slice";
-import Carousel from "../Carousel";
-import Slide from "../CarouselSlide";
 import { toggleProductInWishList } from "../../Redux/WishlistSlice/wishlist-slice";
 import Sizes from "./Sizes";
 import Info from "./Info";
 import Controls from "./Controls";
 import "./styles.scss";
+import Media from "./Media";
+import { cartSelector, specificProductSelector, wishlistSelector } from "../../helpers/selectors";
 
 const sizes = [5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11];
-
-const productSelector = (state) => state.product.product;
-const wishlistSelector = (state) => state.wishlist.wishlist;
-const cartSelector = (state) => state.cart.cart;
 
 const SpecificProduct = () => {
   const { category, id } = useParams();
   const dispatch = useDispatch();
-  const product = useSelector(productSelector);
+  const product = useSelector(specificProductSelector);
   const wishlist = useSelector(wishlistSelector);
   const cart = useSelector(cartSelector);
 
@@ -94,25 +90,13 @@ const SpecificProduct = () => {
             isInWishlist={isInWishlist}
           ></Controls>
         </Info>
-        <div className="pictures">
-          <div className="aspect-ratio-box">
-            <div className="media">
-              <img src={imgSrc} alt="img" />
-            </div>
-          </div>
-          <div className="specific-product-carousel">
-            <Carousel>
-              {product.otherColors.map((x, index) => (
-                <Slide
-                  key={index}
-                  value={x.value}
-                  onMouseOut={onMouseOutHandler}
-                  onMouseOver={onMouseOverHandler}
-                ></Slide>
-              ))}
-            </Carousel>
-          </div>
-        </div>
+
+        <Media
+          imgSrc={imgSrc}
+          otherColors={product.otherColors}
+          onMouseOverHandler={onMouseOverHandler}
+          onMouseOutHandler={onMouseOutHandler}
+        ></Media>
 
         <Sizes sizes={sizes} onChange={setSize} size={size}></Sizes>
 
