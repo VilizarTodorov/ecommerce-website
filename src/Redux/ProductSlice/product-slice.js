@@ -45,6 +45,10 @@ const productSlice = createSlice({
       state.isFetching = false;
       state.error = action.payload;
     },
+
+    clearProductList(state) {
+      state.productList = [];
+    },
   },
 });
 
@@ -90,19 +94,23 @@ const setAll = (snapshot) => {
   };
 };
 
-const getAllMainCategoryItems = (mainCategory, startAfter) => {
+const getAllMainCategoryItems = (mainCategory, startAfter, orderByParameters) => {
   return (dispatch) => {
     dispatch(startFetch());
-    return firestore
-      .collection(mainCategory)
-      .orderBy("name", "asc")
-      .startAfter(startAfter)
+    let ref = firestore.collection(mainCategory).orderBy(orderByParameters.by, orderByParameters.type);
+
+    if (startAfter !== null) {
+      ref = ref.startAfter(startAfter);
+    }
+    return ref
       .limit(2)
       .get()
       .then((snapshot) => {
         const products = [];
         snapshot.forEach((x) => products.push({ id: x.id, ...x.data() }));
-        snapshot.docs[snapshot.docs.length - 1].ref.get().then((doc) => (lastDoc = doc));
+        snapshot.docs[snapshot.docs.length - 1].ref.get().then((doc) => {
+          lastDoc = doc;
+        });
         return products;
       })
       .then((products) => {
@@ -158,6 +166,13 @@ const getSpecificProduct = (category, id) => {
   };
 };
 
+const clear = () => {
+  return (dispatch) => {
+    dispatch(clearProductList());
+    lastDoc = null;
+  };
+};
+
 export {
   addProduct,
   updateProduct,
@@ -167,6 +182,7 @@ export {
   getAllProductsWithSpecificType,
   setAll,
   getSpecificProduct,
+  clear,
 };
 
 export const {
@@ -177,5 +193,6 @@ export const {
   fetchProductListSuccess,
   fetchProductSuccess,
   fetchFailure,
+  clearProductList,
 } = productSlice.actions;
 export default productSlice.reducer;

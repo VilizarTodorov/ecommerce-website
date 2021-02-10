@@ -57,7 +57,7 @@ const AddProduct = () => {
     event.preventDefault();
     const product = {
       name,
-      price,
+      price: +price,
       mainImg,
       secondaryImg,
       otherColors,
@@ -76,14 +76,22 @@ const AddProduct = () => {
       <Form onSubmit={onSubmit}>
         <FormTitle>add new product</FormTitle>
 
-        <Select value={mainCategory} onChange={(event) => setMainCategory(event.target.value)}>
+        <Select
+          value={mainCategory}
+          onChange={(event) => setMainCategory(event.target.value)}
+          initialValue="main category"
+        >
           <Option value="men">men</Option>
           <Option value="women">women</Option>
           <Option value="kids">kids</Option>
         </Select>
 
         {mainCategory && (
-          <Select value={subCategory} onChange={(event) => setSubCategory(event.target.value)}>
+          <Select
+            value={subCategory}
+            onChange={(event) => setSubCategory(event.target.value)}
+            initialValue="sub category"
+          >
             <Option value="shoes">shoes</Option>
             <Option value="clothing">clothing</Option>
             <Option value="accessories">accessories</Option>
@@ -91,7 +99,11 @@ const AddProduct = () => {
         )}
 
         {subCategory && (
-          <Select value={productType} onChange={(event) => setProductType(event.target.value)}>
+          <Select
+            value={productType}
+            onChange={(event) => setProductType(event.target.value)}
+            initialValue="product type"
+          >
             <ProductTypes mainCategory={mainCategory} subCategory={subCategory}></ProductTypes>
           </Select>
         )}

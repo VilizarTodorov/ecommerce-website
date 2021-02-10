@@ -6,6 +6,10 @@
   z-index: 1;
   background-color: white;
 
+  .select-menu{
+    width: auto;
+  }
+
   &-option {
     flex-grow: 1;
     border: 1px solid black;

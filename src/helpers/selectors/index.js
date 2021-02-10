@@ -6,6 +6,7 @@ const selectCart = (state) => state.cart;
 const selectUser = (state) => state.user;
 const selectWishList = (state) => state.wishlist;
 const selectToggleNav = (state) => state.toggleNav;
+const selectOrderBy = (state) => state.orderBy;
 
 export const isAppReadySelector = createSelector([selectApp], ({ isAppReady }) => isAppReady);
 export const isProductFetchingSelector = createSelector([selectProduct], ({ isFetching }) => isFetching);
@@ -44,3 +45,4 @@ export const mainNavSelector = createSelector([selectToggleNav], ({ mainNav }) =
 export const wishlistSelector = createSelector([selectWishList], ({ wishlist }) => wishlist);
 export const isUserFetching = createSelector([selectUser], ({ authActionStarted }) => authActionStarted);
 export const specificProductSelector = createSelector([selectProduct], ({ product }) => product);
+export const orderByParametersSelector = createSelector([selectOrderBy], (parameters) => parameters);

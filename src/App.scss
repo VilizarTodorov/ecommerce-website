@@ -1,0 +1,32 @@
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: inherit;
+}
+
+button {
+  font: inherit;
+}
+
+.main {
+  height: calc(100vh - 95px);
+}
+
+.App {
+  font-weight: 300;
+  word-wrap: break-word;
+  @media screen and (max-width: 401px) {
+    font-size: 13px;
+  }
+}

@@ -5,8 +5,9 @@ import appIsReadyReducer from "./AppSlice/app-slice";
 import productReducer from "./ProductSlice/product-slice";
 import cartReducer from "./CartSlice/cart-slice";
 import wishlistReducer from "./WishlistSlice/wishlist-slice";
-import { persistReducer } from "redux-persist";
+import orderByReducer from "./OrderBySlice";
 import storage from "redux-persist/lib/storage";
+import { persistReducer } from "redux-persist";
 
 export const rootReducer = combineReducers({
   toggleNav: navToggleReducer,
@@ -15,6 +16,7 @@ export const rootReducer = combineReducers({
   product: productReducer,
   cart: cartReducer,
   wishlist: wishlistReducer,
+  orderBy: orderByReducer,
 });
 
 const configStorage = {

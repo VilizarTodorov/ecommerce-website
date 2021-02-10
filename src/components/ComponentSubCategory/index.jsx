@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import Grid from "../Grid";
 import ProductEntry from "../ProductEntry";
 import {
+  clear,
   fetchFailure,
   getAllMainCategoryItems,
   getAllSubCategoryItems,
@@ -12,21 +13,25 @@ import {
 import GeneralHeading from "../GeneralHeading";
 import Filter from "../Filter";
 import LoadMore from "../LoadMore";
-import { productListSelector } from "../../helpers/selectors";
+import { orderByParametersSelector, productListSelector } from "../../helpers/selectors";
 import GeneralContainer from "../GeneralContainer";
 
 const ComponentSubCategory = () => {
   const { category, sub } = useParams();
-  const dispatch = useDispatch();
   const productList = useSelector(productListSelector);
-  console.log(lastDoc);
+  const { by, type } = useSelector(orderByParametersSelector);
+  const dispatch = useDispatch();
+
   useEffect(() => {
+    dispatch(clear());
     if (sub === "all") {
-      dispatch(getAllMainCategoryItems(category, lastDoc)).catch((err) => dispatch(fetchFailure(err.message)));
+      dispatch(getAllMainCategoryItems(category, lastDoc, { by, type })).catch((err) =>
+        dispatch(fetchFailure(err.message))
+      );
     } else {
       dispatch(getAllSubCategoryItems(category, sub)).catch((err) => dispatch(fetchFailure(err.message)));
     }
-  }, [category, sub, dispatch]);
+  }, [category, sub, dispatch, by, type]);
 
   return (
     <GeneralContainer>
@@ -50,7 +55,9 @@ const ComponentSubCategory = () => {
       </Grid>
       <LoadMore
         loadMore={() => {
-          dispatch(getAllMainCategoryItems(category, lastDoc)).catch((err) => dispatch(fetchFailure(err.message)));
+          dispatch(getAllMainCategoryItems(category, lastDoc, { by, type })).catch((err) =>
+            dispatch(fetchFailure(err.message))
+          );
         }}
       ></LoadMore>
     </GeneralContainer>
