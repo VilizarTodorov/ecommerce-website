@@ -9,6 +9,7 @@ import { failure, resetPassword } from "../../Redux/userSlice/user-slice";
 import { useHistory } from "react-router-dom";
 import { SIGN_IN } from "../../constants/routes";
 import { isUserFetching } from "../../helpers/selectors";
+import GeneralContainer from "../GeneralContainer";
 
 const ResetPassword = () => {
   const [email, setEmail] = useState("");
@@ -29,20 +30,22 @@ const ResetPassword = () => {
   };
 
   return (
-    <FormPageLayout>
-      <Form onSubmit={onSubmit}>
-        <FormTitle>reset password</FormTitle>
-        <FormInput
-          type="email"
-          id="email"
-          name="email"
-          value={email}
-          onChange={emailOnChange}
-          label="email"
-        ></FormInput>
-        <FormButton isFetching={isFetching}>reset password</FormButton>
-      </Form>
-    </FormPageLayout>
+    <GeneralContainer>
+      <FormPageLayout>
+        <Form onSubmit={onSubmit}>
+          <FormTitle>reset password</FormTitle>
+          <FormInput
+            type="email"
+            id="email"
+            name="email"
+            value={email}
+            onChange={emailOnChange}
+            label="email"
+          ></FormInput>
+          <FormButton isFetching={isFetching}>reset password</FormButton>
+        </Form>
+      </FormPageLayout>
+    </GeneralContainer>
   );
 };
 

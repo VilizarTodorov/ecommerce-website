@@ -82,7 +82,7 @@ const SpecificProduct = () => {
           name={product.name}
           price={product.price}
         >
-          <Sizes sizes={sizes} onChange={setSize} size={size}></Sizes>
+          <Sizes sizes={sizes} onChange={setSize} size={size} additionalKey={"secondary"}></Sizes>
 
           <Controls
             addProductToCart={addProductToCart}

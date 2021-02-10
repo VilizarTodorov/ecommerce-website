@@ -18,12 +18,27 @@
       }
     }
   }
+
   @media screen and (min-width: 715px) {
     display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    
+    .cars-items{
+      flex-grow: 1;
+    }
 
     .check-out {
+      flex-grow: 0.4;
       margin-left: 15px;
       flex-direction: column;
+
+      .order-summery {
+        margin-top: 20px;
+        border: 2px solid #eceff1;
+        padding: 10px;
+      }
     }
+
   }
 }

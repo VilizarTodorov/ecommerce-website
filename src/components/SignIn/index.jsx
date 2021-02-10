@@ -11,7 +11,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import ResetPasswordLink from "../ResetPassword/reset-password-link";
 import { WithAuthorization } from "../../HOC";
 import { isUserFetching } from "../../helpers/selectors";
-
+import GeneralContainer from '../GeneralContainer'
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -45,32 +45,34 @@ const SignIn = () => {
   };
 
   return (
+      <GeneralContainer>
     <FormPageLayout>
-      <Form onSubmit={onSubmit}>
-        <FormTitle>sign in</FormTitle>
-        <FormInput
-          type="email"
-          id="email"
-          name="email"
-          value={email}
-          onChange={emailOnChange}
-          label="email"
-        ></FormInput>
+        <Form onSubmit={onSubmit}>
+          <FormTitle>sign in</FormTitle>
+          <FormInput
+            type="email"
+            id="email"
+            name="email"
+            value={email}
+            onChange={emailOnChange}
+            label="email"
+          ></FormInput>
 
-        <FormInput
-          type="password"
-          id="password"
-          name="password"
-          value={password}
-          onChange={passwordOnChange}
-          label="password"
-        ></FormInput>
+          <FormInput
+            type="password"
+            id="password"
+            name="password"
+            value={password}
+            onChange={passwordOnChange}
+            label="password"
+          ></FormInput>
 
-        <FormButton isFetching={isFetching}>sign in</FormButton>
-      </Form>
-      <ResetPasswordLink></ResetPasswordLink>
-      <SignUpLink></SignUpLink>
+          <FormButton isFetching={isFetching}>sign in</FormButton>
+        </Form>
+        <ResetPasswordLink></ResetPasswordLink>
+        <SignUpLink></SignUpLink>
     </FormPageLayout>
+      </GeneralContainer>
   );
 };
 

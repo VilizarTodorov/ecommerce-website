@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { cartSelector, totalItemsAndPriceSelector } from "../../helpers/selectors";
 import GeneralButton from "../GeneralButton";
 import CartItem from "./CartItem";
+import GeneralContainer from "../GeneralContainer";
+import GeneralHeading from "../GeneralHeading";
 import "./styles.scss";
 
 const Cart = (props) => {
@@ -11,35 +13,41 @@ const Cart = (props) => {
   const totalCostAndItems = useSelector(totalItemsAndPriceSelector);
 
   return (
-    <div className="cart">
-      <div className="cars-items">
-        {cart.map((x) => {
-          return <CartItem key={x.id} x={x}></CartItem>;
-        })}
-      </div>
-      <div className="check-out">
-        <GeneralButton>checkout</GeneralButton>
-        <div className="order-summery">
-          <h1>order summery</h1>
-          <div className="container">
-            <p>{totalCostAndItems.totalItems} items</p>
-            <p>${totalCostAndItems.totalPrice}</p>
-          </div>
-          <div className="container">
-            <p>delivery</p>
-            <p>free</p>
-          </div>
-          <div className="container">
-            <p>sales tax</p>
-            <p>-</p>
-          </div>
-          <div className="container">
-            <p>total</p>
-            <p>${totalCostAndItems.totalPrice}</p>
+    <GeneralContainer>
+      <GeneralHeading>your bag</GeneralHeading>
+      <h2>
+        TOTAL: ({totalCostAndItems.totalItems}${totalCostAndItems.totalPrice})
+      </h2>
+      <div className="cart">
+        <div className="cars-items">
+          {cart.map((x) => {
+            return <CartItem key={x.id} x={x}></CartItem>;
+          })}
+        </div>
+        <div className="check-out">
+          <GeneralButton>checkout</GeneralButton>
+          <div className="order-summery">
+            <h1>order summery</h1>
+            <div className="container">
+              <p>{totalCostAndItems.totalItems} items</p>
+              <p>${totalCostAndItems.totalPrice}</p>
+            </div>
+            <div className="container">
+              <p>delivery</p>
+              <p>free</p>
+            </div>
+            <div className="container">
+              <p>sales tax</p>
+              <p>-</p>
+            </div>
+            <div className="container">
+              <p>total</p>
+              <p>${totalCostAndItems.totalPrice}</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </GeneralContainer>
   );
 };
 

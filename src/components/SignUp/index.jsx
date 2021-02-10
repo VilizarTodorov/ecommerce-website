@@ -13,6 +13,7 @@ import withAuthorization from "../../HOC/withAuthorization";
 import FormRadioButton from "../FormRadioButton";
 import RadioButtonContainer from "../RadioButtonContainer";
 import { isUserFetching } from "../../helpers/selectors";
+import GeneralContainer from "../GeneralContainer";
 
 const SingUp = () => {
   const [email, setEmail] = useState("");
@@ -71,84 +72,86 @@ const SingUp = () => {
   };
 
   return (
-    <FormPageLayout>
-      <Form onSubmit={onSubmit}>
-        <FormTitle>sign up</FormTitle>
-        <FormInput
-          type="text"
-          id="firsName"
-          name="firstName"
-          value={firstName}
-          onChange={firstNameOnChange}
-          label="first name"
-        ></FormInput>
+    <GeneralContainer>
+      <FormPageLayout>
+        <Form onSubmit={onSubmit}>
+          <FormTitle>sign up</FormTitle>
+          <FormInput
+            type="text"
+            id="firsName"
+            name="firstName"
+            value={firstName}
+            onChange={firstNameOnChange}
+            label="first name"
+          ></FormInput>
 
-        <FormInput
-          type="text"
-          id="lastName"
-          name="lastName"
-          value={lastName}
-          onChange={lastNameOnChange}
-          label="last name"
-        ></FormInput>
+          <FormInput
+            type="text"
+            id="lastName"
+            name="lastName"
+            value={lastName}
+            onChange={lastNameOnChange}
+            label="last name"
+          ></FormInput>
 
-        <RadioButtonContainer>
-          <FormRadioButton
-            id="male"
-            name="gender"
-            value="male"
-            onChange={(event) => setGender(event.target.value)}
-            label="male"
-            currentValue={gender}
-          ></FormRadioButton>
-          <FormRadioButton
-            id="female"
-            name="gender"
-            value="female"
-            onChange={(event) => setGender(event.target.value)}
-            label="female"
-            currentValue={gender}
-          ></FormRadioButton>
-          <FormRadioButton
-            id="other"
-            name="gender"
-            value="other"
-            onChange={(event) => setGender(event.target.value)}
-            label="other"
-            currentValue={gender}
-          ></FormRadioButton>
-        </RadioButtonContainer>
+          <RadioButtonContainer>
+            <FormRadioButton
+              id="male"
+              name="gender"
+              value="male"
+              onChange={(event) => setGender(event.target.value)}
+              label="male"
+              currentValue={gender}
+            ></FormRadioButton>
+            <FormRadioButton
+              id="female"
+              name="gender"
+              value="female"
+              onChange={(event) => setGender(event.target.value)}
+              label="female"
+              currentValue={gender}
+            ></FormRadioButton>
+            <FormRadioButton
+              id="other"
+              name="gender"
+              value="other"
+              onChange={(event) => setGender(event.target.value)}
+              label="other"
+              currentValue={gender}
+            ></FormRadioButton>
+          </RadioButtonContainer>
 
-        <FormInput
-          type="email"
-          id="email"
-          name="email"
-          value={email}
-          onChange={emailOnChange}
-          label="email"
-        ></FormInput>
+          <FormInput
+            type="email"
+            id="email"
+            name="email"
+            value={email}
+            onChange={emailOnChange}
+            label="email"
+          ></FormInput>
 
-        <FormInput
-          type="password"
-          id="password"
-          name="password"
-          value={password}
-          onChange={passwordOnChange}
-          label="password"
-        ></FormInput>
+          <FormInput
+            type="password"
+            id="password"
+            name="password"
+            value={password}
+            onChange={passwordOnChange}
+            label="password"
+          ></FormInput>
 
-        <FormInput
-          type="password"
-          id="rePassword"
-          name="rePassword"
-          value={rePassword}
-          onChange={rePasswordOnChange}
-          label="repeat password"
-        ></FormInput>
+          <FormInput
+            type="password"
+            id="rePassword"
+            name="rePassword"
+            value={rePassword}
+            onChange={rePasswordOnChange}
+            label="repeat password"
+          ></FormInput>
 
-        <FormButton isFetching={authActionStarted}>sign up</FormButton>
-      </Form>
-    </FormPageLayout>
+          <FormButton isFetching={authActionStarted}>sign up</FormButton>
+        </Form>
+      </FormPageLayout>
+    </GeneralContainer>
   );
 };
 
