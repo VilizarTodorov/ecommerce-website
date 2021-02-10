@@ -5,6 +5,7 @@ import { productListSelector } from "../../helpers/selectors";
 import { fetchFailure, getAllProductsWithSpecificType } from "../../Redux/ProductSlice/product-slice";
 import Grid from "../Grid";
 import ProductEntry from "../ProductEntry";
+import GeneralContainer from '../GeneralContainer'
 
 const ComponentProductType = () => {
   const { category, sub, type } = useParams();
@@ -20,22 +21,24 @@ const ComponentProductType = () => {
   }, [category, sub, type, dispatch]);
 
   return (
-    <Grid>
-      {productList.map((x) => (
-        <ProductEntry
-          key={x.id}
-          id={x.id}
-          mainCategory={x.mainCategory}
-          mainImg={x.mainImg}
-          name={x.name}
-          otherColors={x.otherColors}
-          price={x.price}
-          productType={x.productType}
-          secondaryImg={x.secondaryImg}
-          subCategory={x.subCategory}
-        ></ProductEntry>
-      ))}
-    </Grid>
+    <GeneralContainer>
+      <Grid>
+        {productList.map((x) => (
+          <ProductEntry
+            key={x.id}
+            id={x.id}
+            mainCategory={x.mainCategory}
+            mainImg={x.mainImg}
+            name={x.name}
+            otherColors={x.otherColors}
+            price={x.price}
+            productType={x.productType}
+            secondaryImg={x.secondaryImg}
+            subCategory={x.subCategory}
+          ></ProductEntry>
+        ))}
+      </Grid>
+    </GeneralContainer>
   );
 };
 

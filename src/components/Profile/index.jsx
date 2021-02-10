@@ -1,6 +1,6 @@
 import React from "react";
 import SignOut from "../SignOut";
-import { CHANGE_PASSWORD, PERSONAL_INFO, PROFILE, WISH_LIST } from "../../constants/routes";
+import { CHANGE_PASSWORD, PERSONAL_INFO, PROFILE } from "../../constants/routes";
 import { Link } from "react-router-dom";
 import Content from "./Content";
 import "./styles.scss";
@@ -29,9 +29,6 @@ const Profile = (props) => {
             </li>
             <li className="aside-nav-option">
               <Link to={`${PROFILE}${CHANGE_PASSWORD}`}>change password</Link>
-            </li>
-            <li className="aside-nav-option">
-              <Link to={`${PROFILE}${WISH_LIST}`}>wish list</Link>
             </li>
             <li className="aside-nav-option">
               <SignOut></SignOut>
