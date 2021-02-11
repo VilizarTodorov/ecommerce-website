@@ -44,6 +44,11 @@ const SignIn = () => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
+
+    if (isEmailInvalid || isPasswordInvalid) {
+      return;
+    }
+
     const from = getFromLocation();
     try {
       await dispatch(signIn(email, password));

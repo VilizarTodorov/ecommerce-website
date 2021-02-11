@@ -11,13 +11,16 @@ import { SIGN_IN } from "../../constants/routes";
 import { isUserFetching } from "../../helpers/selectors";
 import GeneralContainer from "../GeneralContainer";
 import { withAuthorizationFunction } from "../../HOC";
+import { INITIAL } from "../../constants/strings";
+import { isEmailInvalidFn } from "../../helpers/functions";
 
 const ResetPassword = () => {
-  const [email, setEmail] = useState("");
   const history = useHistory();
-
-  const isFetching = useSelector(isUserFetching);
   const dispatch = useDispatch();
+  const isFetching = useSelector(isUserFetching);
+
+  const [email, setEmail] = useState("");
+  const [isEmailInvalid, setIsEmailInvalid] = useState(INITIAL);
 
   const emailOnChange = (event) => {
     setEmail(event.target.value);
@@ -25,6 +28,11 @@ const ResetPassword = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
+
+    if (isEmailInvalid) {
+      return;
+    }
+
     dispatch(resetPassword(email))
       .then(() => history.push(SIGN_IN))
       .catch((err) => dispatch(failure(err.message)));
@@ -41,6 +49,8 @@ const ResetPassword = () => {
             name="email"
             value={email}
             onChange={emailOnChange}
+            isInvalid={isEmailInvalid}
+            onBlur={() => setIsEmailInvalid(isEmailInvalidFn(email))}
             label="email"
           ></FormInput>
           <FormButton isFetching={isFetching}>reset password</FormButton>

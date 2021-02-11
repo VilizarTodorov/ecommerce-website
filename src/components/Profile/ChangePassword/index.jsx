@@ -9,16 +9,26 @@ import { changePassword, failure } from "../../../Redux/userSlice/user-slice";
 import { useHistory } from "react-router-dom";
 import { PROFILE } from "../../../constants/routes";
 import { isUserFetching } from "../../../helpers/selectors";
+import { INITIAL } from "../../../constants/strings";
+import { isPasswordInvalidFn, isRepeatPasswordInvalidFn } from "../../../helpers/functions";
 
 const ChangePassword = (props) => {
-  const [password, setPassword] = useState("");
-  const [rePassword, setRePassword] = useState("");
   const isFetching = useSelector(isUserFetching);
   const history = useHistory();
   const dispatch = useDispatch();
 
+  const [password, setPassword] = useState("");
+  const [isPasswordInvalid, setIsPasswordInvalid] = useState(INITIAL);
+
+  const [rePassword, setRePassword] = useState("");
+  const [isRepeatPasswordInvalid, setIsRepeatPasswordInvalid] = useState(INITIAL);
+
   const onSubmit = (event) => {
     event.preventDefault();
+
+    if (isPasswordInvalid || isRepeatPasswordInvalid) {
+      return;
+    }
 
     dispatch(changePassword(password))
       .then(() => history.push(PROFILE))
@@ -35,6 +45,8 @@ const ChangePassword = (props) => {
           name="password"
           value={password}
           onChange={(event) => setPassword(event.target.value)}
+          isInvalid={isPasswordInvalid}
+          onBlur={() => setIsPasswordInvalid(isPasswordInvalidFn(password))}
           label="password"
         ></FormInput>
 
@@ -44,6 +56,8 @@ const ChangePassword = (props) => {
           name="rePassword"
           value={rePassword}
           onChange={(event) => setRePassword(event.target.value)}
+          isInvalid={isRepeatPasswordInvalid}
+          onBlur={() => setIsRepeatPasswordInvalid(isRepeatPasswordInvalidFn(password, rePassword))}
           label="repeat password"
         ></FormInput>
 
