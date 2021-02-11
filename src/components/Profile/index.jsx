@@ -6,6 +6,7 @@ import Content from "./Content";
 import "./styles.scss";
 import { useSelector } from "react-redux";
 import { namesSelector } from "../../helpers/selectors";
+import { withAuthorizationFunction } from "../../HOC";
 
 const Profile = (props) => {
   const { firstName, lastName } = useSelector(namesSelector);
@@ -41,4 +42,7 @@ const Profile = (props) => {
   );
 };
 
-export default Profile;
+
+const condition = (user) => user;
+
+export default withAuthorizationFunction(condition)(Profile);

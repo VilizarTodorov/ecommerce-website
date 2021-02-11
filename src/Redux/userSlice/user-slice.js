@@ -43,12 +43,10 @@ const userSlice = createSlice({
 });
 
 const signIn = (email, password) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(authActionStart());
-    return auth.signInWithEmailAndPassword(email, password).then((authUser) => {
-      dispatch(authActionSuccess());
-      return authUser;
-    });
+    const user = await auth.signInWithEmailAndPassword(email, password);
+    return dispatch(setUserAndWishList(user.user.uid));
   };
 };
 

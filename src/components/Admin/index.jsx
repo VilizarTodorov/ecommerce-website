@@ -12,6 +12,7 @@ import { fetchFailure, setAll } from "../../Redux/ProductSlice/product-slice";
 import Grid from "../Grid";
 import "./styles.scss";
 import { namesSelector, productListSelector } from "../../helpers/selectors";
+import { withAuthorizationFunction } from "../../HOC";
 
 const Admin = () => {
   const dispatch = useDispatch();
@@ -99,4 +100,12 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+const condition = (user) => {
+  if (user) {
+    return user.roles.includes("admin");
+  }
+
+  return false;
+};
+
+export default withAuthorizationFunction(condition)(Admin);

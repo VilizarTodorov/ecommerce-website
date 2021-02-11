@@ -1,3 +1,3 @@
-import WithAuthorization from "./withAuthorization";
+import withAuthorizationFunction from "./withAuthorization";
 
-export { WithAuthorization };
+export { withAuthorizationFunction };

@@ -9,9 +9,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { failure, signIn } from "../../Redux/userSlice/user-slice";
 import { useHistory, useLocation } from "react-router-dom";
 import ResetPasswordLink from "../ResetPassword/reset-password-link";
-import { WithAuthorization } from "../../HOC";
+import { withAuthorizationFunction } from "../../HOC";
 import { isUserFetching } from "../../helpers/selectors";
-import GeneralContainer from '../GeneralContainer'
+import GeneralContainer from "../GeneralContainer";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -36,17 +36,20 @@ const SignIn = () => {
     setPassword(event.target.value);
   };
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
     const from = getFromLocation();
-    dispatch(signIn(email, password))
-      .then(() => history.replace(from))
-      .catch((err) => dispatch(failure(err.message)));
+    try {
+      await dispatch(signIn(email, password));
+      history.replace(from);
+    } catch (err) {
+      dispatch(failure(err.message));
+    }
   };
 
   return (
-      <GeneralContainer>
-    <FormPageLayout>
+    <GeneralContainer>
+      <FormPageLayout>
         <Form onSubmit={onSubmit}>
           <FormTitle>sign in</FormTitle>
           <FormInput
@@ -71,11 +74,11 @@ const SignIn = () => {
         </Form>
         <ResetPasswordLink></ResetPasswordLink>
         <SignUpLink></SignUpLink>
-    </FormPageLayout>
-      </GeneralContainer>
+      </FormPageLayout>
+    </GeneralContainer>
   );
 };
 
-const condition = (user) => user == null;
+const condition = (user) => user === null;
 
-export default WithAuthorization(condition)(SignIn);
+export default withAuthorizationFunction(condition)(SignIn);

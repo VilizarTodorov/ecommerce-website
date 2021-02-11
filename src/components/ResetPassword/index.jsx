@@ -10,6 +10,7 @@ import { useHistory } from "react-router-dom";
 import { SIGN_IN } from "../../constants/routes";
 import { isUserFetching } from "../../helpers/selectors";
 import GeneralContainer from "../GeneralContainer";
+import { withAuthorizationFunction } from "../../HOC";
 
 const ResetPassword = () => {
   const [email, setEmail] = useState("");
@@ -49,4 +50,6 @@ const ResetPassword = () => {
   );
 };
 
-export default ResetPassword;
+const condition = (user) => user === null;
+
+export default withAuthorizationFunction(condition)(ResetPassword);

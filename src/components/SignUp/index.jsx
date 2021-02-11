@@ -9,11 +9,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { HOME } from "../../constants/routes";
 import { COLLECTIONS, firestore } from "../../Firebase/firebase";
-import withAuthorization from "../../HOC/withAuthorization";
 import FormRadioButton from "../FormRadioButton";
 import RadioButtonContainer from "../RadioButtonContainer";
 import { isUserFetching } from "../../helpers/selectors";
 import GeneralContainer from "../GeneralContainer";
+import { withAuthorizationFunction } from "../../HOC";
 
 const SingUp = () => {
   const [email, setEmail] = useState("");
@@ -155,6 +155,6 @@ const SingUp = () => {
   );
 };
 
-const condition = (user) => user == null;
+const condition = (user) => user === null;
 
-export default withAuthorization(condition)(SingUp);
+export default withAuthorizationFunction(condition)(SingUp);

@@ -2,7 +2,6 @@ import React from "react";
 import shopMens from "../../assets/shopMens.jpg";
 import shopWomen from "../../assets/shopWomens.jpg";
 import { MEN, WOMEN } from "../../constants/routes";
-import { WithAuthorization } from "../../HOC";
 import LinkComponent from "../LinkComponent";
 import "./styles.scss";
 
@@ -19,6 +18,4 @@ const Home = () => {
   );
 };
 
-const condition = (user) => user != null;
-
-export default WithAuthorization(condition)(Home);
+export default Home;
