@@ -39,4 +39,21 @@
       transform: scale(0.9);
     }
   }
+
+  .is-input-valid {
+    height: 3px;
+    background-color: transparent;
+    &.valid {
+      background-color: green;
+    }
+    &.invalid {
+      background-color: red;
+    }
+  }
+}
+
+.error-message {
+  text-transform: capitalize;
+  color: red;
+  font-weight: bold;
 }

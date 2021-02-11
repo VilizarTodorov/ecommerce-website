@@ -14,41 +14,42 @@ import RadioButtonContainer from "../RadioButtonContainer";
 import { isUserFetching } from "../../helpers/selectors";
 import GeneralContainer from "../GeneralContainer";
 import { withAuthorizationFunction } from "../../HOC";
+import {
+  isEmailInvalidFn,
+  isNameInvalidFn,
+  isPasswordInvalidFn,
+  isRepeatPasswordInvalidFn,
+} from "../../helpers/functions";
+import { INITIAL } from "../../constants/strings";
 
 const SingUp = () => {
   const [email, setEmail] = useState("");
+  const [isEmailInvalid, setIsEmailInvalid] = useState(INITIAL);
+
   const [password, setPassword] = useState("");
+  const [isPasswordInvalid, setIsPasswordInvalid] = useState(INITIAL);
+
   const [rePassword, setRePassword] = useState("");
+  const [isRepeatPasswordInvalid, setIsRepeatPasswordInvalid] = useState(INITIAL);
+
   const [firstName, setFirstName] = useState("");
+  const [isFirstNameInvalid, setIsFirstNameInvalid] = useState(INITIAL);
+
   const [lastName, setLastName] = useState("");
+  const [isLastNameInvalid, setIsLastNameInvalid] = useState(INITIAL);
+
   const [gender, setGender] = useState("gender");
 
   const history = useHistory();
   const dispatch = useDispatch();
   const authActionStarted = useSelector(isUserFetching);
 
-  const firstNameOnChange = (event) => {
-    setFirstName(event.target.value);
-  };
-
-  const lastNameOnChange = (event) => {
-    setLastName(event.target.value);
-  };
-
-  const emailOnChange = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const passwordOnChange = (event) => {
-    setPassword(event.target.value);
-  };
-
-  const rePasswordOnChange = (event) => {
-    setRePassword(event.target.value);
-  };
-
   const onSubmit = (event) => {
     event.preventDefault();
+
+    if (isEmailInvalid || isPasswordInvalid || isRepeatPasswordInvalid || isFirstNameInvalid || isLastNameInvalid) {
+      return;
+    }
 
     dispatch(signUp(email, password))
       .then(({ user }) => {
@@ -61,10 +62,10 @@ const SingUp = () => {
           gender,
         };
 
-        const createDbUserEntry = firestore.collection(COLLECTIONS.USERS).doc(user.uid).set(DB_ENTRY);
-        const createDbWishListEntry = firestore.collection(COLLECTIONS.WISHLISTS).doc(user.uid).set({ wishlist: [] });
-
-        Promise.all([createDbUserEntry, createDbWishListEntry])
+        firestore
+          .collection(COLLECTIONS.USERS)
+          .doc(user.uid)
+          .set(DB_ENTRY)
           .then(() => history.push(HOME))
           .catch((err) => dispatch(failure(err.message)));
       })
@@ -81,7 +82,9 @@ const SingUp = () => {
             id="firsName"
             name="firstName"
             value={firstName}
-            onChange={firstNameOnChange}
+            onChange={(event) => setFirstName(event.target.value)}
+            isInvalid={isFirstNameInvalid}
+            onBlur={() => setIsFirstNameInvalid(isNameInvalidFn(firstName, "first name"))}
             label="first name"
           ></FormInput>
 
@@ -90,7 +93,9 @@ const SingUp = () => {
             id="lastName"
             name="lastName"
             value={lastName}
-            onChange={lastNameOnChange}
+            onChange={(event) => setLastName(event.target.value)}
+            isInvalid={isLastNameInvalid}
+            onBlur={() => setIsLastNameInvalid(isNameInvalidFn(lastName, "last name"))}
             label="last name"
           ></FormInput>
 
@@ -126,7 +131,9 @@ const SingUp = () => {
             id="email"
             name="email"
             value={email}
-            onChange={emailOnChange}
+            onChange={(event) => setEmail(event.target.value)}
+            isInvalid={isEmailInvalid}
+            onBlur={() => setIsEmailInvalid(isEmailInvalidFn(email))}
             label="email"
           ></FormInput>
 
@@ -135,7 +142,9 @@ const SingUp = () => {
             id="password"
             name="password"
             value={password}
-            onChange={passwordOnChange}
+            onChange={(event) => setPassword(event.target.value)}
+            isInvalid={isPasswordInvalid}
+            onBlur={() => setIsPasswordInvalid(isPasswordInvalidFn(password))}
             label="password"
           ></FormInput>
 
@@ -144,7 +153,9 @@ const SingUp = () => {
             id="rePassword"
             name="rePassword"
             value={rePassword}
-            onChange={rePasswordOnChange}
+            onChange={(event) => setRePassword(event.target.value)}
+            isInvalid={isRepeatPasswordInvalid}
+            onBlur={() => setIsRepeatPasswordInvalid(isRepeatPasswordInvalidFn(password, rePassword))}
             label="repeat password"
           ></FormInput>
 

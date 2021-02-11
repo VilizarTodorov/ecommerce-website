@@ -12,10 +12,16 @@ import ResetPasswordLink from "../ResetPassword/reset-password-link";
 import { withAuthorizationFunction } from "../../HOC";
 import { isUserFetching } from "../../helpers/selectors";
 import GeneralContainer from "../GeneralContainer";
+import { HOME } from "../../constants/routes";
+import { INITIAL } from "../../constants/strings";
+import { isEmailInvalidFn, isPasswordInvalidSignInFn } from "../../helpers/functions";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
+  const [isEmailInvalid, setIsEmailInvalid] = useState(INITIAL);
+
   const [password, setPassword] = useState("");
+  const [isPasswordInvalid, setIsPasswordInvalid] = useState(INITIAL);
 
   const location = useLocation();
   const history = useHistory();
@@ -24,7 +30,7 @@ const SignIn = () => {
   const isFetching = useSelector(isUserFetching);
 
   const getFromLocation = () => {
-    const { from } = location.state || { from: "/" };
+    const { from } = location.state || { from: HOME };
     return from;
   };
 
@@ -58,6 +64,8 @@ const SignIn = () => {
             name="email"
             value={email}
             onChange={emailOnChange}
+            isInvalid={isEmailInvalid}
+            onBlur={() => setIsEmailInvalid(isEmailInvalidFn(email))}
             label="email"
           ></FormInput>
 
@@ -67,6 +75,8 @@ const SignIn = () => {
             name="password"
             value={password}
             onChange={passwordOnChange}
+            isInvalid={isPasswordInvalid}
+            onBlur={() => setIsPasswordInvalid(isPasswordInvalidSignInFn(password))}
             label="password"
           ></FormInput>
 
