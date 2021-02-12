@@ -14,6 +14,7 @@ const SpecificProduct = React.lazy(() => import("../SpecificProduct"));
 const Cart = React.lazy(() => import("../Cart"));
 const ResetPassword = React.lazy(() => import("../ResetPassword"));
 const Wishlist = React.lazy(() => import("../Wishlist"));
+const Checkout = React.lazy(() => import("../Checkout"));
 
 const Routes = () => {
   return (
@@ -27,6 +28,9 @@ const Routes = () => {
         </Route>
         <Route exact path={ROUTES.CART}>
           <Cart></Cart>
+        </Route>
+        <Route exact path={ROUTES.CHECKOUT}>
+          <Checkout></Checkout>
         </Route>
         <Route path={ROUTES.PROFILE}>
           <Profile></Profile>

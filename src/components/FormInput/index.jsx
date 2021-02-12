@@ -2,7 +2,7 @@ import React from "react";
 import { INITIAL } from "../../constants/strings";
 import "./styles.scss";
 
-const FormInput = ({ type, id, name, value, onChange, label, isInvalid, onBlur }) => {
+const FormInput = ({ type, id, name, value, onChange, isInvalid, onBlur, label }) => {
   return (
     <div className="form-input-wrapper">
       <div className="form-input">

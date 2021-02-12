@@ -1,0 +1,13 @@
+.select-menu {
+  width: 100%;
+  select {
+    margin: 20px 0;
+    text-transform: capitalize;
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #767677;
+    background-color: white;
+    color: black;
+    outline: none;
+  }
+}

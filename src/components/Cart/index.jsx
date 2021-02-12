@@ -1,11 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { cartSelector, totalItemsAndPriceSelector } from "../../helpers/selectors";
-import GeneralButton from "../GeneralButton";
+// import GeneralButton from "../GeneralButton";
 import CartItem from "./CartItem";
 import GeneralContainer from "../GeneralContainer";
 import GeneralHeading from "../GeneralHeading";
 import "./styles.scss";
+// import { useHistory } from "react-router-dom";
+import LinkComponent from "../LinkComponent";
+import { CHECKOUT } from "../../constants/routes";
 
 const Cart = (props) => {
   const cart = useSelector(cartSelector);
@@ -25,7 +28,8 @@ const Cart = (props) => {
           })}
         </div>
         <div className="check-out">
-          <GeneralButton>checkout</GeneralButton>
+          {/* <GeneralButton onClick={}>checkout</GeneralButton> */}
+          <LinkComponent to={CHECKOUT} linkContent="checkout"></LinkComponent>
           <div className="order-summery">
             <h1>order summery</h1>
             <div className="container">
