@@ -7,11 +7,16 @@ import FormInput from "../FormInput";
 import { INITIAL } from "../../constants/strings";
 import { isNameInvalidFn } from "../../helpers/functions";
 import FormCountryDropdown from "../FormCountryDropdown";
-import { CardElement } from "@stripe/react-stripe-js";
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import CityPostalCodeWrapper from "../CityPostalCodeWrapper";
+import FormButton from "../FormButton";
+import { apiInstance } from "../../helpers/utils";
+import { useSelector } from "react-redux";
 import "./styles.scss";
+import { totalItemsAndPriceSelector } from "../../helpers/selectors";
 
 const CARD_OPTIONS = {
+  hidePostalCode: true,
   iconStyle: "solid",
   style: {
     base: {
@@ -32,6 +37,10 @@ const CARD_OPTIONS = {
 };
 
 const PaymentDetails = (props) => {
+  const { totalPrice } = useSelector(totalItemsAndPriceSelector);
+  const elements = useElements();
+  const stripe = useStripe();
+
   const [recipientName, setRecipientName] = useState("");
   const [isRecipientNameInvalid, setIsRecipientNameInvalid] = useState(INITIAL);
 
@@ -60,11 +69,69 @@ const PaymentDetails = (props) => {
 
   const [countryBilling, setCountryBilling] = useState("");
 
+  const onSubmit = (event) => {
+    event.preventDefault();
+    const card = elements.getElement("card");
+
+    if (
+      isRecipientNameInvalid ||
+      isRecipientNameBillingInvalid ||
+      isAddressLineInvalid ||
+      isAddressLineBillingInvalid ||
+      isCityInvalid ||
+      isCityBillingInvalid ||
+      isPostalCodeInvalid ||
+      isPostalCodeBillingInvalid ||
+      !country ||
+      !countryBilling
+    ) {
+      return;
+    }
+    apiInstance
+      .post("/payment/create", {
+        amount: totalPrice * 100,
+        shipping: {
+          name: recipientName,
+          address: {
+            line1: addressLine,
+            city,
+            postal_code: postalCode,
+            country,
+          },
+        },
+      })
+      .then(({ data: clientSecret }) => {
+        stripe
+          .createPaymentMethod({
+            type: "card",
+            card: card,
+            billing_details: {
+              name: recipientNameBilling,
+              address: {
+                line1: addressLineBilling,
+                city: cityBilling,
+                postal_code: postalCodeBilling,
+                country: countryBilling,
+              },
+            },
+          })
+          .then(({ paymentMethod }) => {
+            stripe
+              .confirmCardPayment(clientSecret, {
+                payment_method: paymentMethod.id,
+              })
+              .then((paymentIntent) => {
+                console.log(paymentIntent);
+              });
+          });
+      });
+  };
+
   return (
     <GeneralContainer>
       <div className="checkout">
         <FormPageLayout>
-          <Form>
+          <Form onSubmit={onSubmit}>
             <FormTitle>shipping address</FormTitle>
 
             <FormInput
@@ -172,6 +239,8 @@ const PaymentDetails = (props) => {
             <div className="card-input">
               <CardElement options={CARD_OPTIONS} />
             </div>
+
+            <FormButton>submit</FormButton>
           </Form>
         </FormPageLayout>
       </div>

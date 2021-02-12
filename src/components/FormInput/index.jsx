@@ -14,6 +14,7 @@ const FormInput = ({ type, id, name, value, onChange, isInvalid, onBlur, label }
           value={value}
           onChange={onChange}
           onBlur={onBlur}
+          required
         />
         <label className="input-label" htmlFor={id}>
           {label}
