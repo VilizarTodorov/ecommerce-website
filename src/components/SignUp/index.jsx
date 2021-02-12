@@ -1,17 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FormPageLayout from "../../layout/FormPageLayout";
 import Form from "../Form";
 import FormInput from "../FormInput";
 import FormTitle from "../FormTitle";
 import FormButton from "../FormButton";
-import { failure, signUp } from "../../Redux/userSlice/user-slice";
+import { clearError, failure, signUp } from "../../Redux/userSlice/user-slice";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { HOME } from "../../constants/routes";
 import { COLLECTIONS, firestore } from "../../Firebase/firebase";
 import FormRadioButton from "../FormRadioButton";
 import RadioButtonContainer from "../RadioButtonContainer";
-import { isUserFetching } from "../../helpers/selectors";
+import { isUserFetching, userErrorSelector } from "../../helpers/selectors";
 import GeneralContainer from "../GeneralContainer";
 import { withAuthorizationFunction } from "../../HOC";
 import {
@@ -21,8 +21,11 @@ import {
   isRepeatPasswordInvalidFn,
 } from "../../helpers/functions";
 import { INITIAL } from "../../constants/strings";
+import FormError from "../FormError";
 
 const SingUp = () => {
+  const error = useSelector(userErrorSelector);
+
   const [email, setEmail] = useState("");
   const [isEmailInvalid, setIsEmailInvalid] = useState(INITIAL);
 
@@ -43,6 +46,12 @@ const SingUp = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const authActionStarted = useSelector(isUserFetching);
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearError());
+    };
+  },[dispatch]);
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -158,6 +167,8 @@ const SingUp = () => {
             onBlur={() => setIsRepeatPasswordInvalid(isRepeatPasswordInvalidFn(password, rePassword))}
             label="repeat password"
           ></FormInput>
+
+          <FormError>{error}</FormError>
 
           <FormButton isFetching={authActionStarted}>sign up</FormButton>
         </Form>

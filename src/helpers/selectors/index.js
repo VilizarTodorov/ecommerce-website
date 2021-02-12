@@ -46,3 +46,4 @@ export const wishlistSelector = createSelector([selectWishList], ({ wishlist }) 
 export const isUserFetching = createSelector([selectUser], ({ authActionStarted }) => authActionStarted);
 export const specificProductSelector = createSelector([selectProduct], ({ product }) => product);
 export const orderByParametersSelector = createSelector([selectOrderBy], (parameters) => parameters);
+export const userErrorSelector = createSelector([selectUser], ({ error }) => error);

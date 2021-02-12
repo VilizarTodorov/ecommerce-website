@@ -1,19 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Form from "../../Form";
 import FormTitle from "../../FormTitle";
 import FormInput from "../../FormInput";
 import FormButton from "../../FormButton";
 import { useDispatch, useSelector } from "react-redux";
 import FormPageLayout from "../../../layout/FormPageLayout";
-import { changePassword, failure } from "../../../Redux/userSlice/user-slice";
+import { changePassword, clearError, failure } from "../../../Redux/userSlice/user-slice";
 import { useHistory } from "react-router-dom";
 import { PROFILE } from "../../../constants/routes";
-import { isUserFetching } from "../../../helpers/selectors";
+import { isUserFetching, userErrorSelector } from "../../../helpers/selectors";
 import { INITIAL } from "../../../constants/strings";
 import { isPasswordInvalidFn, isRepeatPasswordInvalidFn } from "../../../helpers/functions";
+import FormError from "../../FormError";
 
 const ChangePassword = (props) => {
   const isFetching = useSelector(isUserFetching);
+  const error = useSelector(userErrorSelector);
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -22,6 +24,12 @@ const ChangePassword = (props) => {
 
   const [rePassword, setRePassword] = useState("");
   const [isRepeatPasswordInvalid, setIsRepeatPasswordInvalid] = useState(INITIAL);
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearError());
+    };
+  }, [dispatch]);
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -60,6 +68,8 @@ const ChangePassword = (props) => {
           onBlur={() => setIsRepeatPasswordInvalid(isRepeatPasswordInvalidFn(password, rePassword))}
           label="repeat password"
         ></FormInput>
+
+        <FormError>{error}</FormError>
 
         <FormButton isFetching={isFetching}>change password</FormButton>
       </Form>

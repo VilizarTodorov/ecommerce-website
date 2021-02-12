@@ -1,59 +1,81 @@
-.form-input {
-  margin: 20px 0;
+.form-input-wrapper {
   width: 100%;
-  position: relative;
+  margin: 10px 0;
 
-  .input-label {
-    text-transform: capitalize;
-    color: #767677;
-    position: absolute;
-    left: 15px;
-    top: 13px;
-    background-color: white;
-    padding: 2px;
-    pointer-events: none;
-    transition: all 0.3s;
-
-    .required {
-      color: red;
-    }
-  }
-
-  .input-field {
+  .form-input {
+    margin: 10px 0;
     width: 100%;
-    padding: 15px;
-    border: 1px solid #767677;
-    background-color: white;
-    color: black;
-    outline: none;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
 
-    &.active + .input-label {
-      left: 11px;
-      top: -11px;
-      transform: scale(0.9);
+    .input-label {
+      text-transform: capitalize;
+      color: #767677;
+      position: absolute;
+      left: 15px;
+      top: 13px;
+      background-color: white;
+      padding: 2px;
+      pointer-events: none;
+      transition: all 0.3s;
+
+      .required {
+        color: red;
+      }
     }
 
-    &:focus + .input-label {
-      left: 11px;
-      top: -11px;
-      transform: scale(0.9);
+    .input-field {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid #767677;
+      background-color: white;
+      color: black;
+      outline: none;
+
+      &.active + .input-label {
+        left: 11px;
+        top: -11px;
+        transform: scale(0.9);
+      }
+
+      &:focus + .input-label {
+        left: 11px;
+        top: -11px;
+        transform: scale(0.9);
+      }
+    }
+
+    .is-input-valid-icon {
+      position: absolute;
+      right: 5px;
+
+      &.valid {
+        color: green;
+      }
+
+      &.invalid {
+        color: red;
+      }
+    }
+
+    .is-input-valid {
+      height: 3px;
+      background-color: transparent;
+      width: 100%;
+      &.valid {
+        background-color: green;
+      }
+      &.invalid {
+        background-color: red;
+      }
     }
   }
 
-  .is-input-valid {
-    height: 3px;
-    background-color: transparent;
-    &.valid {
-      background-color: green;
-    }
-    &.invalid {
-      background-color: red;
-    }
+  .error-message {
+    text-transform: capitalize;
+    color: red;
+    font-weight: bold;
   }
-}
-
-.error-message {
-  text-transform: capitalize;
-  color: red;
-  font-weight: bold;
 }

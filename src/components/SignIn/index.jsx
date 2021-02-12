@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FormPageLayout from "../../layout/FormPageLayout";
 import Form from "../Form";
 import FormInput from "../FormInput";
@@ -6,17 +6,20 @@ import FormTitle from "../FormTitle";
 import FormButton from "../FormButton";
 import SignUpLink from "../SignUp/sign-up-link";
 import { useDispatch, useSelector } from "react-redux";
-import { failure, signIn } from "../../Redux/userSlice/user-slice";
+import { clearError, failure, signIn } from "../../Redux/userSlice/user-slice";
 import { useHistory, useLocation } from "react-router-dom";
 import ResetPasswordLink from "../ResetPassword/reset-password-link";
 import { withAuthorizationFunction } from "../../HOC";
-import { isUserFetching } from "../../helpers/selectors";
+import { isUserFetching, userErrorSelector } from "../../helpers/selectors";
 import GeneralContainer from "../GeneralContainer";
 import { HOME } from "../../constants/routes";
 import { INITIAL } from "../../constants/strings";
 import { isEmailInvalidFn, isPasswordInvalidSignInFn } from "../../helpers/functions";
+import FormError from "../FormError";
 
 const SignIn = () => {
+  const error = useSelector(userErrorSelector);
+
   const [email, setEmail] = useState("");
   const [isEmailInvalid, setIsEmailInvalid] = useState(INITIAL);
 
@@ -28,6 +31,12 @@ const SignIn = () => {
 
   const dispatch = useDispatch();
   const isFetching = useSelector(isUserFetching);
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearError());
+    };
+  },[dispatch]);
 
   const getFromLocation = () => {
     const { from } = location.state || { from: HOME };
@@ -84,6 +93,8 @@ const SignIn = () => {
             onBlur={() => setIsPasswordInvalid(isPasswordInvalidSignInFn(password))}
             label="password"
           ></FormInput>
+
+          <FormError>{error}</FormError>
 
           <FormButton isFetching={isFetching}>sign in</FormButton>
         </Form>

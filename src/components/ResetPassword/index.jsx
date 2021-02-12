@@ -1,26 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Form from "../Form";
 import FormTitle from "../FormTitle";
 import FormInput from "../FormInput";
 import FormButton from "../FormButton";
 import FormPageLayout from "../../layout/FormPageLayout";
 import { useSelector, useDispatch } from "react-redux";
-import { failure, resetPassword } from "../../Redux/userSlice/user-slice";
+import { clearError, failure, resetPassword } from "../../Redux/userSlice/user-slice";
 import { useHistory } from "react-router-dom";
 import { SIGN_IN } from "../../constants/routes";
-import { isUserFetching } from "../../helpers/selectors";
+import { isUserFetching, userErrorSelector } from "../../helpers/selectors";
 import GeneralContainer from "../GeneralContainer";
 import { withAuthorizationFunction } from "../../HOC";
 import { INITIAL } from "../../constants/strings";
 import { isEmailInvalidFn } from "../../helpers/functions";
+import FormError from "../FormError";
 
 const ResetPassword = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const isFetching = useSelector(isUserFetching);
+  const error = useSelector(userErrorSelector);
 
   const [email, setEmail] = useState("");
   const [isEmailInvalid, setIsEmailInvalid] = useState(INITIAL);
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearError())
+    }
+  },[dispatch])
 
   const emailOnChange = (event) => {
     setEmail(event.target.value);
@@ -53,6 +61,8 @@ const ResetPassword = () => {
             onBlur={() => setIsEmailInvalid(isEmailInvalidFn(email))}
             label="email"
           ></FormInput>
+
+          <FormError>{error}</FormError>
           <FormButton isFetching={isFetching}>reset password</FormButton>
         </Form>
       </FormPageLayout>

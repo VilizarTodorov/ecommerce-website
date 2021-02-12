@@ -24,6 +24,10 @@ const isPasswordInvalidFn = (password) => {
 };
 
 const isRepeatPasswordInvalidFn = (password, repeatPassword) => {
+  if (!repeatPassword) {
+    return "please repeat password";
+  }
+
   if (password !== repeatPassword) {
     return "password and repeat password must match";
   }
