@@ -135,12 +135,14 @@ const PaymentDetails = (props) => {
                   .then(() => history.push(HOME))
                   .catch((err) => dispatch(failure(err.message)));
 
+                const timestamp = new Date().getTime() / 1000;
+
                 const order = {
                   orderID: paymentIntent.id,
                   items: cart,
                   totalPrice,
                   totalItems,
-                  orderCreatedDate: new Date(),
+                  orderCreatedDate: timestamp,
                 };
 
                 dispatch(addNewOrder(uid, orders, order));

@@ -23,20 +23,13 @@ const ordersSlice = createSlice({
     actionEnded(state) {
       state.isFetching = false;
     },
+    clear(state) {
+      state.orders = [];
+    },
   },
 });
 
-const { actionEnded, actionStarted, setOrders, failure } = ordersSlice.actions;
-
-const getOrders = (uid) => {
-  return (dispatch) => {
-    return firestore
-      .collection(COLLECTIONS.ORDERS)
-      .doc(uid)
-      .get()
-      .then((doc) => dispatch(setOrders(doc.data().orders)));
-  };
-};
+const { actionEnded, actionStarted, setOrders, failure, clear } = ordersSlice.actions;
 
 const addNewOrder = (uid, previousOrders, newOrder) => {
   return (dispatch) => {
@@ -49,5 +42,5 @@ const addNewOrder = (uid, previousOrders, newOrder) => {
   };
 };
 
-export { getOrders, addNewOrder, failure };
+export { addNewOrder, failure, clear, setOrders };
 export default ordersSlice.reducer;

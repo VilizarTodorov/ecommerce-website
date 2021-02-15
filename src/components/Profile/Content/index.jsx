@@ -1,11 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
-import { CHANGE_PASSWORD, PERSONAL_INFO, PROFILE } from "../../../constants/routes";
+import { CHANGE_PASSWORD, ORDER_HISTORY, PERSONAL_INFO, PROFILE } from "../../../constants/routes";
 import { userSelector } from "../../../helpers/selectors";
 import ChangePassword from "../ChangePassword";
 import MyAccount from "../MyAccount";
 import PersonalInfo from "../PersonalInfo";
+import OrderHistory from "../OrderHistory";
 
 const Content = (props) => {
   const user = useSelector(userSelector);
@@ -21,6 +22,9 @@ const Content = (props) => {
         </Route>
         <Route exact path={`${PROFILE}${CHANGE_PASSWORD}`}>
           <ChangePassword></ChangePassword>
+        </Route>
+        <Route exact path={`${PROFILE}${ORDER_HISTORY}`}>
+          <OrderHistory></OrderHistory>
         </Route>
       </Switch>
     </section>

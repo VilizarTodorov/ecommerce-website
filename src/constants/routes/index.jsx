@@ -20,4 +20,5 @@ export const PROFILE = "/profile";
 export const WISH_LIST = "/wishlist";
 export const PERSONAL_INFO = "/personal-info";
 export const CART = "/cart";
-export const CHECKOUT='/checkout'
+export const CHECKOUT = "/checkout";
+export const ORDER_HISTORY = "/order-history";

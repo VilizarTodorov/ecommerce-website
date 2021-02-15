@@ -1,6 +1,6 @@
 import React from "react";
 import SignOut from "../SignOut";
-import { CHANGE_PASSWORD, PERSONAL_INFO, PROFILE } from "../../constants/routes";
+import { CHANGE_PASSWORD, ORDER_HISTORY, PERSONAL_INFO, PROFILE } from "../../constants/routes";
 import { Link } from "react-router-dom";
 import Content from "./Content";
 import "./styles.scss";
@@ -32,6 +32,9 @@ const Profile = (props) => {
               <Link to={`${PROFILE}${CHANGE_PASSWORD}`}>change password</Link>
             </li>
             <li className="aside-nav-option">
+              <Link to={`${PROFILE}${ORDER_HISTORY}`}>order history</Link>
+            </li>
+            <li className="aside-nav-option">
               <SignOut></SignOut>
             </li>
           </ul>
@@ -41,7 +44,6 @@ const Profile = (props) => {
     </div>
   );
 };
-
 
 const condition = (user) => user;
 
