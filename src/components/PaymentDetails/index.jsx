@@ -12,7 +12,7 @@ import CityPostalCodeWrapper from "../CityPostalCodeWrapper";
 import FormButton from "../FormButton";
 import { apiInstance } from "../../helpers/utils";
 import { useDispatch, useSelector } from "react-redux";
-import { ordersSelector, totalItemsAndPriceSelector, uidSelector } from "../../helpers/selectors";
+import { cartSelector, ordersSelector, totalItemsAndPriceSelector, uidSelector } from "../../helpers/selectors";
 import { clearCart } from "../../Redux/CartSlice/cart-slice";
 import { useHistory } from "react-router-dom";
 import { HOME } from "../../constants/routes";
@@ -42,9 +42,10 @@ const CARD_OPTIONS = {
 };
 
 const PaymentDetails = (props) => {
+  const { totalItems, totalPrice } = useSelector(totalItemsAndPriceSelector);
+  const cart = useSelector(cartSelector);
   const orders = useSelector(ordersSelector);
   const uid = useSelector(uidSelector);
-  const { totalPrice } = useSelector(totalItemsAndPriceSelector);
   const elements = useElements();
   const stripe = useStripe();
   const dispatch = useDispatch();
@@ -134,7 +135,15 @@ const PaymentDetails = (props) => {
                   .then(() => history.push(HOME))
                   .catch((err) => dispatch(failure(err.message)));
 
-                dispatch(addNewOrder(uid, orders, paymentIntent.id));
+                const order = {
+                  orderID: paymentIntent.id,
+                  items: cart,
+                  totalPrice,
+                  totalItems,
+                  orderCreatedDate: new Date(),
+                };
+
+                dispatch(addNewOrder(uid, orders, order));
               });
           });
       });

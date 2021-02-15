@@ -5,4 +5,12 @@
     grid-template-columns: repeat(3, 33%);
     justify-content: center;
   }
+
+  input {
+    display: none;
+    &:checked + .size-radio-button {
+      background-color: black;
+      color: white;
+    }
+  }
 }

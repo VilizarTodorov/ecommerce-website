@@ -4,7 +4,7 @@ import "./styles.scss";
 
 const FormInput = ({ type, id, name, value, onChange, isInvalid, onBlur, label }) => {
   return (
-    <div className="form-input-wrapper">
+    <div className="form-input-wrapper-cont">
       <div className="form-input">
         <input
           className={`input-field ${value ? "active" : ""}`}

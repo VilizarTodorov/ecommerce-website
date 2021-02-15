@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { firestore, COLLECTIONS } from "../../Firebase/firebase";
 
 const INITIAL_STATE = {
-  orders: {},
+  orders: [],
   isFetching: false,
   error: null,
 };
@@ -34,7 +34,7 @@ const getOrders = (uid) => {
       .collection(COLLECTIONS.ORDERS)
       .doc(uid)
       .get()
-      .then((doc) => dispatch(setOrders(doc.data())));
+      .then((doc) => dispatch(setOrders(doc.data().orders)));
   };
 };
 
@@ -44,7 +44,7 @@ const addNewOrder = (uid, previousOrders, newOrder) => {
     return firestore
       .collection(COLLECTIONS.ORDERS)
       .doc(uid)
-      .update({ orders: { ...previousOrders, newOrder } })
+      .update({ orders: [...previousOrders, newOrder] })
       .then(() => dispatch(actionEnded()));
   };
 };

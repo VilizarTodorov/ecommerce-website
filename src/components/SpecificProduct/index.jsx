@@ -8,9 +8,9 @@ import { toggleProductInWishList } from "../../Redux/WishlistSlice/wishlist-slic
 import Sizes from "./Sizes";
 import Info from "./Info";
 import Controls from "./Controls";
-import "./styles.scss";
 import Media from "./Media";
 import { cartSelector, specificProductSelector, wishlistSelector } from "../../helpers/selectors";
+import "./styles.scss";
 
 const sizes = [5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11];
 

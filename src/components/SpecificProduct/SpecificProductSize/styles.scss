@@ -9,11 +9,3 @@
     color: white;
   }
 }
-
-input {
-  display: none;
-  &:checked + .size-radio-button {
-    background-color: black;
-    color: white;
-  }
-}

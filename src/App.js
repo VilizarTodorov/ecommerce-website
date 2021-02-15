@@ -6,6 +6,7 @@ import Routes from "./components/Routes";
 import { auth } from "./Firebase/firebase";
 import { isAppReadySelector } from "./helpers/selectors";
 import { setToReady } from "./Redux/AppSlice/app-slice";
+import { getOrders } from "./Redux/OrdersSlice/order-slice";
 import { resetUser, setUserAndWishList, setUid } from "./Redux/userSlice/user-slice";
 
 function App() {
@@ -16,7 +17,9 @@ function App() {
     const listener = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         dispatch(setUid(authUser.uid));
-        dispatch(setUserAndWishList(authUser.uid)).then(() => dispatch(setToReady()));
+        dispatch(setUserAndWishList(authUser.uid))
+          .then(() => dispatch(setToReady()))
+          .then(() => dispatch(getOrders(authUser.uid)));
       } else {
         dispatch(resetUser());
         dispatch(setToReady());
