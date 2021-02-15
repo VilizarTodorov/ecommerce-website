@@ -3,6 +3,7 @@ import { isProductInCart } from "../../helpers/functions";
 
 const INITIAL_STATE = {
   cart: [],
+  error: null,
 };
 
 const cartSlice = createSlice({
@@ -21,10 +22,16 @@ const cartSlice = createSlice({
     setQuantity(state, action) {
       state.cart[action.payload.index].quantity = action.payload.quantity;
     },
+    clear(state) {
+      state.cart = [];
+    },
+    failure(state, action) {
+      state.error = action.payload;
+    },
   },
 });
 
-const { add, remove, increment, setQuantity } = cartSlice.actions;
+const { add, remove, increment, setQuantity, clear, failure } = cartSlice.actions;
 
 const addToCart = (cart, product, size) => {
   return (dispatch) => {
@@ -51,6 +58,18 @@ const setProductQuantity = (productID, quantity, cart) => {
   };
 };
 
-export { addToCart, removeFromCart, setProductQuantity };
+const clearCart = () => {
+  return (dispatch) => {
+    return new Promise((res, rej) => {
+      try {
+        res(dispatch(clear()));
+      } catch (error) {
+        rej(error);
+      }
+    });
+  };
+};
+
+export { addToCart, removeFromCart, setProductQuantity, clearCart, failure };
 
 export default cartSlice.reducer;

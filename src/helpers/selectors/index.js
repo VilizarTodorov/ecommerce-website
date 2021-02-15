@@ -7,10 +7,12 @@ const selectUser = (state) => state.user;
 const selectWishList = (state) => state.wishlist;
 const selectToggleNav = (state) => state.toggleNav;
 const selectOrderBy = (state) => state.orderBy;
+const selectOrders = (state) => state.orders;
 
 export const isAppReadySelector = createSelector([selectApp], ({ isAppReady }) => isAppReady);
 export const isProductFetchingSelector = createSelector([selectProduct], ({ isFetching }) => isFetching);
 export const userSelector = createSelector([selectUser], ({ user }) => user);
+export const uidSelector = createSelector([selectUser], ({ uid }) => uid);
 export const namesSelector = createSelector([selectUser], ({ user }) => {
   return {
     firstName: user.firstName,
@@ -47,3 +49,4 @@ export const isUserFetching = createSelector([selectUser], ({ authActionStarted 
 export const specificProductSelector = createSelector([selectProduct], ({ product }) => product);
 export const orderByParametersSelector = createSelector([selectOrderBy], (parameters) => parameters);
 export const userErrorSelector = createSelector([selectUser], ({ error }) => error);
+export const ordersSelector = createSelector([selectOrders], ({ orders }) => orders);

@@ -5,7 +5,7 @@ import firebaseConfig from "./config";
 
 const COLLECTIONS = {
   USERS: "users",
-  WISHLISTS: "wishLists",
+  ORDERS: "orders",
   CARTS: "carts",
 };
 const firebase = app.initializeApp(firebaseConfig);

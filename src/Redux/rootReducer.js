@@ -6,6 +6,7 @@ import productReducer from "./ProductSlice/product-slice";
 import cartReducer from "./CartSlice/cart-slice";
 import wishlistReducer from "./WishlistSlice/wishlist-slice";
 import orderByReducer from "./OrderBySlice";
+import ordersReducer from "./OrdersSlice/order-slice";
 import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 
@@ -17,6 +18,7 @@ export const rootReducer = combineReducers({
   cart: cartReducer,
   wishlist: wishlistReducer,
   orderBy: orderByReducer,
+  orders: ordersReducer,
 });
 
 const configStorage = {

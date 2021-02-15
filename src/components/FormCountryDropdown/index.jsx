@@ -4,7 +4,7 @@ import "./styles.scss";
 
 const FormCountryDropdown = ({ value, onChange }) => {
   return (
-    <div className="select-menu">
+    <div className="select-menu-div">
       <CountryDropdown onChange={onChange} value={value} valueType="short" required></CountryDropdown>
     </div>
   );

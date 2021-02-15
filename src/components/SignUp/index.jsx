@@ -51,7 +51,7 @@ const SingUp = () => {
     return () => {
       dispatch(clearError());
     };
-  },[dispatch]);
+  }, [dispatch]);
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -77,6 +77,8 @@ const SingUp = () => {
           .set(DB_ENTRY)
           .then(() => history.push(HOME))
           .catch((err) => dispatch(failure(err.message)));
+
+        firestore.collection(COLLECTIONS.ORDERS).doc(user.uid).set({ orders: {} });
       })
       .catch((err) => dispatch(failure(err.message)));
   };

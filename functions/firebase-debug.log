@@ -454,3 +454,35 @@ Issues? Report them at https://github.com/firebase/firebase-tools/issues and att
 [debug] [2021-02-12T22:14:10.141Z] [worker-api-30fa2335-50ff-488c-9ae3-a723b1d0f7f7]: IDLE {"metadata":{"emulator":{"name":"functions"},"message":"[worker-api-30fa2335-50ff-488c-9ae3-a723b1d0f7f7]: IDLE"}}
 [debug] [2021-02-12T22:14:10.141Z] [work-queue] {"queueLength":0,"workRunningCount":0}
 [debug] [2021-02-12T22:17:22.395Z] Received signal SIGHUP 1
+[debug] [2021-02-15T15:27:09.752Z] ----------------------------------------------------------------------
+[debug] [2021-02-15T15:27:09.754Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\todor\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js emulators:start --only functions
+[debug] [2021-02-15T15:27:09.754Z] CLI Version:   8.16.1
+[debug] [2021-02-15T15:27:09.754Z] Platform:      win32
+[debug] [2021-02-15T15:27:09.754Z] Node Version:  v12.16.3
+[debug] [2021-02-15T15:27:09.755Z] Time:          Mon Feb 15 2021 17:27:09 GMT+0200 (Eastern European Standard Time)
+[debug] [2021-02-15T15:27:09.756Z] ----------------------------------------------------------------------
+[debug] [2021-02-15T15:27:09.756Z] 
+[debug] [2021-02-15T15:27:09.758Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2021-02-15T15:27:09.781Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-02-15T15:27:09.782Z] > authorizing via signed-in user
+[info] i  emulators: Starting emulators: functions {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: functions"}}
+[debug] [2021-02-15T15:27:10.454Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2021-02-15T15:27:10.454Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[warn] !  emulators: It seems that you are running multiple instances of the emulator suite for project ecommerce-6e903. This may result in unexpected behavior. 
+[debug] [2021-02-15T15:27:11.800Z] [hub] writing locator at C:\Users\todor\AppData\Local\Temp\hub-ecommerce-6e903.json
+[warn] !  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: auth, firestore, database, hosting, pubsub {"metadata":{"emulator":{"name":"functions"},"message":"The following emulators are not running, calls to these services from the Functions emulator will affect production: \u001b[1mauth, firestore, database, hosting, pubsub\u001b[22m"}}
+[info] +  functions: Using node@12 from host. {"metadata":{"emulator":{"name":"functions"},"message":"Using node@12 from host."}}
+[debug] [2021-02-15T15:27:13.823Z] defaultcredentials: writing to file C:\Users\todor\AppData\Roaming\firebase\todorovvilizar_gmail_com_application_default_credentials.json
+[debug] [2021-02-15T15:27:13.827Z] Setting GAC to C:\Users\todor\AppData\Roaming\firebase\todorovvilizar_gmail_com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to C:\\Users\\todor\\AppData\\Roaming\\firebase\\todorovvilizar_gmail_com_application_default_credentials.json"}}
+[debug] [2021-02-15T15:27:17.845Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2021-02-15T15:27:17.845Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2021-02-15T15:27:17.845Z] Starting Emulator UI with command {"binary":"node","args":["C:\\Users\\todor\\.cache\\firebase\\emulators\\ui-v1.2.2\\server.bundle.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"C:\\\\Users\\\\todor\\\\.cache\\\\firebase\\\\emulators\\\\ui-v1.2.2\\\\server.bundle.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
+[debug] [2021-02-15T15:27:17.966Z] Web / API server started at http://localhost:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at http://localhost:4000\n"}}
+[info] i  functions: Watching "D:\project collection\eCommerce Website\ecommerce-website\functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"D:\\project collection\\eCommerce Website\\ecommerce-website\\functions\" for Cloud Functions..."}}
+[debug] [2021-02-15T15:27:18.373Z] [worker-pool] addWorker(~diagnostic~) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] addWorker(~diagnostic~)"}}
+[debug] [2021-02-15T15:27:18.374Z] [worker-pool] Adding worker with key ~diagnostic~, total=1 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Adding worker with key ~diagnostic~, total=1"}}
+[debug] [2021-02-15T15:27:18.374Z] [worker-pool] submitWork(triggerId=) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitWork(triggerId=)"}}
+[debug] [2021-02-15T15:27:18.374Z] [worker-~diagnostic~-60a25984-cb5c-4d34-ab23-198ff9714b3e]: Assigning socketPath: \\?\pipe\D:\project collection\eCommerce Website\ecommerce-website\functions\16416 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-60a25984-cb5c-4d34-ab23-198ff9714b3e]: Assigning socketPath: \\\\?\\pipe\\D:\\project collection\\eCommerce Website\\ecommerce-website\\functions\\16416"}}
+[debug] [2021-02-15T15:27:18.375Z] [worker-~diagnostic~-60a25984-cb5c-4d34-ab23-198ff9714b3e]: BUSY {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-60a25984-cb5c-4d34-ab23-198ff9714b3e]: BUSY"}}

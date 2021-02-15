@@ -11,9 +11,14 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import CityPostalCodeWrapper from "../CityPostalCodeWrapper";
 import FormButton from "../FormButton";
 import { apiInstance } from "../../helpers/utils";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { ordersSelector, totalItemsAndPriceSelector, uidSelector } from "../../helpers/selectors";
+import { clearCart } from "../../Redux/CartSlice/cart-slice";
+import { useHistory } from "react-router-dom";
+import { HOME } from "../../constants/routes";
+import { failure } from "../../Redux/CartSlice/cart-slice";
 import "./styles.scss";
-import { totalItemsAndPriceSelector } from "../../helpers/selectors";
+import { addNewOrder } from "../../Redux/OrdersSlice/order-slice";
 
 const CARD_OPTIONS = {
   hidePostalCode: true,
@@ -37,9 +42,13 @@ const CARD_OPTIONS = {
 };
 
 const PaymentDetails = (props) => {
+  const orders = useSelector(ordersSelector);
+  const uid = useSelector(uidSelector);
   const { totalPrice } = useSelector(totalItemsAndPriceSelector);
   const elements = useElements();
   const stripe = useStripe();
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   const [recipientName, setRecipientName] = useState("");
   const [isRecipientNameInvalid, setIsRecipientNameInvalid] = useState(INITIAL);
@@ -120,8 +129,12 @@ const PaymentDetails = (props) => {
               .confirmCardPayment(clientSecret, {
                 payment_method: paymentMethod.id,
               })
-              .then((paymentIntent) => {
-                console.log(paymentIntent);
+              .then(({ paymentIntent }) => {
+                dispatch(clearCart())
+                  .then(() => history.push(HOME))
+                  .catch((err) => dispatch(failure(err.message)));
+
+                dispatch(addNewOrder(uid, orders, paymentIntent.id));
               });
           });
       });
