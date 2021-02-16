@@ -108,9 +108,8 @@ const getAllMainCategoryItems = (mainCategory, startAfter, orderByParameters) =>
       .then((snapshot) => {
         const products = [];
         snapshot.forEach((x) => products.push({ id: x.id, ...x.data() }));
-        snapshot.docs[snapshot.docs.length - 1].ref.get().then((doc) => {
-          lastDoc = doc;
-        });
+        lastDoc = snapshot.docs[snapshot.docs.length - 1];
+
         return products;
       })
       .then((products) => {
@@ -119,33 +118,54 @@ const getAllMainCategoryItems = (mainCategory, startAfter, orderByParameters) =>
   };
 };
 
-const getAllSubCategoryItems = (mainCategory, subCategory) => {
+const getAllSubCategoryItems = (mainCategory, subCategory, startAfter, orderByParameters) => {
   return (dispatch) => {
     dispatch(startFetch());
-    return firestore
+    let ref = firestore
       .collection(mainCategory)
       .where("subCategory", "==", subCategory)
+      .orderBy(orderByParameters.by, orderByParameters.type);
+
+    if (startAfter !== null) {
+      ref = ref.startAfter(startAfter);
+    }
+
+    return ref
+      .limit(20)
       .get()
       .then((snapshot) => {
         const products = [];
         snapshot.forEach((x) => products.push({ id: x.id, ...x.data() }));
+        lastDoc = snapshot.docs[snapshot.docs.length - 1];
+
         return products;
       })
       .then((products) => dispatch(fetchProductListSuccess(products)));
   };
 };
 
-const getAllProductsWithSpecificType = (mainCategory, subCategory, productType) => {
+const getAllProductsWithSpecificType = (mainCategory, subCategory, productType, startAfter, orderByParameters) => {
   return (dispatch) => {
     dispatch(startFetch());
-    return firestore
+
+    let ref = firestore
       .collection(mainCategory)
       .where("subCategory", "==", subCategory)
       .where("productType", "==", productType)
+      .orderBy(orderByParameters.by, orderByParameters.type);
+
+    if (startAfter !== null) {
+      ref = ref.startAfter(startAfter);
+    }
+
+    return ref
+      .limit(20)
       .get()
       .then((snapshot) => {
         const products = [];
         snapshot.forEach((x) => products.push({ id: x.id, ...x.data() }));
+        lastDoc = snapshot.docs[snapshot.docs.length - 1];
+
         return products;
       })
       .then((products) => dispatch(fetchProductListSuccess(products)));

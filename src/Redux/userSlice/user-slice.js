@@ -36,7 +36,8 @@ const userSlice = createSlice({
     },
 
     resetUser(state) {
-      state.authUser = null;
+      state.error = null;
+      state.uid = null;
       state.user = null;
     },
 
@@ -142,5 +143,13 @@ export {
   updateLoginDetails,
   deleteAccount,
 };
-export const { authActionStart, authActionSuccess, setUid, setUser, failure, resetUser,clearError } = userSlice.actions;
+export const {
+  authActionStart,
+  authActionSuccess,
+  setUid,
+  setUser,
+  failure,
+  resetUser,
+  clearError,
+} = userSlice.actions;
 export default userSlice.reducer;

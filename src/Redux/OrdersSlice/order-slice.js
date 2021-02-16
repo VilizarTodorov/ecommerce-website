@@ -29,6 +29,8 @@ const ordersSlice = createSlice({
     },
     clear(state) {
       state.orders = [];
+      state.specificOrder = null;
+      state.error = null;
     },
   },
 });

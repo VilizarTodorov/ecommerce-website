@@ -25,11 +25,15 @@ const ComponentSubCategory = () => {
   useEffect(() => {
     dispatch(clear());
     if (sub === "all") {
-      dispatch(getAllMainCategoryItems(category, lastDoc, { by, type })).catch((err) =>
-        dispatch(fetchFailure(err.message))
-      );
+      dispatch(getAllMainCategoryItems(category, lastDoc, { by, type }))
+      // .catch((err) =>
+      //   dispatch(fetchFailure(err.message))
+      // );
     } else {
-      dispatch(getAllSubCategoryItems(category, sub)).catch((err) => dispatch(fetchFailure(err.message)));
+      dispatch(getAllSubCategoryItems(category, sub, lastDoc, { by, type }))
+      // .catch((err) =>
+      //   dispatch(fetchFailure(err.message))
+      // );
     }
   }, [category, sub, dispatch, by, type]);
 
@@ -54,11 +58,19 @@ const ComponentSubCategory = () => {
         ))}
       </Grid>
       <LoadMore
-        loadMore={() => {
-          dispatch(getAllMainCategoryItems(category, lastDoc, { by, type })).catch((err) =>
-            dispatch(fetchFailure(err.message))
-          );
-        }}
+        loadMore={
+          sub === "all"
+            ? () => {
+                dispatch(getAllMainCategoryItems(category, lastDoc, { by, type })).catch((err) =>
+                  dispatch(fetchFailure(err.message))
+                );
+              }
+            : () => {
+                dispatch(getAllSubCategoryItems(category, sub, lastDoc, { by, type })).catch((err) =>
+                  dispatch(fetchFailure(err.message))
+                );
+              }
+        }
       ></LoadMore>
     </GeneralContainer>
   );
