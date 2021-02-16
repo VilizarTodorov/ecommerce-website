@@ -135,7 +135,7 @@ const PaymentDetails = (props) => {
                   .then(() => history.push(HOME))
                   .catch((err) => dispatch(failure(err.message)));
 
-                const timestamp = new Date().getTime() / 1000;
+                const timestamp = new Date().toUTCString();
 
                 const order = {
                   orderID: paymentIntent.id,

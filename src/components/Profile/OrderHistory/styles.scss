@@ -1,0 +1,42 @@
+.order-history {
+  .select-menu {
+    width: auto;
+  }
+
+  .table {
+    .order-history-thead {
+      border-bottom: 1px solid #a1a1a1;
+    }
+
+    .order-history-tr {
+      border-bottom: 1px solid #a1a1a1;
+      cursor: pointer;
+      &:hover {
+        background-color: #eceff1;
+      }
+    }
+
+    border-collapse: collapse;
+    .order-history-td,
+    .order-history-th {
+      text-align: left;
+      padding: 10px;
+    }
+
+    .order-history-th {
+      font-weight: 300;
+      text-transform: capitalize;
+    }
+
+    .order-history-td {
+      &.price,
+      &.date {
+        white-space: nowrap;
+      }
+
+      &.orderID {
+        width: 99%;
+      }
+    }
+  }
+}

@@ -3,6 +3,7 @@ import { firestore, COLLECTIONS } from "../../Firebase/firebase";
 
 const INITIAL_STATE = {
   orders: [],
+  specificOrder: null,
   isFetching: false,
   error: null,
 };
@@ -17,6 +18,9 @@ const ordersSlice = createSlice({
     setOrders(state, action) {
       state.orders = action.payload;
     },
+    setSpecificOrder(state, action) {
+      state.specificOrder = action.payload;
+    },
     failure(state, action) {
       state.error = action.payload;
     },
@@ -29,7 +33,7 @@ const ordersSlice = createSlice({
   },
 });
 
-const { actionEnded, actionStarted, setOrders, failure, clear } = ordersSlice.actions;
+const { actionEnded, actionStarted, setOrders, setSpecificOrder, failure, clear } = ordersSlice.actions;
 
 const addNewOrder = (uid, previousOrders, newOrder) => {
   return (dispatch) => {
@@ -37,10 +41,21 @@ const addNewOrder = (uid, previousOrders, newOrder) => {
     return firestore
       .collection(COLLECTIONS.ORDERS)
       .doc(uid)
-      .update({ orders: [...previousOrders, newOrder] })
+      .update({ orders: [newOrder, ...previousOrders] })
       .then(() => dispatch(actionEnded()));
   };
 };
 
-export { addNewOrder, failure, clear, setOrders };
+const getSpecificOrder = (orderID, orders) => {
+  return (dispatch) => {
+    const order = orders.find((x) => x.orderID === orderID);
+    if (order) {
+      dispatch(setSpecificOrder(order));
+    } else {
+      dispatch(failure("no such order"));
+    }
+  };
+};
+
+export { addNewOrder, getSpecificOrder, failure, clear, setOrders };
 export default ordersSlice.reducer;

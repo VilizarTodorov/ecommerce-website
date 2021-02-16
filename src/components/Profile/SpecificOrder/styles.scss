@@ -1,0 +1,23 @@
+.specific-order {
+  .order-table {
+    border-collapse: collapse;
+    margin: 10px 0;
+
+    &-tr {
+      border-bottom: 1px solid #a1a1a1;
+    }
+
+    &-td {
+      font-weight: 300;
+      text-transform: capitalize;
+      text-align: left;
+      padding: 5px;
+      width: 25%;
+      border-bottom: 1px solid #a1a1a1;
+      border-collapse: collapse;
+      img {
+        width: 100%;
+      }
+    }
+  }
+}

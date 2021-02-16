@@ -1,12 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
-import { CHANGE_PASSWORD, ORDER_HISTORY, PERSONAL_INFO, PROFILE } from "../../../constants/routes";
+import { CHANGE_PASSWORD, ORDER_HISTORY, ORDER_HISTORY_ORDER, PERSONAL_INFO, PROFILE } from "../../../constants/routes";
 import { userSelector } from "../../../helpers/selectors";
 import ChangePassword from "../ChangePassword";
 import MyAccount from "../MyAccount";
 import PersonalInfo from "../PersonalInfo";
 import OrderHistory from "../OrderHistory";
+import SpecificOrder from "../SpecificOrder";
 
 const Content = (props) => {
   const user = useSelector(userSelector);
@@ -25,6 +26,9 @@ const Content = (props) => {
         </Route>
         <Route exact path={`${PROFILE}${ORDER_HISTORY}`}>
           <OrderHistory></OrderHistory>
+        </Route>
+        <Route exact path={`${PROFILE}${ORDER_HISTORY_ORDER}`}>
+          <SpecificOrder></SpecificOrder>
         </Route>
       </Switch>
     </section>

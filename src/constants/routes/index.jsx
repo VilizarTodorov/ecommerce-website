@@ -22,3 +22,4 @@ export const PERSONAL_INFO = "/personal-info";
 export const CART = "/cart";
 export const CHECKOUT = "/checkout";
 export const ORDER_HISTORY = "/order-history";
+export const ORDER_HISTORY_ORDER = "/order-history/:id";
