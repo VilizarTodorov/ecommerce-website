@@ -42,6 +42,9 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-style: italic;
 
       .select-menu {
         width: 70px;

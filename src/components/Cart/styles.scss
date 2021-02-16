@@ -12,6 +12,8 @@
     .order-summery {
       display: flex;
       flex-direction: column;
+      font-weight: bold;
+      font-style: italic;
       .container {
         display: flex;
         justify-content: space-between;

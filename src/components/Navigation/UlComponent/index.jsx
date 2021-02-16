@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { setMainToFalse } from "../../../Redux/NavSlice/nav-slice";
 import NavHeader from "../NavHeading";
 import "./styles.scss";
 
 const UlComponent = (props) => {
   const [subSubNavToggle, setSubSubNavToggle] = useState(false);
+  const dispatch = useDispatch();
 
   const setSubSubNavToTrue = () => {
     setSubSubNavToggle(true);
@@ -17,7 +20,7 @@ const UlComponent = (props) => {
   const items = props.items.map((item) => {
     const productTypeRoutePart = item.replace(/\s+/g, "-");
     return (
-      <li key={item} className="shop-item-category">
+      <li onClick={() => dispatch(setMainToFalse())} key={item} className="shop-item-category">
         <Link to={`${props.mainRoutePart}${props.subRoutePart}/${productTypeRoutePart}`}>{item}</Link>
       </li>
     );

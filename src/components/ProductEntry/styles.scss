@@ -24,8 +24,10 @@
   }
 
   &-info {
-    padding: 7px;
-    padding-bottom: 60px;
+    text-transform: uppercase;
+    margin: 7px 0;
+    font-weight: bold;
+    font-style: italic;
   }
 
   .product-info {
@@ -49,6 +51,4 @@
       display: block;
     }
   }
-
- 
 }

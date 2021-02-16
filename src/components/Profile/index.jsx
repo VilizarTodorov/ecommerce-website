@@ -16,7 +16,7 @@ const Profile = (props) => {
       <aside className="aside">
         <header className="aside-header">
           <i className="far fa-user-circle fa-4x"></i>
-          <h2>
+          <h2 className='name'>
             {firstName} {lastName}
           </h2>
         </header>

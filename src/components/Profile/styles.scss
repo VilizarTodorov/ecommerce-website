@@ -13,6 +13,10 @@
       flex-direction: column;
       align-items: center;
       border-bottom: 1px solid lightgray;
+
+      .name {
+        text-align: center;
+      }
     }
 
     &-nav-option {
@@ -35,7 +39,7 @@
     overflow-y: auto;
   }
 
-  .sign-out-button{
+  .sign-out-button {
     padding: 15px;
   }
 }
