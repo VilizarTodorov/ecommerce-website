@@ -17,7 +17,7 @@
     width: 0;
     overflow-x: hidden;
     transition: all 0.4s;
-    z-index: 1;
+    z-index: 5;
 
     &.active {
       width: 100%;

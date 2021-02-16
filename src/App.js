@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import "./App.css";
 import Header from "./components/Header";
 import Routes from "./components/Routes";
 import { auth } from "./Firebase/firebase";
@@ -8,6 +7,7 @@ import { isAppReadySelector } from "./helpers/selectors";
 import { setToReady } from "./Redux/AppSlice/app-slice";
 import { clear } from "./Redux/OrdersSlice/order-slice";
 import { resetUser, setUserAndWishList, setUid } from "./Redux/userSlice/user-slice";
+import "./App.css";
 
 function App() {
   const dispatch = useDispatch();

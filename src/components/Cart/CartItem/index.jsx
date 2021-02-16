@@ -5,6 +5,7 @@ import Select from "../../AddProduct/Select";
 import { removeFromCart, setProductQuantity } from "../../../Redux/CartSlice/cart-slice";
 import { cartSelector } from "../../../helpers/selectors";
 import "./styles.scss";
+import GeneralHeading from "../../GeneralHeading";
 
 const CartItem = ({ x }) => {
   const cart = useSelector(cartSelector);
@@ -42,7 +43,7 @@ const CartItem = ({ x }) => {
           </Select>
         </div>
         <div onClick={() => removeProduct(x.id)} className="controls">
-          X
+          <i className="fas fa-times fa-lg exit"></i>
         </div>
       </div>
     </div>

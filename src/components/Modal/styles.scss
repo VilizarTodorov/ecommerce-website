@@ -9,8 +9,10 @@
   z-index: 20;
 
   .content {
+    display: block;
     position: absolute;
-    width: 500px;
+    width: 100%;
+    max-width: 500px;
     max-height: 90%;
     border: 1px solid #ccc;
     background: #fff;

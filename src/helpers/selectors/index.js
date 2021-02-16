@@ -51,3 +51,4 @@ export const orderByParametersSelector = createSelector([selectOrderBy], (parame
 export const userErrorSelector = createSelector([selectUser], ({ error }) => error);
 export const ordersSelector = createSelector([selectOrders], ({ orders }) => orders);
 export const specificOrderSelector = createSelector([selectOrders], ({ specificOrder }) => specificOrder);
+export const hasMoreSelector = createSelector([selectProduct], ({ hasMore }) => hasMore);

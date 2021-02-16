@@ -13,34 +13,37 @@ import {
 import GeneralHeading from "../GeneralHeading";
 import Filter from "../Filter";
 import LoadMore from "../LoadMore";
-import { orderByParametersSelector, productListSelector } from "../../helpers/selectors";
+import { hasMoreSelector, orderByParametersSelector, productListSelector } from "../../helpers/selectors";
 import GeneralContainer from "../GeneralContainer";
 
 const ComponentSubCategory = () => {
   const { category, sub } = useParams();
   const productList = useSelector(productListSelector);
   const { by, type } = useSelector(orderByParametersSelector);
+  const hasMore = useSelector(hasMoreSelector);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(clear());
     if (sub === "all") {
-      dispatch(getAllMainCategoryItems(category, lastDoc, { by, type }))
-      // .catch((err) =>
-      //   dispatch(fetchFailure(err.message))
-      // );
+      dispatch(getAllMainCategoryItems(category, lastDoc, { by, type })).catch((err) =>
+        dispatch(fetchFailure(err.message))
+      );
     } else {
-      dispatch(getAllSubCategoryItems(category, sub, lastDoc, { by, type }))
-      // .catch((err) =>
-      //   dispatch(fetchFailure(err.message))
-      // );
+      dispatch(getAllSubCategoryItems(category, sub, lastDoc, { by, type })).catch((err) =>
+        dispatch(fetchFailure(err.message))
+      );
     }
+
+    return () => {
+      dispatch(clear());
+    };
   }, [category, sub, dispatch, by, type]);
 
   return (
     <GeneralContainer>
       <GeneralHeading>MENS CLOTHING, SHOES AND ACCESSORIES</GeneralHeading>
-      <Filter></Filter>
+      {<Filter></Filter>}
       <Grid>
         {productList.map((x) => (
           <ProductEntry
@@ -57,21 +60,23 @@ const ComponentSubCategory = () => {
           ></ProductEntry>
         ))}
       </Grid>
-      <LoadMore
-        loadMore={
-          sub === "all"
-            ? () => {
-                dispatch(getAllMainCategoryItems(category, lastDoc, { by, type })).catch((err) =>
-                  dispatch(fetchFailure(err.message))
-                );
-              }
-            : () => {
-                dispatch(getAllSubCategoryItems(category, sub, lastDoc, { by, type })).catch((err) =>
-                  dispatch(fetchFailure(err.message))
-                );
-              }
-        }
-      ></LoadMore>
+      {hasMore && (
+        <LoadMore
+          loadMore={
+            sub === "all"
+              ? () => {
+                  dispatch(getAllMainCategoryItems(category, lastDoc, { by, type })).catch((err) =>
+                    dispatch(fetchFailure(err.message))
+                  );
+                }
+              : () => {
+                  dispatch(getAllSubCategoryItems(category, sub, lastDoc, { by, type })).catch((err) =>
+                    dispatch(fetchFailure(err.message))
+                  );
+                }
+          }
+        ></LoadMore>
+      )}
     </GeneralContainer>
   );
 };

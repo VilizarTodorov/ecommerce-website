@@ -15,14 +15,22 @@ const Cart = (props) => {
 
   const totalCostAndItems = useSelector(totalItemsAndPriceSelector);
 
+  if (cart.length < 1) {
+    return (
+      <GeneralContainer>
+        <GeneralHeading>your bag is empty</GeneralHeading>
+      </GeneralContainer>
+    );
+  }
+
   return (
     <GeneralContainer>
       <GeneralHeading>your bag</GeneralHeading>
       <h2>
-        TOTAL: ({totalCostAndItems.totalItems}${totalCostAndItems.totalPrice})
+        TOTAL: ({totalCostAndItems.totalItems} item(s) ${totalCostAndItems.totalPrice})
       </h2>
       <div className="cart">
-        <div className="cars-items">
+        <div className="cart-items">
           {cart.map((x) => {
             return <CartItem key={x.id} x={x}></CartItem>;
           })}

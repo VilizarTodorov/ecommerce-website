@@ -26,7 +26,4 @@ button {
 .App {
   font-weight: 300;
   word-wrap: break-word;
-  @media screen and (max-width: 401px) {
-    font-size: 13px;
-  }
 }

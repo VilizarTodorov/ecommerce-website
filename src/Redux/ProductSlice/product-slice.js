@@ -1,14 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { firestore } from "../../Firebase/firebase";
 
+
 let lastDoc = null;
 export { lastDoc };
 
+const limit = 16
 const INITIAL_STATE = {
   isFetching: false,
   productList: [],
   product: null,
   error: null,
+  hasMore: true,
 };
 
 const productSlice = createSlice({
@@ -48,6 +51,11 @@ const productSlice = createSlice({
 
     clearProductList(state) {
       state.productList = [];
+      state.hasMore = true;
+    },
+
+    noMoreProducts(state) {
+      state.hasMore = false;
     },
   },
 });
@@ -103,12 +111,16 @@ const getAllMainCategoryItems = (mainCategory, startAfter, orderByParameters) =>
       ref = ref.startAfter(startAfter);
     }
     return ref
-      .limit(2)
+      .limit(limit)
       .get()
       .then((snapshot) => {
         const products = [];
         snapshot.forEach((x) => products.push({ id: x.id, ...x.data() }));
-        lastDoc = snapshot.docs[snapshot.docs.length - 1];
+        if (snapshot.docs.length < limit ) {
+          dispatch(noMoreProducts());
+        } else {
+          lastDoc = snapshot.docs[snapshot.docs.length - 1];
+        }
 
         return products;
       })
@@ -131,12 +143,16 @@ const getAllSubCategoryItems = (mainCategory, subCategory, startAfter, orderByPa
     }
 
     return ref
-      .limit(20)
+      .limit(limit)
       .get()
       .then((snapshot) => {
         const products = [];
         snapshot.forEach((x) => products.push({ id: x.id, ...x.data() }));
-        lastDoc = snapshot.docs[snapshot.docs.length - 1];
+        if (snapshot.docs.length < limit) {
+          dispatch(noMoreProducts());
+        } else {
+          lastDoc = snapshot.docs[snapshot.docs.length - 1];
+        }
 
         return products;
       })
@@ -159,12 +175,16 @@ const getAllProductsWithSpecificType = (mainCategory, subCategory, productType, 
     }
 
     return ref
-      .limit(20)
+      .limit(limit)
       .get()
       .then((snapshot) => {
         const products = [];
         snapshot.forEach((x) => products.push({ id: x.id, ...x.data() }));
-        lastDoc = snapshot.docs[snapshot.docs.length - 1];
+        if (snapshot.docs.length < limit) {
+          dispatch(noMoreProducts());
+        } else {
+          lastDoc = snapshot.docs[snapshot.docs.length - 1];
+        }
 
         return products;
       })
@@ -214,5 +234,6 @@ export const {
   fetchProductSuccess,
   fetchFailure,
   clearProductList,
+  noMoreProducts,
 } = productSlice.actions;
 export default productSlice.reducer;

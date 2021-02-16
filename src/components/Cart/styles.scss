@@ -1,5 +1,6 @@
 .cart {
   padding: 5px;
+  text-transform: uppercase;
   .check-out {
     padding-top: 15px;
     display: flex;
@@ -23,8 +24,8 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    
-    .cars-items{
+
+    .cart-items {
       flex-grow: 1;
     }
 
@@ -33,12 +34,15 @@
       margin-left: 15px;
       flex-direction: column;
 
+      .link-component {
+        margin: 0;
+      }
+
       .order-summery {
         margin-top: 20px;
         border: 2px solid #eceff1;
         padding: 10px;
       }
     }
-
   }
 }
